@@ -1,0 +1,21 @@
+swagger: "2.0"
+info:
+  description: Test data server REST API documentation
+  version: "0.0.1"
+  title: Swagger for Test data server
+consumes:
+  - "application/json"
+produces:
+  - "application/json"
+
+paths:
+  /status:
+    get:
+      operationId: "status.get_status"
+      tags:
+        - "Status"
+      summary: "Server status"
+      description: "Get server status to see if it is running"
+      responses:
+        200:
+          description: "Server is running"
