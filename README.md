@@ -1,5 +1,3 @@
-This idea creates open-source competitor for HP VTS (Virtual Table Server) product and other similar tools.
-
 # Test data server, with properties: #
 
 * Light-weight (web?) server with minimal dependecies
