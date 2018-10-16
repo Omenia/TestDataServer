@@ -1,4 +1,4 @@
-# Test data server, with properties: #
+# Test data server, with properties #
 
 * Light-weight (web?) server with minimal dependecies
 * Dynamic data allocation: No need to know, how many users are using the same pool, no need to manually divide the pool: User always gets the "oldest" data globally.
