@@ -18,3 +18,16 @@
 * Implementation preferably with Python, release via Pypi, automated deployment pipeline (including tests), ....
 * Source code hosted in Github
 * Planned first (pre)release 0.0.1 available in Pypi @1.11.2018
+
+## Running ##
+
+```
+python3 -m venv venv
+source venv/bin/activate
+pip3 install -r requirements.txt
+python3 server.py
+```
+
+## API documentation ##
+
+Go to `localhost:5000/ui` when server is running.
