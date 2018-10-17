@@ -51,5 +51,9 @@ jobs:
 
     - store_artifacts:
         path: source
+        destination: source
 
+    - store_artifacts:
+        path: setup.py
+        destination: setup.py
 
