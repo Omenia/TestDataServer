@@ -50,5 +50,4 @@ jobs:
         destination: test-reports
 
     - store_artifacts:
-        path: server.py
-        destination: server.py
+        path: *.py
