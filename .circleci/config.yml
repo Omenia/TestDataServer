@@ -49,6 +49,7 @@ jobs:
         name: run tests
         command: |
           . venv/bin/activate
+          export PYTHONPATH=source
           pytest
 
     - store_artifacts:
