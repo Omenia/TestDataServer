@@ -45,6 +45,13 @@ jobs:
           . venv/bin/activate
           flake8 .
 
+    - run:
+        name: run tests
+        command: |
+          . venv/bin/activate
+          export PYTHONPATH=source
+          pytest
+
     - store_artifacts:
         path: test-reports
         destination: test-reports
@@ -56,4 +63,3 @@ jobs:
     - store_artifacts:
         path: setup.py
         destination: setup.py
-
