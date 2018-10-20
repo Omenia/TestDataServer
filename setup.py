@@ -10,7 +10,7 @@ setup(
     author = "Siili Salabs",
     author_email = "info@siili.com",
     description = ("Simple and powerful test data server"
-    license = "<open_source>",
+    license = "keksijotain",
     keywords = "example documentation tutorial",
     url = "http://packages.python.org/ultimateTestDataServer",
     packages=['source', 'tests'],
