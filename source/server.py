@@ -4,6 +4,9 @@ app = connexion.App(__name__, specification_dir='./')
 
 app.add_api('swagger.yml')
 
+app.app.config.from_object('config')
+TEST_DATA_CONFIG = app.app.config['TEST_DATA_CONFIG']
+
 
 @app.route('/')
 def home():
