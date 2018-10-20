@@ -18,3 +18,8 @@ def test__index_endpoint(client):
 def test__status_endpoint(client):
     response = client.get('/status')
     assert response.status_code == 200
+
+
+def test__testdata_endpoint(client):
+    response = client.get('/testdata')
+    assert response.json == {"testdata": {"username": "user", "password": "pass"}}

@@ -11,7 +11,7 @@ produces:
 paths:
   /status:
     get:
-      operationId: "status.get_status"
+      operationId: "status.read"
       tags:
         - "Status"
       summary: "Server status"
@@ -19,3 +19,18 @@ paths:
       responses:
         200:
           description: "Server is running"
+  /testdata:
+    get:
+      operationId: "testdata.read"
+      tags:
+      - "Testdata"
+      summary: "Get test data"
+      description: "Get data that can be used in test execution"
+      responses:
+        200:
+          description: "Successful request of test data"
+          schema:
+            type: string
+            properties:
+              testdata:
+                type: "string"
