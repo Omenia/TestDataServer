@@ -1,11 +1,27 @@
+import sys
+import os.path
+
 import connexion
+
+
+def set_test_data_items():
+    try:
+        path = app.app.config['TEST_DATA_CONFIG']
+        if not os.path.isfile(os.path.abspath(path)):
+            sys.exit(f'ERROR: {path} defined by TEST_DATA_CONFIG is not a file')
+    except KeyError:
+        sys.exit('ERROR: TEST_DATA_CONFIG variable not defined in config.py')
+    else:
+        # todo: read test data items from file
+        return []
+
 
 app = connexion.App(__name__, specification_dir='./')
 
 app.add_api('swagger.yml')
 
 app.app.config.from_object('config')
-TEST_DATA_CONFIG = app.app.config['TEST_DATA_CONFIG']
+TEST_DATA_ITEMS = set_test_data_items()
 
 
 @app.route('/')

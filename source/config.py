@@ -1,1 +1,1 @@
-TEST_DATA_CONFIG = '/path/to/test/data/configuration/file'
+TEST_DATA_CONFIG = "test-data-config-example.txt"
