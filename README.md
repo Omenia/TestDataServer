@@ -19,6 +19,10 @@
 * Source code hosted in Github
 * Planned first (pre)release 0.0.1 available in Pypi @1.11.2018
 
+## Configuration ##
+
+Configure path to test data configuration file to `TEST_DATA_CONFIG` variable in `source/config.py`.
+
 ## Running ##
 
 ```
