@@ -1,5 +1,6 @@
 import sys
 import os.path
+import json
 
 import connexion
 
@@ -11,9 +12,18 @@ def set_test_data_items():
             sys.exit(f'ERROR: {path} defined by TEST_DATA_CONFIG is not a file')
     except KeyError:
         sys.exit('ERROR: TEST_DATA_CONFIG variable not defined in config.py')
-    else:
-        # todo: read test data items from file
-        return []
+
+    with open(path, 'r') as f:
+        items = f.readlines()
+
+    test_data_items = []
+    for item in items:
+        try:
+            test_data_items.append(json.loads(item))
+        except ValueError:
+            sys.exit(f'ERROR: Invalid json for test data item ({item})')
+
+    return test_data_items
 
 
 app = connexion.App(__name__, specification_dir='./')
