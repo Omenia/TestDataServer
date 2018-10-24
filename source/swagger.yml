@@ -21,7 +21,7 @@ paths:
           description: "Server is running"
   /testdata:
     get:
-      operationId: "testdata.read"
+      operationId: "server.read_test_data"
       tags:
       - "Testdata"
       summary: "Get test data"
