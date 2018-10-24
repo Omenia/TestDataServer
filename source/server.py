@@ -5,6 +5,13 @@ import json
 import connexion
 
 
+# todo: this should be moved to separate file when database is taken into use
+def read_test_data():
+    item = TEST_DATA_ITEMS.pop(0)
+    TEST_DATA_ITEMS.append(item)
+    return {"testdata": item}
+
+
 def set_test_data_items():
     try:
         path = app.app.config['TEST_DATA_CONFIG']
