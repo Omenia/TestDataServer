@@ -1,44 +1,14 @@
-import sys
-import os.path
-import json
-
-import connexion
+import config
+import database
+import testdata
 
 
-# todo: this should be moved to separate file when database is taken into use
-def read_test_data():
-    item = TEST_DATA_ITEMS.pop(0)
-    TEST_DATA_ITEMS.append(item)
-    return {"testdata": item}
-
-
-def set_test_data_items():
-    try:
-        path = app.app.config['TEST_DATA_CONFIG']
-        if not os.path.isfile(os.path.abspath(path)):
-            sys.exit(f'ERROR: {path} defined by TEST_DATA_CONFIG is not a file')
-    except KeyError:
-        sys.exit('ERROR: TEST_DATA_CONFIG variable not defined in config.py')
-
-    with open(path, 'r') as f:
-        items = f.readlines()
-
-    test_data_items = []
-    for item in items:
-        try:
-            test_data_items.append(json.loads(item))
-        except ValueError:
-            sys.exit(f'ERROR: Invalid json for test data item ({item})')
-
-    return test_data_items
-
-
-app = connexion.App(__name__, specification_dir='./')
-
+app = config.connex_app
 app.add_api('swagger.yml')
 
 app.app.config.from_object('config')
-TEST_DATA_ITEMS = set_test_data_items()
+testdata.set_test_data_items(app)
+database.setup()
 
 
 @app.route('/')
