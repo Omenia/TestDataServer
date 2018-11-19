@@ -3,6 +3,7 @@ import os.path
 import json
 
 import connexion
+from flask import render_template
 
 
 # todo: this should be moved to separate file when database is taken into use
@@ -33,7 +34,7 @@ def set_test_data_items():
     return test_data_items
 
 
-app = connexion.App(__name__, specification_dir='./')
+app = connexion.App(__name__, specification_dir='./', static_folder='templates/static', template_folder='./templates', static_url_path='')
 
 app.add_api('swagger.yml')
 
@@ -43,7 +44,8 @@ TEST_DATA_ITEMS = set_test_data_items()
 
 @app.route('/')
 def home():
-    return 'Test data server'
+    return render_template('app.html')
+    # return 'Test data server'
 
 
 if __name__ == '__main__':

@@ -19,17 +19,50 @@
 * Source code hosted in Github
 * Planned first (pre)release 0.0.1 available in Pypi @1.11.2018
 
-## Configuration ##
+## Get Test Data Server code
 
-Configure path to test data configuration file to `TEST_DATA_CONFIG` variable in `source/config.py`.
+```
+git clone https://github.com/Omenia/TestDataServer.git
+cd TestDataServer
+```
 
-## Running ##
+## Create Python virtualenv
 
 ```
 python3 -m venv venv
 source venv/bin/activate
+```
+
+## Install Python dependencies
+
+```
 pip3 install -r requirements.txt
-python3 server.py
+```
+
+## Install frontend packages
+
+Node.js needs to be installed. [Install Node.js](https://nodejs.org/en/download/package-manager/)
+
+```
+cd client
+npm install
+```
+
+## Build frontend
+
+```
+npm run build
+```
+
+## Configuration ##
+
+Configure path to test data configuration file to `TEST_DATA_CONFIG` variable in `source/config.py`.
+
+## Start server
+
+```
+cd ..
+python3 server/server.py
 ```
 
 ## API documentation ##
