@@ -41,6 +41,12 @@ jobs:
         key: v1-dependencies-{{ checksum "server/requirements.txt" }}
 
     - run:
+        name: build client
+        command: |
+          cd client
+          npm run build
+
+    - run:
         name: run flake8
         command: |
           . venv/bin/activate
@@ -52,12 +58,6 @@ jobs:
           . venv/bin/activate
           export PYTHONPATH=server
           pytest
-
-    - run:
-        name: build client
-        command: |
-          cd client
-          npm run build
 
     - store_artifacts:
         path: test-reports
