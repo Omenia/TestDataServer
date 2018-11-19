@@ -9,7 +9,6 @@ jobs:
     # specify the version you desire here
     # use `-browsers` prefix for selenium tests, e.g. `3.6.1-browsers`
     - image: circleci/python:3.6.1
-    - image: circleci/node:8.12.0
 
     # Specify service dependencies here if necessary
     # CircleCI maintains a library of pre-built images
@@ -40,6 +39,12 @@ jobs:
         - ./venv
         key: v1-dependencies-{{ checksum "server/requirements.txt" }}
 
+    - run:
+        name: install Node.js
+        command: |
+          sudo apt-get update
+          sudo apt-get install nodejs
+          
     - run:
         name: build client
         command: |
