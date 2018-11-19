@@ -33,7 +33,7 @@ jobs:
         command: |
           python3 -m venv venv
           . venv/bin/activate
-          pip install -r source/requirements.txt
+          pip install -r server/requirements.txt
 
     - save_cache:
         paths:
