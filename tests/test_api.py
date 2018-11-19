@@ -1,6 +1,6 @@
 import pytest
 
-from server.server import app
+from server.testdataserver import app
 
 
 @pytest.fixture
@@ -12,7 +12,7 @@ def client():
 
 def test__index_endpoint(client):
     response = client.get('/')
-    assert response.data == b'Test data server'
+    assert response.status_code == 200
 
 
 def test__status_endpoint(client):

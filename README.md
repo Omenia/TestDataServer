@@ -62,7 +62,7 @@ Configure path to test data configuration file to `TEST_DATA_CONFIG` variable in
 
 ```
 cd ..
-python3 server/server.py
+python3 server/testdataserver.py
 ```
 
 ## API documentation ##
