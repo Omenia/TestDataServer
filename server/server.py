@@ -34,7 +34,8 @@ def set_test_data_items():
     return test_data_items
 
 
-app = connexion.App(__name__, specification_dir='./', static_folder='templates/static', template_folder='./templates', static_url_path='')
+app = connexion.App(__name__, specification_dir='./', static_folder='templates/static', template_folder='./templates',
+                    static_url_path='')
 
 app.add_api('swagger.yml')
 
