@@ -54,10 +54,10 @@ jobs:
           pytest
 
     - run:
-      name: build client
-      command: |
-        cd client
-        npm run build
+        name: build client
+        command: |
+          cd client
+          npm run build
 
     - store_artifacts:
         path: test-reports
