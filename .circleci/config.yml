@@ -45,8 +45,10 @@ jobs:
           sudo apt-get update
           sudo apt-get install nodejs
           
-    - run:
+    - deploy:
         name: build client
+        requires:
+          - install Node.js
         command: |
           cd client
           npm run build
