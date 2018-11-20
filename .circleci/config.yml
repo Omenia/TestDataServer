@@ -42,6 +42,8 @@ jobs:
     - run:
         name: install Node.js
         command: |
+          sudo apt update
+          sudo apt install snapd
           sudo snap install node --classic --channel=8
           
     - run:
