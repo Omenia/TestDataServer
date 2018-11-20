@@ -42,8 +42,8 @@ jobs:
     - run:
         name: install Node.js
         command: |
-          sudo apt-get update
-          sudo apt-get install nodejs npm
+          sudo curl -sL https://deb.nodesource.com/setup_8.x | bash -
+          sudo apt-get install -y nodejs
           
     - run:
         name: build client
