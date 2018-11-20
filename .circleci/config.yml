@@ -8,7 +8,7 @@ jobs:
     docker:
     # specify the version you desire here
     # use `-browsers` prefix for selenium tests, e.g. `3.6.1-browsers`
-    - image: circleci/python:3.6.1
+    - image: circleci/python:3.6.7-node-browsers
 
     # Specify service dependencies here if necessary
     # CircleCI maintains a library of pre-built images
@@ -39,13 +39,6 @@ jobs:
         - ./venv
         key: v1-dependencies-{{ checksum "server/requirements.txt" }}
 
-    - run:
-        name: install Node.js
-        command: |
-          sudo apt update
-          sudo apt install snapd
-          sudo snap install node --classic --channel=8
-          
     - run:
         name: build client
         requires:
