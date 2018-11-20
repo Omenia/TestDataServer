@@ -40,12 +40,16 @@ jobs:
         key: v1-dependencies-{{ checksum "server/requirements.txt" }}
 
     - run:
-        name: build client
-        requires:
-          - install Node.js
+        name: install node modules
         command: |
           cd client
+          npm install
+
+    - run:
+        name: build client
+        command: |
           npm run build
+          cd ..
 
     - run:
         name: run flake8
