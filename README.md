@@ -56,7 +56,7 @@ npm run build
 
 ## Configuration ##
 
-Configure path to test data configuration file to `TEST_DATA_CONFIG` variable in `source/config.py`.
+Configure path to test data configuration file to `TEST_DATA_CONFIG` variable in `server/config.py`.
 
 ## Start server
 
