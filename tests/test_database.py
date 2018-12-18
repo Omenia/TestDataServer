@@ -11,7 +11,9 @@ def create_database_setup(request):
     def teardown():
         os.remove(os.path.join(basedir, 'testitem.db'))
         if os.path.exists(os.path.join(basedir, 'testitem_orig.db')):
-            os.rename(os.path.join(basedir, 'testitem_orig.db'), os.path.join(basedir, 'testitem.db'))
+            os.rename(
+                os.path.join(basedir, 'testitem_orig.db'), os.path.join(basedir, 'testitem.db')
+            )
 
     basedir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
     if os.path.exists(os.path.join(basedir, 'testitem.db')):
