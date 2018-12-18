@@ -27,8 +27,3 @@ app.config['TEST_DATA_CONFIG'] = 'test-data-config-example.txt'
 db = SQLAlchemy(app)
 
 ma = Marshmallow(app)
-
-
-# todo: remove when test items are configured from GUI
-def get_test_data_config_file():
-    return TEST_DATA_CONFIG
