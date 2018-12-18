@@ -36,7 +36,7 @@ source venv/bin/activate
 ## Install Python dependencies
 
 ```
-pip3 install -r requirements.txt
+pip3 install -r server/requirements.txt
 ```
 
 ## Install frontend packages
