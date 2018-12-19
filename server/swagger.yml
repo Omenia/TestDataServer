@@ -34,3 +34,18 @@ paths:
             properties:
               testdata:
                 type: "string"
+  /testdata/all:
+    get:
+      operationId: "testdata.read_all"
+      tags:
+      - "Testdata/all"
+      summary: "Get all test data"
+      description: "Get all test data which has been configured. Does not reserve test items for test execution."
+      responses:
+        200:
+          description: "Successful request of all test data"
+          schema:
+            type: string
+            properties:
+              testdata:
+                type: "string"

@@ -1,16 +1,19 @@
 <template>
   <div id="app">
     <Header/>
+    <Testdataview/>
   </div>
 </template>
 
 <script>
 import Header from './components/Header';
+import Testdataview from './components/Testdataview';
 
 export default {
   name: 'App',
   components: {
     Header,
+    Testdataview
   },
 };
 </script>

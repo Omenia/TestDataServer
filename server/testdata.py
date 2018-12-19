@@ -2,23 +2,21 @@ import sys
 import os.path
 import json
 
+import database
+
 
 ITEMS = None
 
 
 def read():
-    # todo: ITEMS handling to be removed when db is used
-    global ITEMS
-    item = ITEMS.pop(0)
-    ITEMS.append(item)
-    return {"testdata": item}
+    return {"testdata": database.get_testdata()}
 
 
 # todo: to be removed when test data items are set with GUI
 def set_test_data_items(app):
     global ITEMS
     try:
-        path = app.app.config['TEST_DATA_CONFIG']
+        path = app.config['TEST_DATA_CONFIG']
         if not os.path.isfile(os.path.abspath(path)):
             sys.exit(f'ERROR: {path} defined by TEST_DATA_CONFIG is not a file')
     except KeyError:
@@ -33,3 +31,13 @@ def set_test_data_items(app):
             ITEMS.append(json.loads(item))
         except ValueError:
             sys.exit(f'ERROR: Invalid json for test data item ({item})')
+
+
+# todo: to be removed when test data items are set with GUI
+def get_ITEMS():
+    global ITEMS
+    return ITEMS
+
+
+def read_all():
+    return {"testdata": database.get_all_testdata()}
