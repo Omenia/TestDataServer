@@ -8,8 +8,8 @@ import database
 ITEMS = None
 
 
-def read():
-    return {"testdata": database.get_testdata()}
+def get_testdata_next():
+    return {"testdata": database.get_testdata_next()}
 
 
 # todo: to be removed when test data items are set with GUI
@@ -39,5 +39,5 @@ def get_ITEMS():
     return ITEMS
 
 
-def read_all():
-    return {"testdata": database.get_all_testdata()}
+def get_testdata():
+    return {"testdata": database.get_testdata()}

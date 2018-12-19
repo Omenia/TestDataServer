@@ -1,2 +1,2 @@
-def read():
+def get_status():
     pass

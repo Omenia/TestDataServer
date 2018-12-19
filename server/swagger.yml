@@ -9,9 +9,9 @@ produces:
   - "application/json"
 
 paths:
-  /status:
+  /api/v1/status:
     get:
-      operationId: "status.read"
+      operationId: "status.get_status"
       tags:
         - "Status"
       summary: "Server status"
@@ -19,31 +19,31 @@ paths:
       responses:
         200:
           description: "Server is running"
-  /testdata:
+  /api/v1/testdata:
     get:
-      operationId: "testdata.read"
+      operationId: "testdata.get_testdata"
       tags:
       - "Testdata"
-      summary: "Get test data"
-      description: "Get data that can be used in test execution"
-      responses:
-        200:
-          description: "Successful request of test data"
-          schema:
-            type: string
-            properties:
-              testdata:
-                type: "string"
-  /testdata/all:
-    get:
-      operationId: "testdata.read_all"
-      tags:
-      - "Testdata/all"
       summary: "Get all test data"
       description: "Get all test data which has been configured. Does not reserve test items for test execution."
       responses:
         200:
           description: "Successful request of all test data"
+          schema:
+            type: string
+            properties:
+              testdata:
+                type: "string"
+  /api/v1/testdata/next:
+    get:
+      operationId: "testdata.get_testdata_next"
+      tags:
+      - "Testdata/next"
+      summary: "Get test data"
+      description: "Get data that can be used in test execution."
+      responses:
+        200:
+          description: "Successful request of test data"
           schema:
             type: string
             properties:

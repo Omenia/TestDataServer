@@ -41,15 +41,15 @@ def test__index_endpoint(client):
 
 
 def test__status_endpoint(client):
-    response = client.get('/status')
+    response = client.get('/api/v1/status')
     assert response.status_code == 200
 
 
 # todo: test will break when configured from GUI is implemented
-def test__testdata_endpoint(client, create_database_setup):
+def test__testdata_next_endpoint(client, create_database_setup):
     datetimes = (datetime(2018, 1, 1, hour) for hour in range(3, 6))
     with freeze_time(datetimes):
-        response = client.get('/testdata')
+        response = client.get('/api/v1/testdata/next')
         assert response.json == {
             "testdata": {
                 "item": "{'key A1': 'value A1', 'key B1': 'value B1', 'key C1': 'value C1'}",
@@ -58,7 +58,7 @@ def test__testdata_endpoint(client, create_database_setup):
             }
         }
     with freeze_time(datetimes):
-        response = client.get('/testdata')
+        response = client.get('/api/v1/testdata/next')
         assert response.json == {
             "testdata": {
                 "item": "{'key A2': 'value A2', 'key B2': 'value B2', 'key C2': 'value C2'}",
@@ -67,7 +67,7 @@ def test__testdata_endpoint(client, create_database_setup):
             }
         }
     with freeze_time(datetimes):
-        response = client.get('/testdata')
+        response = client.get('/api/v1/testdata/next')
         assert response.json == {
             "testdata": {
                 "item": "{'key A1': 'value A1', 'key B1': 'value B1', 'key C1': 'value C1'}",
@@ -78,11 +78,11 @@ def test__testdata_endpoint(client, create_database_setup):
 
 
 # todo: test will break when configured from GUI is implemented
-def test__testdata_all_endpoint(client, create_database_setup):
+def test__testdata_endpoint(client, create_database_setup):
     # todo: workaround until configuration from GUI is implemented
     datetimes = (datetime(2018, 1, 1, hour) for hour in range(3, 5))
     with freeze_time(datetimes):
-        response = client.get('/testdata')
+        response = client.get('/api/v1/testdata/next')
         assert response.json == {
             "testdata": {
                 "item": "{'key A1': 'value A1', 'key B1': 'value B1', 'key C1': 'value C1'}",
@@ -91,7 +91,7 @@ def test__testdata_all_endpoint(client, create_database_setup):
             }
         }
     with freeze_time(datetimes):
-        response = client.get('/testdata')
+        response = client.get('/api/v1/testdata/next')
         assert response.json == {
             "testdata": {
                 "item": "{'key A2': 'value A2', 'key B2': 'value B2', 'key C2': 'value C2'}",
@@ -101,7 +101,7 @@ def test__testdata_all_endpoint(client, create_database_setup):
         }
     # end of workaround
 
-    response = client.get('/testdata/all')
+    response = client.get('/api/v1/testdata')
     print(response.json)
     assert response.json == {
         "testdata": {
