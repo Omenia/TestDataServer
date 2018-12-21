@@ -30,7 +30,7 @@ def add_testdata_to_db():
     db.session.commit()
 
 
-def get_all_testdata():
+def get_testdata():
     testdata = {}
     for row in db.session.query(TestItem, TestItem.dataset).order_by(TestItem.timestamp).all():
         data = {
@@ -46,7 +46,7 @@ def get_all_testdata():
     return testdata
 
 
-def get_testdata():
+def get_testdata_next():
     item = db.session.query(TestItem, TestItem.dataset).order_by(TestItem.timestamp).first()
     item.TestItem.timestamp = datetime.now()
     db.session.commit()

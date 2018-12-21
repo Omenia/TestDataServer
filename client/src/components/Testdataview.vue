@@ -22,7 +22,7 @@ export default {
         };
     },
     created() {
-        axios.get(`/testdata/all`)
+        axios.get(`/api/v1/testdata`)
             .then(response => (this.testdata = response.data.testdata))
             .catch(error => (this.errors = error))
     }
