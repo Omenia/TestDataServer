@@ -1,15 +1,11 @@
 <template>
-    <h1>{{ msg }}</h1>
+    <div>{{ title }}<div>
 </template>
 
 <script>
 export default {
   name: 'Header',
-  data() {
-    return {
-      msg: 'Test Data Server',
-    };
-  },
+  props: ['title'],
 };
 </script>
 
