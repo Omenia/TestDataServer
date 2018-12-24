@@ -1,8 +1,12 @@
 <template>
-  <div id="dashboard">
-    <Header title="Dashboard"></Header>
-    <Navigation/>
-    <Testdataview/>
+  <div id="dashboard" class="container">
+    <div class="nav">
+      <Navigation active_page="dashboard"/>
+    </div>
+    <div class="main">
+      <Header title="Dashboard"></Header>
+      <Testdataview/>
+    </div>
   </div>
 </template>
 
@@ -22,12 +26,5 @@ export default {
 </script>
 
 <style>
-#dashboard {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+   @import '../assets/styles/testdataserver.css';
 </style>

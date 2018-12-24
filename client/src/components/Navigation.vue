@@ -1,9 +1,11 @@
 <template>
-    <ul>
-        <li><font-awesome-icon size="2x" icon="tachometer-alt" /></li>
-        <li><font-awesome-icon size="2x" icon="info" /></li>
+    <ul id="navigation">
+        <li v-for="link in Object.values(links)">
+            <a v-bind:class="link.element_class" v-bind:href="link.url" v-bind:title="link.tooltip">
+                <font-awesome-icon size="2x" v-bind:icon="link.icon" />
+            </a>
+        </li>
     </ul>
-
 </template>
 
 <script>
@@ -19,23 +21,32 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 export default {
   name: 'Navigation',
+  props: ['active_page'],
+  data() {
+    return {
+        active_link: this.active_page,
+        links: {
+            dashboard: {
+                url: '/',
+                icon: 'tachometer-alt',
+                tooltip: 'Dashboard',
+                element_class: 'deactive_page'
+            },
+            swagger: {
+                url: '/ui',
+                icon: 'info',
+                tooltip: 'API documentation',
+                element_class: 'deactive_page'
+            }
+        }
+    }
+  },
+  created() {
+      this.links[this.active_link]['element_class'] = 'active_page';
+  }
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+<style>
+    @import '../assets/styles/testdataserver.css';
 </style>
