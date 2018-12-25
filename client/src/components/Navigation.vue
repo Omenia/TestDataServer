@@ -1,11 +1,13 @@
 <template>
-    <ul id="navigation">
-        <li v-for="link in Object.values(links)">
-            <a v-bind:class="link.element_class" v-bind:href="link.url" v-bind:title="link.tooltip">
-                <font-awesome-icon size="2x" v-bind:icon="link.icon" />
-            </a>
-        </li>
-    </ul>
+    <div class="nav">
+        <ul id="navigation">
+            <li v-for="link in Object.values(links)">
+                <a v-bind:class="link.element_class" v-bind:href="link.url" v-bind:title="link.tooltip">
+                    <font-awesome-icon size="2x" v-bind:icon="link.icon" />
+                </a>
+            </li>
+        </ul>
+    </div>
 </template>
 
 <script>

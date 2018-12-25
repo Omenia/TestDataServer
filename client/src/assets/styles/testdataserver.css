@@ -8,9 +8,6 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-#navigation {
-  padding-top: 60px;
-}
 #navigation li {
   margin-top: 5px;
 }
@@ -23,17 +20,17 @@ body {
 
 .header {
   flex: 0 1 55px;
-  padding-top: 20px;
+  text-align: left;
+  padding: 20px 0px 0px 75px;
   background-size: cover;
-  width: 100vw;
   background: var(--toolbar-bg-color);
   font-size: xx-large;
-  font-weight: bold;
-}
+  font-weight: bold;}
 
 .container {
   height: 100vh;
-  display: inline-flex;
+  display: flex;
+  flex-direction: column;
 }
 .nav {
   background-size: cover;
@@ -49,11 +46,8 @@ body {
   margin: 0 10px;
 }
 .main {
-  width: 100vw;
   flex: 1 1 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: inline-flex;
   justify-content: center;
 }
 

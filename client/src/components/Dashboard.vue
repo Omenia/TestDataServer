@@ -1,10 +1,8 @@
 <template>
   <div id="dashboard" class="container">
-    <div class="nav">
-      <Navigation active_page="dashboard"/>
-    </div>
+    <Header title="Dashboard"></Header>
     <div class="main">
-      <Header title="Dashboard"></Header>
+      <Navigation active_page="dashboard"/>
       <Testdataview/>
     </div>
   </div>
