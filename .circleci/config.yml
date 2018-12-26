@@ -64,6 +64,17 @@ jobs:
           export PYTHONPATH=server
           pytest
 
+    - run:
+          name: run server
+          command: python3 server/testdataserver.py
+          background: true
+
+    - run:
+          name: run Robot tests
+          command: |
+            cd robottests
+            robot -d output .
+
     - store_artifacts:
         path: test-reports
         destination: test-reports
@@ -75,3 +86,7 @@ jobs:
     - store_artifacts:
         path: setup.py
         destination: setup.py
+
+    - store_artifacts:
+        path: robottests/output
+        destination: robottests/

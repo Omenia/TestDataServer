@@ -1,5 +1,5 @@
 <template>
-  <div id="dashboard" class="container">
+  <div id="dashboard" class="container ta_dashboard_header">
     <div class="nav">
       <Navigation active_page="dashboard"/>
     </div>
@@ -11,12 +11,12 @@
 </template>
 
 <script>
-import Header from './Header';
-import Navigation from './Navigation';
-import Testdataview from './Testdataview';
+import Header from "./Header";
+import Navigation from "./Navigation";
+import Testdataview from "./Testdataview";
 
 export default {
-  name: 'Dashboard',
+  name: "Dashboard",
   components: {
     Header,
     Navigation,
@@ -26,5 +26,5 @@ export default {
 </script>
 
 <style>
-   @import '../assets/styles/testdataserver.css';
+@import "../assets/styles/testdataserver.css";
 </style>
