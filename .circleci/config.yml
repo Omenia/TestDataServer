@@ -73,7 +73,7 @@ jobs:
           name: run Robot tests
           command: |
             cd robottests
-            robot -d output .
+            python3 -m robot -d output .
 
     - store_artifacts:
         path: test-reports
