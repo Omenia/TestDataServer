@@ -72,6 +72,7 @@ jobs:
     - run:
           name: run Robot tests
           command: |
+            . venv/bin/activate
             cd robottests
             python3 -m robot -d output .
 
