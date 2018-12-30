@@ -36,13 +36,20 @@ paths:
                   properties:
                     testdata:
                       type: string
-  /api/v1/testdata/next:
+  /api/v1/testdata/{dataset}:
     get:
       operationId: "testdata.get_testdata_next"
       tags:
       - "Testdata"
       summary: "Get test data"
       description: "Get data that can be used in test execution."
+      parameters:
+        - name: dataset
+          in: path
+          required: true
+          description: Dataset from which test data item is requested
+          schema:
+            type: string
       responses:
         200:
           description: "Successful request of test data"
