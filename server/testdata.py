@@ -1,8 +1,8 @@
 import database
 
 
-def get_testdata_next():
-    return {"testdata": database.get_testdata_next()}
+def get_testdata_next(dataset):
+    return {"testdata": database.get_testdata_next(dataset)}
 
 
 def get_testdata():

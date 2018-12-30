@@ -62,7 +62,7 @@ def test__status_endpoint(client):
 def test__testdata_next_endpoint(client, create_database_setup):
     datetimes = (datetime(2018, 1, 1, hour) for hour in range(3, 6))
     with freeze_time(datetimes):
-        response = client.get('/api/v1/testdata/next')
+        response = client.get('/api/v1/testdata/test')
         assert response.json == {
             "testdata": {
                 "item": '{"username": "user1", "password": "passwd", "email": "user1@example.com"}',
@@ -71,7 +71,7 @@ def test__testdata_next_endpoint(client, create_database_setup):
             }
         }
     with freeze_time(datetimes):
-        response = client.get('/api/v1/testdata/next')
+        response = client.get('/api/v1/testdata/test')
         assert response.json == {
             "testdata": {
                 "item": '{"username": "user2", "password": "passwd", "email": "user2@example.com"}',
@@ -80,7 +80,7 @@ def test__testdata_next_endpoint(client, create_database_setup):
             }
         }
     with freeze_time(datetimes):
-        response = client.get('/api/v1/testdata/next')
+        response = client.get('/api/v1/testdata/test')
         assert response.json == {
             "testdata": {
                 "item": '{"username": "user1", "password": "passwd", "email": "user1@example.com"}',
