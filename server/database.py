@@ -3,7 +3,6 @@ from datetime import datetime
 
 from config import db
 from models import TestItem
-from testdata import get_ITEMS
 
 
 def setup():
@@ -14,19 +13,6 @@ def setup():
 
 def create():
     db.create_all()
-    db.session.commit()
-    add_testdata_to_db()  # todo: remove when testdata is set from GUI
-
-
-# todo: remove when testdata is set from GUI
-def add_testdata_to_db():
-    items = get_ITEMS()
-    for item in items:
-        # todo: dataset 'setti' is now hard coded
-        testitem = TestItem(
-            dataset='setti', item=str(item), status='available', timestamp=datetime.now()
-        )
-        db.session.add(testitem)
     db.session.commit()
 
 
@@ -55,3 +41,15 @@ def get_testdata_next():
         'status': item.TestItem.status,
         'timestamp': item.TestItem.timestamp,
     }
+
+
+def add_testdata_to_db(body):
+    for item in body.get('items').splitlines():
+        testitem = TestItem(
+            dataset=body.get('name'),
+            item=item.strip(),
+            status='available',
+            timestamp=datetime.now(),
+        )
+        db.session.add(testitem)
+    db.session.commit()

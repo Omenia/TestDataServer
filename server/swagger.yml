@@ -57,3 +57,24 @@ paths:
                   properties:
                     testdata:
                       type: string
+  /api/v1/dataset:
+    post:
+      operationId: "dataset.post_dataset"
+      description: Create new dataset
+      tags:
+      - "Dataset"
+      summary: Create dataset
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                name:
+                  type: string
+                  description: Name of dataset to create
+                items:
+                  type: string
+                  description: Items for dataset
+      responses:
+        201:
+          description: "Successfully created dataset."

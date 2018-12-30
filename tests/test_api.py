@@ -28,9 +28,22 @@ def create_database_setup(request):
     if os.path.exists(os.path.join(basedir, 'testitem.db')):
         os.rename(os.path.join(basedir, 'testitem.db'), os.path.join(basedir, 'testitem_orig.db'))
 
-    # todo: testdata needs to be set differently to database when configuring testdata is done from GUI
-    with freeze_time((datetime(2018, 1, 1, hour) for hour in range(1, 3))):
-        db.create()
+    db.create()
+    datetimes = (datetime(2018, 1, 1, hour) for hour in range(1, 3))
+    with freeze_time(datetimes):
+        db.add_testdata_to_db(
+            {
+                'name': 'test',
+                'items': '{"username": "user1", "password": "passwd", "email": "user1@example.com"}',
+            }
+        )
+    with freeze_time(datetimes):
+        db.add_testdata_to_db(
+            {
+                'name': 'test',
+                'items': '{"username": "user2", "password": "passwd", "email": "user2@example.com"}',
+            }
+        )
 
     request.addfinalizer(teardown)
 
@@ -45,14 +58,14 @@ def test__status_endpoint(client):
     assert response.status_code == 200
 
 
-# todo: test will break when configured from GUI is implemented
+# todo: issue-34
 def test__testdata_next_endpoint(client, create_database_setup):
     datetimes = (datetime(2018, 1, 1, hour) for hour in range(3, 6))
     with freeze_time(datetimes):
         response = client.get('/api/v1/testdata/next')
         assert response.json == {
             "testdata": {
-                "item": "{'key A1': 'value A1', 'key B1': 'value B1', 'key C1': 'value C1'}",
+                "item": '{"username": "user1", "password": "passwd", "email": "user1@example.com"}',
                 "status": "available",
                 "timestamp": "2018-01-01T03:00:00Z",
             }
@@ -61,7 +74,7 @@ def test__testdata_next_endpoint(client, create_database_setup):
         response = client.get('/api/v1/testdata/next')
         assert response.json == {
             "testdata": {
-                "item": "{'key A2': 'value A2', 'key B2': 'value B2', 'key C2': 'value C2'}",
+                "item": '{"username": "user2", "password": "passwd", "email": "user2@example.com"}',
                 "status": "available",
                 "timestamp": "2018-01-01T04:00:00Z",
             }
@@ -70,51 +83,28 @@ def test__testdata_next_endpoint(client, create_database_setup):
         response = client.get('/api/v1/testdata/next')
         assert response.json == {
             "testdata": {
-                "item": "{'key A1': 'value A1', 'key B1': 'value B1', 'key C1': 'value C1'}",
+                "item": '{"username": "user1", "password": "passwd", "email": "user1@example.com"}',
                 "status": "available",
                 "timestamp": "2018-01-01T05:00:00Z",
             }
         }
 
 
-# todo: test will break when configured from GUI is implemented
+# todo: issue-34
 def test__testdata_endpoint(client, create_database_setup):
-    # todo: workaround until configuration from GUI is implemented
-    datetimes = (datetime(2018, 1, 1, hour) for hour in range(3, 5))
-    with freeze_time(datetimes):
-        response = client.get('/api/v1/testdata/next')
-        assert response.json == {
-            "testdata": {
-                "item": "{'key A1': 'value A1', 'key B1': 'value B1', 'key C1': 'value C1'}",
-                "status": "available",
-                "timestamp": "2018-01-01T03:00:00Z",
-            }
-        }
-    with freeze_time(datetimes):
-        response = client.get('/api/v1/testdata/next')
-        assert response.json == {
-            "testdata": {
-                "item": "{'key A2': 'value A2', 'key B2': 'value B2', 'key C2': 'value C2'}",
-                "status": "available",
-                "timestamp": "2018-01-01T04:00:00Z",
-            }
-        }
-    # end of workaround
-
     response = client.get('/api/v1/testdata')
-    print(response.json)
     assert response.json == {
         "testdata": {
-            "setti": [
+            "test": [
                 {
-                    "item": "{'key A1': 'value A1', 'key B1': 'value B1', 'key C1': 'value C1'}",
+                    "item": '{"username": "user1", "password": "passwd", "email": "user1@example.com"}',
                     "status": "available",
-                    "timestamp": "2018-01-01T03:00:00Z",
+                    "timestamp": "2018-01-01T01:00:00Z",
                 },
                 {
-                    "item": "{'key A2': 'value A2', 'key B2': 'value B2', 'key C2': 'value C2'}",
+                    "item": '{"username": "user2", "password": "passwd", "email": "user2@example.com"}',
                     "status": "available",
-                    "timestamp": "2018-01-01T04:00:00Z",
+                    "timestamp": "2018-01-01T02:00:00Z",
                 },
             ]
         }

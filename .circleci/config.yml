@@ -76,7 +76,7 @@ jobs:
           command: |
             . venv/bin/activate
             cd robottests
-            python3 -m robot -d output .
+            python3 -m robot -P . -d output .
 
     - store_artifacts:
         path: test-reports
