@@ -7,14 +7,7 @@ from flask_marshmallow import Marshmallow
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-connex_app = connexion.App(
-    __name__,
-    specification_dir='./',
-    static_folder='templates/static',
-    template_folder='./templates',
-    static_url_path='',
-)
-
+connex_app = connexion.FlaskApp(__name__, port=9090, specification_dir='.')
 connex_app.add_api('swagger.yml')
 
 app = connex_app.app

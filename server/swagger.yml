@@ -1,12 +1,8 @@
-swagger: "2.0"
+openapi: "3.0.0"
 info:
   description: Test data server REST API documentation
   version: "0.0.1"
   title: Swagger for Test data server
-consumes:
-  - "application/json"
-produces:
-  - "application/json"
 
 paths:
   /api/v1/status:
@@ -29,23 +25,35 @@ paths:
       responses:
         200:
           description: "Successful request of all test data"
-          schema:
-            type: string
-            properties:
-              testdata:
-                type: "string"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - testdata
+                  properties:
+                    testdata:
+                      type: string
   /api/v1/testdata/next:
     get:
       operationId: "testdata.get_testdata_next"
       tags:
-      - "Testdata/next"
+      - "Testdata"
       summary: "Get test data"
       description: "Get data that can be used in test execution."
       responses:
         200:
           description: "Successful request of test data"
-          schema:
-            type: string
-            properties:
-              testdata:
-                type: "string"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - testdata
+                  properties:
+                    testdata:
+                      type: string
