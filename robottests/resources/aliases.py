@@ -10,7 +10,7 @@ NAV_LINK = {
 
 PAGE_HEADER_ELEMENT = {
     'dashboard': 'css=.ta_dashboard_header',
-    'Swagger': 'css=.info_title',
+    'Swagger': 'css=.title',
 }
 
 PAGE_HEADER_TEXT = {
