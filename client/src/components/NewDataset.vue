@@ -40,13 +40,14 @@ export default {
   methods: {
     submitNewDataset() {
       axios
-        .post("/api/v1/dataset", {
+        .post("/api/v1/datasets", {
           name: this.dataset,
           items: this.items
         })
         .then(response => {
           this.dataset = "";
           this.items = "";
+          // todo: take into use when implementing existing dataset view
           // this.$emit("created");
         })
         .catch(error => (this.errors = error));
