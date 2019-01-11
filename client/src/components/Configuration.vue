@@ -3,10 +3,7 @@
     <div class="nav">
       <Navigation active_page="configuration"/>
     </div>
-    <div class="main">
-      <Header title="Configuration"></Header>
-      <Configview/>
-    </div>
+    <Configview/>
   </div>
 </template>
 

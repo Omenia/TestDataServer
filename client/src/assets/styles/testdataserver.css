@@ -24,42 +24,22 @@ body {
   color: #0b071b;
 }
 
-.header {
-  flex: 0 1 55px;
-  padding-top: 20px;
-  text-align: left;
-  background-size: cover;
-  width: 100vw;
-  background: var(--toolbar-bg-color);
-  font-size: xx-large;
-  font-weight: bold;
-}
-
 .container {
   height: 100vh;
-  display: inline-flex;
+  display: flex;
 }
 .nav {
-  background-size: cover;
   background: var(--toolbar-bg-color);
   flex: 0 0 70px;
   text-align: center;
+  height: 100vh;
 }
 .nav ul {
-  list-style-type: none;
   padding: 0px;
 }
 .nav li {
   display: inline-block;
   margin: 5px 10px;
-}
-.main {
-  width: 100vw;
-  flex: 1 1 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
 #dashboard #configuration {
@@ -70,12 +50,12 @@ body {
 .content {
   flex: 1 1 auto;
   padding: 20px;
+  justify-content: center;
+  display: flex;
+  align-self: baseline;
 }
 
 .form-group {
-  /* border: 2px solid red;
-  border-radius: 5px; */
-  width: 100%;
   border-radius: 5px;
   background-color: #f2f2f2;
   padding: 20px;

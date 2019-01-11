@@ -13,16 +13,10 @@ NAV_LINK = {
     'Swagger': 'css=.ta_swagger_nav_item',
 }
 
-PAGE_HEADER_ELEMENT = {
+PAGE_ELEMENT = {
     'dashboard': 'css=.ta_dashboard_header',
     'configuration': 'css=.ta_configuration_header',
-    'Swagger': 'css=.title',
-}
-
-PAGE_HEADER_TEXT = {
-    'dashboard': 'Dashboard',
-    'configuration': 'Configuration',
-    'Swagger': 'Swagger for Test data server',
+    'Swagger': 'css=#swagger-ui',
 }
 
 NEW_DATASET_FORM = {

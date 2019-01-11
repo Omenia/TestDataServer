@@ -1,11 +1,13 @@
 <template>
   <div class="content">
-    <h3>Datasets</h3>
-    <div v-for="dataset in Object.keys(testdata)" v-bind:key="dataset">
-      <span>Dataset: {{ dataset }}</span>
-      <div v-for="item in testdata[dataset]" v-bind:key="item.item">
-        <span>Item: {{ item.item }} - Timestamp: {{ item.timestamp }}</span>
-      </div>
+    <div>
+        <h3>Datasets</h3>
+        <template v-for="dataset in Object.keys(testdata)">
+            <span :key="dataset">Dataset: {{ dataset }}</span>
+            <div v-for="item in testdata[dataset]" :key="item.item">
+                <span>Item: {{ item.item }} - Timestamp: {{ item.timestamp }}</span>
+            </div>
+        </template>
     </div>
   </div>
 </template>
