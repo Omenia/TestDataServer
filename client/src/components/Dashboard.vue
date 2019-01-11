@@ -3,10 +3,7 @@
     <div class="nav">
       <Navigation active_page="dashboard"/>
     </div>
-    <div class="main">
-      <Header title="Dashboard"></Header>
-      <Testdataview/>
-    </div>
+    <Testdataview/>
   </div>
 </template>
 
