@@ -73,8 +73,6 @@ body {
 }
 
 .form-group {
-  /* border: 2px solid red;
-  border-radius: 5px; */
   width: 100%;
   border-radius: 5px;
   background-color: #f2f2f2;
@@ -98,4 +96,51 @@ textarea {
   border-radius: 4px;
   background-color: #f8f8f8;
   resize: none;
+}
+
+.config-testdata {
+  width: 100%;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  margin-bottom: 10px;
+}
+
+.section-header {
+  margin-bottom: 10px;
+  font-size: x-large;
+  text-align: center;
+}
+
+.dataset-row {
+  border: 2px solid #ccc;
+  padding: 7px;
+  background-color: var(--toolbar-bg-color);  
+  overflow: hidden;
+}
+.dataset-item-row {
+  border: 2px solid #ccc;
+  border-top-style: none;
+  padding: 7px;
+  padding-left: 20px;
+  background-color: white;
+  display: none;
+  overflow: hidden;
+}
+.dataset-name {
+  display: block;
+  float: left;
+  width: 98%;
+  cursor: pointer;
+}
+.item-name {
+  display: block;
+  float: left;
+  width: 98%;
+}
+.item-modify {
+  display: block;
+  width: 2%;
+  float: right;
+  cursor: pointer;
 }

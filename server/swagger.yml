@@ -36,6 +36,27 @@ paths:
                   properties:
                     testdata:
                       type: string
+    post:
+      operationId: "testdata.post_dataset"
+      description: Create new dataset
+      tags:
+      - "Testdata"
+      summary: Create dataset
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                dataset:
+                  type: string
+                  description: Name of dataset to create
+                items:
+                  type: string
+                  description: Items for dataset
+      responses:
+        201:
+          description: "Successfully created dataset."
+
   /api/v1/testdata/{dataset}:
     get:
       operationId: "testdata.get_testdata_next"
@@ -64,24 +85,42 @@ paths:
                   properties:
                     testdata:
                       type: string
-  /api/v1/dataset:
-    post:
-      operationId: "dataset.post_dataset"
-      description: Create new dataset
+    delete:
+      operationId: "testdata.delete_dataset"
+      description: Delete dataset from comfiguration
       tags:
-      - "Dataset"
-      summary: Create dataset
-      requestBody:
-        content:
-          application/json:
-            schema:
-              properties:
-                name:
-                  type: string
-                  description: Name of dataset to create
-                items:
-                  type: string
-                  description: Items for dataset
+      - "Testdata"
+      summary: Delete dataset
+      parameters:
+        - name: dataset
+          description: Dataset name
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
-        201:
-          description: "Successfully created dataset."
+        200:
+          description: "Successful dataset deletion"
+  /api/v1/testdata/{dataset}/{item}:
+    delete:
+      operationId: "testdata.delete_dataset_item"
+      description: Delete dataset item from comfiguration
+      tags:
+      - "Testdata"
+      summary: Delete dataset item
+      parameters:
+        - name: dataset
+          description: Dataset name
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: item
+          description: Dataset item
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: "Successful dataset item deletion"

@@ -6,6 +6,7 @@ Resource     then.robot
 Resource     setup.robot
 Resource     teardown.robot
 Library      SeleniumLibrary
+Library      lib.testdata_api.TestdataApi
 Library      lib.verify.Verify
 
 *** Variables ***

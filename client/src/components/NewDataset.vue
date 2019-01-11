@@ -1,5 +1,6 @@
 <template>
   <div class="form-group">
+    <div class="section-header">Add new dataset</div>
     <label for="new-dataset">Dataset name</label>
     <input
       type="text"
@@ -40,8 +41,8 @@ export default {
   methods: {
     submitNewDataset() {
       axios
-        .post("/api/v1/dataset", {
-          name: this.dataset,
+        .post("/api/v1/testdata", {
+          dataset: this.dataset,
           items: this.items
         })
         .then(response => {

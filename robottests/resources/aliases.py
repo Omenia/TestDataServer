@@ -30,3 +30,8 @@ NEW_DATASET_FORM = {
     'items': 'css=.ta_new_dataset_items',
     'submit': 'css=.ta_new_dataset_submit',
 }
+
+ALERT_TEXT = {
+    'delete-dataset': 'Are you sure you want to delete dataset:',
+    'delete-item': 'Are you sure you want to delete dataset item:',
+}
