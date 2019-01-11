@@ -48,6 +48,7 @@ export default {
         .then(response => {
           this.dataset = "";
           this.items = "";
+          // todo: take into use when implementing existing dataset view
           // this.$emit("created");
         })
         .catch(error => (this.errors = error));

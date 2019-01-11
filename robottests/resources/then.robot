@@ -15,4 +15,4 @@ other dataset items will be left in database
     verify dataset item exists in db    ${BASE_URL}    ${DATASET_NAME}    ${EXISTING_ITEM}
 
 "${page}" page will be loaded
-    Wait Until Element Contains     &{PAGE_HEADER_ELEMENT}[${page}]    &{PAGE_HEADER_TEXT}[${page}]
+    Wait Until Page Contains Element     &{PAGE_ELEMENT}[${page}]
