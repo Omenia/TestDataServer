@@ -1,25 +1,25 @@
 <template>
-  <div id="app">
+  <div id="configuration">
     <Header/>
-    <Testdataview/>
+    <Navigation/>
   </div>
 </template>
 
 <script>
-import Header from './components/Header';
-import Testdataview from './components/Testdataview';
+import Header from './Header';
+import Navigation from './Navigation';
 
 export default {
-  name: 'App',
+  name: 'Configuration',
   components: {
     Header,
-    Testdataview
+    Navigation,
   },
 };
 </script>
 
 <style>
-#app {
+#configuration {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

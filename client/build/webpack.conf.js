@@ -18,7 +18,9 @@ function resolve (dir) {
 module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
-    app: './src/main.js'
+    dashboard: './src/dashboard.js',
+    configuration: './src/configuration.js',
+    settings: './src/settings.js',
   },
 
     module: {
@@ -77,6 +79,7 @@ module.exports = {
       filename: config.build.dashboard,
       template: 'index.html',
       inject: true,
+      chunks: ['dashboard', 'vendor', 'manifest'],
       minify: {
         removeComments: true,
         collapseWhitespace: true,
@@ -91,6 +94,7 @@ module.exports = {
       filename: config.build.configuration,
       template: 'index.html',
       inject: true,
+      chunks: ['configuration', 'vendor', 'manifest'],
       minify: {
         removeComments: true,
         collapseWhitespace: true,
@@ -105,6 +109,7 @@ module.exports = {
       filename: config.build.settings,
       template: 'index.html',
       inject: true,
+      chunks: ['settings', 'vendor', 'manifest'],
       minify: {
         removeComments: true,
         collapseWhitespace: true,
