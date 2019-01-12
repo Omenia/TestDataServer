@@ -15,9 +15,9 @@
       name="items"
       id="new-dataset-items"
       class="form-control ta_new_dataset_items"
-      placeholder='Items in JSON form. One item in a line. Example: 
-        {"username": "user1", "password": "passwd", "email": "user1@example.com"}
-        {"username": "user2", "password": "passwd", "email": "user2@example.com"}'
+      placeholder='One item in a line. Example: 
+        "username": "user1", "password": "passwd", "email": "user1@example.com"
+        "username": "user2", "password": "passwd", "email": "user2@example.com"'
       rows="5"
       required
       v-model="items"
@@ -40,10 +40,16 @@ export default {
   },
   methods: {
     submitNewDataset() {
+      // var itemJson = {};
+      var itemList = this.items.split("\n");
+      // for (var i = 0; i < itemList.length; i++) {
+        // itemJson[i] = itemList[i];
+      // }
+
       axios
         .post("/api/v1/testdata", {
           dataset: this.dataset,
-          items: this.items
+          items: itemList
         })
         .then(response => {
           this.dataset = "";

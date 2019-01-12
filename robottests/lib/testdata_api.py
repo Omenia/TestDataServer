@@ -1,3 +1,5 @@
+import json
+
 from robot.libraries.BuiltIn import BuiltIn
 from robot.api import logger
 import requests
@@ -15,7 +17,7 @@ class TestdataApi(object):
         """
         response = requests.post(
             base_url + '/api/v1/testdata',
-            json={'dataset': dataset_name, 'items': '\n'.join(dataset_items)},
+            json={'dataset': dataset_name, 'items': dataset_items}
         )
         if response.status_code != 200:
             BuiltIn().fail(

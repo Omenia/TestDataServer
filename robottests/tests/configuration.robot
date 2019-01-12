@@ -4,7 +4,8 @@ Resource         ../resources/generic-resources.robot
 
 *** Variables ***
 ${DATASET_NAME}    dataset-1
-@{ITEMS}           key-a1=value-a1, key-a2=value-a2    key-b1=value-b1, key-b2=value-b2 
+@{ITEMS}           "key-a1": "value-a1", "key-a2": "value-a2"
+...                "key-b1": "value-b1", "key-b2": "value-b2"
 
 *** Test Cases ***
 New dataset will be stored to database
