@@ -52,7 +52,7 @@ def add_testdata_to_db(dataset, items):
     for item in items:
         testitem = TestItem(
             dataset=dataset,
-            item=item.strip(),
+            item=str(item),
             status='available',
             timestamp=datetime.now(),
         )

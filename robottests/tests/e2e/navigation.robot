@@ -1,5 +1,5 @@
 *** Settings ***
-Resource    ../resources/generic-resources.robot
+Resource    ../../resources/e2e/generic-resources.robot
 
 *** Test Cases ***
 Dashboard will be landing page

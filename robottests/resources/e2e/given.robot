@@ -1,6 +1,6 @@
 *** Keywords ***
 dataset was configured
-    add dataset    ${BASE_URL}    ${DATASET_NAME}    @{ITEMS}    
+    add dataset    ${API_URL}    ${DATASET_NAME}    @{ITEMS}    
     Go To    ${BASE_URL}&{ON_PAGE}[configuration page]
 
 user was not on "${page}"

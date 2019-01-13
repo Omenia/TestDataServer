@@ -10,5 +10,6 @@ Library      lib.testdata_api.TestdataApi
 Library      lib.verify.Verify
 
 *** Variables ***
-${BROWSER}=    headlessfirefox
+${BROWSER}=     headlessfirefox
 ${BASE_URL}=    http://localhost:5000
+${API_URL}=     http://localhost:5000/api/v1
