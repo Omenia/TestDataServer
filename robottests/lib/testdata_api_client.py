@@ -51,14 +51,14 @@ class TestdataApi(object):
 
         logger.info('Dataset deleted.')
 
-    def delete_multiple_dataset(self, base_url, dataset_names):
+    def delete_datasets(self, base_url):
         """
-        Delete multiple dataset.
+        Delete datasets from database.
 
         :param base_url: base url for api
-        :param datasets: list of dataset names
         """
-        for dataset in dataset_names:
+        response = self.send_get_request(base_url, '/testdata')
+        for dataset in response.json()['testdata']:
             self.delete_dataset(base_url, dataset)
 
     @staticmethod
@@ -95,7 +95,7 @@ class TestdataApi(object):
         return requests.post(
             base_url + '/testdata',
             json=json.loads(body_json),
-            headers={'Content-Type': 'application/json'}
+            headers={'Content-Type': 'application/json'},
         )
 
     @staticmethod

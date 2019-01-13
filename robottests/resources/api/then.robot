@@ -9,3 +9,7 @@ status code 200 with next dataset item will be received
 
 status code "${code}" will be received
     Should Be Equal As Numbers    ${RESPONSE.status_code}    ${code}
+
+status code "${code}" will be received with error "${error}"
+    Should Be Equal As Numbers    ${RESPONSE.status_code}       ${code}
+    Should Be Equal               ${RESPONSE.json()}[detail]    ${error}

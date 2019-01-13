@@ -17,5 +17,5 @@ GET "${endpoint}" request ${end_of_name}
     Set Test Variable    ${RESPONSE}    ${response}
 
 POST /testdata request ${end_of_name}
-    ${response}=    send post testdata request    ${API_URL}    ${BODY}   
+    ${response}=    send post testdata request    ${API_URL}    ${PARAMS}   
     Set Test Variable    ${RESPONSE}    ${response}

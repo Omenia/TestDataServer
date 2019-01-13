@@ -38,8 +38,7 @@ class Verify(object):
         :param dataset_name: name of dataset to be searched
         """
         response = requests.get(base_url + '/testdata/' + dataset_name)
-        # todo: status code needs to be changed when error handling is implemented
-        if response.status_code != 500:
+        if response.status_code != 404:
             BuiltIn().fail(
                 'Getting testdata failed ({}: {})'.format(response.status_code, response.text)
             )

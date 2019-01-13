@@ -18,8 +18,26 @@ GET /testdata will response with status code 200 and datasets
 
 POST /testdata with dataset will response with status code 201
     [Setup]    Set Test Variable    
-     ...    ${BODY}    {"dataset": "${DATASET_NAMES}[0]", "items": [${ITEMS_0}[0], ${ITEMS_0}[1]]}
+     ...    ${PARAMS}    {"dataset": "${DATASET_NAMES}[0]", "items": [${ITEMS_0}[0], ${ITEMS_0}[1]]}
     Given service was running
     When POST /testdata request with dataset is send
     Then status code "201" will be received
-    
+
+Missing dataset parameter - POST /testdata will response with status code 400
+    [Setup]    Set Test Variable    ${PARAMS}    {"items": [${ITEMS_0}[0], ${ITEMS_0}[1]]}
+    Given service was running
+    When POST /testdata request without dataset parameter is send
+    Then status code "400" will be received with error "'dataset' is a required property" 
+
+Existing dataset - POST /testdata with dataset will response with status code 409
+    [Setup]    Set Test Variable    
+     ...    ${PARAMS}    {"dataset": "${DATASET_NAMES}[0]", "items": [${ITEMS_0}[0], ${ITEMS_0}[1]]}
+    Given testdata was configured
+    When POST /testdata request with existing dataset is send
+    Then status code "409" will be received with error "dataset exists already" 
+
+Missing items parameter - POST /testdata will response with status code 400
+    [Setup]    Set Test Variable    ${PARAMS}    {"dataset": "${DATASET_NAMES}[0]"}
+    Given service was running
+    When POST /testdata request without dataset parameter is send
+    Then status code "400" will be received with error "'items' is a required property" 

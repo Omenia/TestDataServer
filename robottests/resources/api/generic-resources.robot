@@ -5,7 +5,7 @@ Resource     when.robot
 Resource     then.robot
 Resource     setup.robot
 Resource     teardown.robot
-Library      lib.testdata_api.TestdataApi
+Library      lib.testdata_api_client.TestdataApi
 Library      lib.verify.Verify
 
 *** Variables ***
