@@ -11,6 +11,7 @@ def get_testdata():
 
 def post_dataset(body):
     database.add_testdata_to_db(body.get('dataset'), body.get('items'))
+    return 'Dataset created', 201
 
 
 def delete_dataset(dataset):

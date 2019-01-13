@@ -46,6 +46,9 @@ paths:
         content:
           application/json:
             schema:
+              required:
+                - dataset
+                - items
               properties:
                 dataset:
                   type: string
