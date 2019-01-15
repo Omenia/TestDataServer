@@ -10,5 +10,5 @@ NAV_LINK = {
 
 PAGE_ELEMENT = {
     'dashboard': 'css=.ta_dashboard_header',
-    'Swagger': 'css=.swagger-section',
+    'Swagger': 'css=#swagger-ui',
 }
