@@ -15,5 +15,12 @@ NAV_LINK = {
 
 PAGE_ELEMENT = {
     'dashboard': 'css=.ta_dashboard_header',
+    'configuration': 'css=.ta_configuration_header',
     'Swagger': 'css=#swagger-ui',
+}
+
+NEW_DATASET_FORM = {
+    'name': 'css=.ta_new_dataset_name',
+    'items': 'css=.ta_new_dataset_items',
+    'submit': 'css=.ta_new_dataset_submit',
 }
