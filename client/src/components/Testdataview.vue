@@ -2,8 +2,8 @@
   <div class="content">
     <h3>Datasets</h3>
       <template v-for="dataset in Object.keys(testdata)">
-          <span>Dataset: {{ dataset }}</span>
-          <div v-for="item in testdata[dataset]">
+          <span :key="dataset">Dataset: {{ dataset }}</span>
+          <div v-for="item in testdata[dataset]" :key="item">
             <span>Item: {{ item.item }} - Timestamp: {{ item.timestamp }}</span>
           </div>
       </template>

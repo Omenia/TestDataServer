@@ -8,6 +8,7 @@ yarn-error.log*
 venv/
 testitem.db
 __pycache__
+robottests/output
 
 
 # Editor directories and files

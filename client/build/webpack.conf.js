@@ -1,4 +1,6 @@
 'use strict'
+// import Testdataview from "../src/components/Testdataview";
+
 const path = require('path')
 const utils = require('./utils')
 const webpack = require('webpack')

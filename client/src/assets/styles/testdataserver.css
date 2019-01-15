@@ -8,6 +8,9 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+#navigation {
+  padding-top: 60px;
+}
 #navigation li {
   margin-top: 5px;
 }
@@ -18,37 +21,20 @@ body {
   color: #3b11e4;
 }
 
-.header {
-  flex: 0 1 55px;
-  text-align: left;
-  padding: 20px 0px 0px 75px;
-  background-size: cover;
-  background: var(--toolbar-bg-color);
-  font-size: xx-large;
-  font-weight: bold;}
-
 .container {
   height: 100vh;
   display: flex;
-  flex-direction: column;
 }
 .nav {
-  background-size: cover;
   background: var(--toolbar-bg-color);
   flex: 0 0 70px;
 }
 .nav ul {
-  list-style-type: none;
   padding: 0px;
 }
 .nav li {
   display: inline-block;
   margin: 0 10px;
-}
-.main {
-  flex: 1 1 auto;
-  display: inline-flex;
-  justify-content: center;
 }
 
 #dashboard {
