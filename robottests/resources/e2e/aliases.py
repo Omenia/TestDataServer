@@ -29,3 +29,18 @@ ALERT_TEXT = {
     'delete-dataset': 'Are you sure you want to delete dataset:',
     'delete-item': 'Are you sure you want to delete dataset item:',
 }
+
+INFO_ELEMENT = {
+    'ok': 'css=.ok-info',
+    'error': 'css=.error-info',
+    'hidden': 'css=.hidden-info',
+}
+
+INFO_TEXT = {
+    'dataset-added-ok': 'Dataset added',
+    'dataset-added-error': 'Conflict (dataset exists already)',
+    'dataset-deleted-ok': 'Dataset deleted',
+    'dataset-deleted-error': 'Not Found (dataset does not exist)',
+    'item-deleted-ok': 'Dataset item deleted',
+    'item-deleted-error': 'Not Found (dataset item does not exist)',
+}

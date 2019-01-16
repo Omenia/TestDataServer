@@ -16,8 +16,8 @@
       id="new-dataset-items"
       class="form-control ta_new_dataset_items"
       placeholder='One item in a line. Example: 
-        "username": "user1", "password": "passwd", "email": "user1@example.com"
-        "username": "user2", "password": "passwd", "email": "user2@example.com"'
+        {"username": "user1", "password": "passwd", "email": "user1@example.com"}
+        {"username": "user2", "password": "passwd", "email": "user2@example.com"}'
       rows="5"
       required
       v-model="items"
@@ -35,7 +35,6 @@ export default {
     return {
       dataset: "",
       items: "",
-      errors: []
     };
   },
   methods: {
@@ -50,10 +49,12 @@ export default {
         .then(response => {
           this.dataset = "";
           this.items = "";
-          // todo: take into use when implementing existing dataset view
-          // this.$emit("created");
+          this.$emit("submit", "ok", "Dataset added");
         })
-        .catch(error => (this.errors = error));
+        .catch(error => {
+          var errorData = error["response"]["data"]
+          this.$emit("submit", "error",  errorData["title"] + " (" + errorData["detail"] + ")");
+        });
     }
   }
 };
