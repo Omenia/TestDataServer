@@ -1,10 +1,12 @@
 *** Keywords ***
 user clicks dataset delete button
+    Set Test Variable    ${ACTION}    dataset-deleted
     Wait Until Element Is Visible    css=.ta_delete_${DATASET_NAME}
     Click Element    css=.ta_delete_${DATASET_NAME}
     Set Test Variable    ${ALERT_INFO}    &{ALERT_TEXT}[delete-dataset] ${DATASET_NAME}
 
 user clicks dataset item delete button
+    Set Test Variable    ${ACTION}    item-deleted
     Set Test Variable    ${DELETED_ITEM}     ${ITEMS}[0]
     Set Test Variable    ${EXISTING_ITEM}    ${ITEMS}[1]
     Wait Until Page Contains    ${DATASET_NAME}
@@ -23,6 +25,7 @@ user goes to root domain
     Go To     ${BASE_URL}
 
 user submits new dataset
+    Set Test Variable    ${ACTION}    dataset-added
     Set Test Variable    ${DATASET_ITEMS}    ${ITEMS}[0]\n${ITEMS}[1]
     Input Text    &{NEW_DATASET_FORM}[name]    ${DATASET_NAME}
     Input Text    &{NEW_DATASET_FORM}[items]    ${DATASET_ITEMS}

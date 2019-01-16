@@ -21,7 +21,7 @@ def get_testdata():
 
 
 def post_dataset(body):
-    status = database.add_testdata_to_db(body.get('dataset'), body.get('items'))
+    status = database.add_testdata_to_db(body.get('dataset').strip(), body.get('items'))
     if status == 'added':
         return '', 201
     elif status == 'exists':
@@ -55,10 +55,10 @@ def _deletion_response(status, searched):
 
 
 def delete_dataset(dataset):
-    status = database.delete_dataset(dataset)
+    status = database.delete_dataset(dataset.strip())
     return _deletion_response(status, 'dataset')
 
 
 def delete_dataset_item(dataset, item):
-    status = database.delete_dataset_item(dataset, item)
+    status = database.delete_dataset_item(dataset.strip(), item)
     return _deletion_response(status, 'dataset item')

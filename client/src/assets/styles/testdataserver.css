@@ -1,5 +1,5 @@
 :root {
-  --toolbar-bg-color: #b8d8d2;
+  --toolbar-bg-color: #cccccc;
 }
 
 body {
@@ -15,13 +15,13 @@ body {
   margin-top: 5px;
 }
 .active_page {
-  color: #65a5f6;
+  color: #3300cc;
 }
 .deactive_page {
-  color: #3b11e4;
+  color: #6699ff;
 }
 .deactive_page:hover {
-  color: #0b071b;
+  color: #000033;
 }
 
 .container {
@@ -44,12 +44,12 @@ body {
 
 #dashboard #configuration {
   text-align: center;
-  color: #2c3e50;
+  color: #333366;
 }
 
 .content {
   flex: 1 1 auto;
-  padding: 20px;
+  padding: 1px 20px 20px 20px;
   justify-content: center;
   display: flex;
   align-self: baseline;
@@ -65,7 +65,7 @@ input[type=text] {
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
-  border: 1px solid #ccc;
+  border: 1px solid #cccccc;
   border-radius: 4px;
   box-sizing: border-box;
 }
@@ -74,9 +74,9 @@ textarea {
   height: 150px;
   padding: 12px 20px;
   box-sizing: border-box;
-  border: 2px solid #ccc;
+  border: 1px solid #cccccc;
   border-radius: 4px;
-  background-color: #f8f8f8;
+  /* background-color: #f8f8f8; */
   resize: none;
 }
 
@@ -94,13 +94,13 @@ textarea {
 }
 
 .dataset-row {
-  border: 2px solid #ccc;
+  border: 2px solid #f2f2f2;
   padding: 7px;
   background-color: var(--toolbar-bg-color);  
   overflow: hidden;
 }
 .dataset-item-row {
-  border: 2px solid #ccc;
+  border: 2px solid #cccccc;
   border-top-style: none;
   padding: 7px;
   padding-left: 20px;
@@ -124,4 +124,25 @@ textarea {
   width: 2%;
   float: right;
   cursor: pointer;
+}
+
+.info {
+  top: 1px;
+  padding: 5px;
+  margin-bottom: 1px;
+  text-align: center;
+}
+.ok-info {
+  background: #99cc99;
+  border-radius: 5px;
+  visibility: visible;
+}
+.error-info {
+  background: #ff9999;
+  border-radius: 5px;
+  visibility: visible;
+}
+.hidden-info {
+  visibility: hidden;
+  margin-bottom: 20px
 }

@@ -32,8 +32,6 @@ export default {
     return { 
       testdata: {},
       openedDatasets: {},
-      // dataset: "",
-      // items: "",
       errors: [],
     };
   },
@@ -64,8 +62,12 @@ export default {
         axios
           .delete("/api/v1/testdata/" + dataset)
           .then((response) => {
-          })
-          .catch(error => {this.errors = error})
+            this.$emit("submit", "ok", "Dataset deleted");
+        })
+        .catch(error => {
+          var errorData = error["response"]["data"]
+          this.$emit("submit", "error",  errorData["title"] + " (" + errorData["detail"] + ")");
+        });
       }
     },
     confirm_item_delete: function (dataset, item) {
@@ -73,8 +75,12 @@ export default {
         axios
           .delete("/api/v1/testdata/" + dataset + "/" + item)
           .then((response) => {
-          })
-          .catch(error => {this.errors = error})
+            this.$emit("submit", "ok", "Dataset item deleted");
+        })
+        .catch(error => {
+          var errorData = error["response"]["data"]
+          this.$emit("submit", "error", errorData["title"] + " (" + errorData["detail"] + ")");
+        });
       }
     },
     dataset_ta_class: function (dataset, element) {
