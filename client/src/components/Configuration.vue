@@ -3,21 +3,28 @@
     <div class="nav">
       <Navigation active_page="configuration"/>
     </div>
-    <Configview/>
+    <div class="content">
+      <div>
+        <ModifyDatasets/>
+        <NewDataset/>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import Header from "./Header";
 import Navigation from "./Navigation";
-import Configview from "./Configview";
+import ModifyDatasets from "./ModifyDatasets";
+import NewDataset from "./NewDataset";
 
 export default {
   name: "Configuration",
   components: {
     Header,
     Navigation,
-    Configview
+    ModifyDatasets,
+    NewDataset
   }
 };
 </script>

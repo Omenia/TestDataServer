@@ -32,19 +32,12 @@ def create_database_setup(request):
     datetimes = (datetime(2018, 1, 1, hour) for hour in range(1, 3))
     with freeze_time(datetimes):
         db.add_testdata_to_db(
-            {
-                'name': 'test',
-                'items': '{"username": "user1", "password": "passwd", "email": "user1@example.com"}',
-            }
+            'test', ['{"username": "user1", "password": "passwd", "email": "user1@example.com"}']
         )
     with freeze_time(datetimes):
         db.add_testdata_to_db(
-            {
-                'name': 'test',
-                'items': '{"username": "user2", "password": "passwd", "email": "user2@example.com"}',
-            }
+            'test', ['{"username": "user2", "password": "passwd", "email": "user2@example.com"}']
         )
-
     request.addfinalizer(teardown)
 
 

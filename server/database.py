@@ -48,13 +48,23 @@ def get_testdata_next(dataset):
     }
 
 
-def add_testdata_to_db(body):
-    for item in body.get('items').splitlines():
+def add_testdata_to_db(dataset, items):
+    for item in items:
         testitem = TestItem(
-            dataset=body.get('name'),
+            dataset=dataset,
             item=item.strip(),
             status='available',
             timestamp=datetime.now(),
         )
         db.session.add(testitem)
+    db.session.commit()
+
+
+def delete_dataset(dataset):
+    db.session.query(TestItem.dataset).filter(TestItem.dataset == dataset).delete()
+    db.session.commit()
+
+
+def delete_dataset_item(dataset, item):
+    db.session.query(TestItem.item).filter(TestItem.item == item).filter(TestItem.dataset == dataset).delete()
     db.session.commit()
