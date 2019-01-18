@@ -1,17 +1,20 @@
 from flask import render_template
 
 import database
-import testdata
 from config import app
 
 
-testdata.set_test_data_items(app)
 database.setup()
 
 
 @app.route('/')
-def home():
+def dashboard():
     return render_template('dashboard.html')
+
+
+@app.route('/configuration')
+def configuration():
+    return render_template('configuration.html')
 
 
 if __name__ == '__main__':

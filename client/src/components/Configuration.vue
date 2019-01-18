@@ -1,30 +1,27 @@
 <template>
-  <div id="configuration">
-    <Header/>
-    <Navigation/>
+  <div id="configuration" class="container ta_configuration_header">
+    <div class="nav">
+      <Navigation active_page="configuration"/>
+    </div>
+    <Configview/>
   </div>
 </template>
 
 <script>
-import Header from './Header';
-import Navigation from './Navigation';
+import Header from "./Header";
+import Navigation from "./Navigation";
+import Configview from "./Configview";
 
 export default {
-  name: 'Configuration',
+  name: "Configuration",
   components: {
     Header,
     Navigation,
-  },
+    Configview
+  }
 };
 </script>
 
 <style>
-#configuration {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+@import "../assets/styles/testdataserver.css";
 </style>

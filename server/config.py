@@ -14,8 +14,6 @@ app = connex_app.app
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////' + os.path.join(basedir, '../testitem.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-# todo: remove when test items are configured from GUI
-app.config['TEST_DATA_CONFIG'] = 'test-data-config-example.txt'
 
 db = SQLAlchemy(app)
 
