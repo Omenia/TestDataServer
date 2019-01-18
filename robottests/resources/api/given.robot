@@ -1,6 +1,6 @@
 *** Keywords ***
 dataset item was requested
-    ${response}=    send get testdata dataset request    ${API_URL}    ${DATASET_NAMES}[0]
+    ${response}=    send get request    ${API_URL}/testdata/${DATASET_NAMES}[0]
     Set Test Variable    ${PREVIOUS_RESPONSE}    ${response}
 
 service was running

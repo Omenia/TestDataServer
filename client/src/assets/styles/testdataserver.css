@@ -55,6 +55,9 @@ body {
   align-self: baseline;
 }
 
+#add-new-dataset-header {
+  cursor: pointer;
+}
 .form-group {
   border-radius: 5px;
   background-color: #f2f2f2;
@@ -131,6 +134,7 @@ textarea {
   padding: 5px;
   margin-bottom: 1px;
   text-align: center;
+  min-width: 800px;
 }
 .ok-info {
   background: #99cc99;

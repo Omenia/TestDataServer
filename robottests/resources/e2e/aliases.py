@@ -19,7 +19,8 @@ PAGE_ELEMENT = {
     'Swagger': 'css=#swagger-ui',
 }
 
-NEW_DATASET_FORM = {
+ADD_NEW_DATASET = {
+    'header': 'css=#add-new-dataset-header',
     'name': 'css=.ta_new_dataset_name',
     'items': 'css=.ta_new_dataset_items',
     'submit': 'css=.ta_new_dataset_submit',
@@ -30,11 +31,7 @@ ALERT_TEXT = {
     'delete-item': 'Are you sure you want to delete dataset item:',
 }
 
-INFO_ELEMENT = {
-    'ok': 'css=.ok-info',
-    'error': 'css=.error-info',
-    'hidden': 'css=.hidden-info',
-}
+INFO_ELEMENT = {'ok': 'css=.ok-info', 'error': 'css=.error-info', 'hidden': 'css=.hidden-info'}
 
 INFO_TEXT = {
     'dataset-added-ok': 'Dataset added',

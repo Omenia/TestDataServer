@@ -1,14 +1,43 @@
 <template>
-  <div class="config-testdata"> 
-    <div class="section-header">Existing datasets</div>
-    <div v-for="dataset in Object.keys(testdata)" v-bind:key="dataset">
-      <div class="dataset-row">
-        <span class="dataset-name" :class="dataset_ta_class(dataset, 'name')" @click="toggle(dataset)">{{ dataset }}</span> 
-        <span class="item-modify" :class="dataset_ta_class(dataset, 'delete')" @click="confirm_dataset_delete(dataset)" title="Delete dataset"><font-awesome-icon size="1x" icon="trash-alt"/></span>
+  <div>
+    <div class="config-testdata"> 
+      <div class="section-header">Existing datasets</div>
+      <div v-for="dataset in Object.keys(testdata)" v-bind:key="dataset">
+        <div class="dataset-row">
+          <span class="dataset-name" :class="dataset_ta_class(dataset, 'name')" @click="toggle_dataset(dataset)">{{ dataset }}</span> 
+          <span class="item-modify" :class="dataset_ta_class(dataset, 'delete')" @click="confirm_dataset_delete(dataset)" title="Delete dataset"><font-awesome-icon size="1x" icon="trash-alt"/></span>
+        </div>
+        <div class="dataset-item-row" v-for="(item, index) in testdata[dataset]" v-bind:key="item.item" v-bind:style="{ display: openedDatasets[dataset] }">
+          <span class="item-name" :class="item_ta_class(dataset, index, 'name')">{{ item.item }}</span>
+          <span class="item-modify" :class="item_ta_class(dataset, index, 'delete')" @click="confirm_item_delete(dataset, item.item)" title="Delete dataset item"><font-awesome-icon size="1x" icon="trash-alt"/></span>
+        </div>
       </div>
-      <div class="dataset-item-row" v-for="(item, index) in testdata[dataset]" v-bind:key="item.item" v-bind:style="{ display: openedDatasets[dataset] }">
-        <span class="item-name" :class="item_ta_class(dataset, index, 'name')">{{ item.item }}</span>
-        <span class="item-modify" :class="item_ta_class(dataset, index, 'delete')" @click="confirm_item_delete(dataset, item.item)" title="Delete dataset item"><font-awesome-icon size="1x" icon="trash-alt"/></span>
+    </div>
+    <div class="form-group">
+      <div class="section-header ta-add-new-dataset-header" id="add-new-dataset-header" @click="toggle_new_dataset()">Add new dataset</div>
+      <div id="add-new-dataset-section" v-bind:style="{ display: showAddNew }">
+        <label for="new-dataset">Dataset name</label>
+        <input
+          type="text"
+          name="new-dataset"
+          id="new-dataset"
+          class="form-field ta_new_dataset_name"
+          required
+          v-model="newDataset"
+        >
+        <label for="new-dataset">Dataset items</label>
+        <textarea
+          name="items"
+          id="new-dataset-items"
+          class="form-control ta_new_dataset_items"
+          placeholder='One item in a line. Example: 
+            {"username": "user1", "password": "passwd", "email": "user1@example.com"}
+            {"username": "user2", "password": "passwd", "email": "user2@example.com"}'
+          rows="5"
+          required
+          v-model="items"
+        ></textarea>
+        <button type="submit" class="btn ta_new_dataset_submit" @click="submitNewDataset">Submit</button>
       </div>
     </div>
   </div>
@@ -31,7 +60,10 @@ export default {
   data() {
     return { 
       testdata: {},
+      newDataset: "",
+      items: "",
       openedDatasets: {},
+      showAddNew: "none",
       errors: [],
     };
   },
@@ -50,12 +82,46 @@ export default {
       .catch(error => {this.errors = error})
   },
   methods: {
-    toggle: function(dataset) {
-      if (this.openedDatasets[dataset] == "none") {
-        this.$set(this.openedDatasets, dataset, "inherit")
-      } else {
+    toggle_dataset: function(dataset) {
+      if (this.openedDatasets[dataset] == "inherit") {
         this.$set(this.openedDatasets, dataset, "none")
+      } else {
+        this.$set(this.openedDatasets, dataset, "inherit")
       }
+    },
+    toggle_new_dataset: function() {
+      if (this.showAddNew == "inherit") {
+        this.showAddNew = 'none';
+      }
+      else {
+        this.showAddNew = 'inherit';
+      }
+    },
+    submitNewDataset() {
+      var itemList = this.items.split("\n");
+
+      axios
+        .post("/api/v1/testdata", {
+          dataset: this.newDataset,
+          items: itemList
+        })
+        .then(response => {
+          this.newDataset = "";
+          this.items = "";
+          this.$emit("submit", "ok", "Dataset added");
+          axios
+              .get(`/api/v1/testdata`)
+              .then((response) => {
+                var testdata = response.data.testdata;
+                var openedDatasets = {};
+                this.testdata = testdata;
+              })
+              .catch(error => {this.errors = error})
+        })
+        .catch(error => {
+          var errorData = error["response"]["data"]
+          this.$emit("submit", "error",  errorData["title"] + " (" + errorData["detail"] + ")");
+        });
     },
     confirm_dataset_delete: function (dataset) {
       if (confirm("Are you sure you want to delete dataset: " + dataset)) {
@@ -63,10 +129,18 @@ export default {
           .delete("/api/v1/testdata/" + dataset)
           .then((response) => {
             this.$emit("submit", "ok", "Dataset deleted");
+            axios
+              .get(`/api/v1/testdata`)
+              .then((response) => {
+                var testdata = response.data.testdata;
+                var openedDatasets = {};
+                this.testdata = testdata;
+              })
+              .catch(error => {this.errors = error})
         })
         .catch(error => {
           var errorData = error["response"]["data"]
-          this.$emit("submit", "error",  errorData["title"] + " (" + errorData["detail"] + ")");
+          this.$emit("submit", "error",  errorData["title"] + " (" + errorData["detail"] + ")");          
         });
       }
     },
@@ -76,6 +150,14 @@ export default {
           .delete("/api/v1/testdata/" + dataset + "/" + item)
           .then((response) => {
             this.$emit("submit", "ok", "Dataset item deleted");
+            axios
+              .get(`/api/v1/testdata`)
+              .then((response) => {
+                var testdata = response.data.testdata;
+                var openedDatasets = {};
+                this.testdata = testdata;
+              })
+              .catch(error => {this.errors = error})
         })
         .catch(error => {
           var errorData = error["response"]["data"]
@@ -90,8 +172,8 @@ export default {
     item_ta_class: function (dataset, index, element) {
       var className = "ta_" + element + "_" + dataset + "_" + index;
       return {[className]: true}
-    }
-  }    
+    },
+  },
 };
 </script>
 

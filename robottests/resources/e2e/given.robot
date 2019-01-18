@@ -1,4 +1,9 @@
 *** Keywords ***
+add new dataset section was open
+    Go To    ${BASE_URL}&{ON_PAGE}[configuration page]
+    Click Element    &{ADD_NEW_DATASET}[header]
+    Wait Until Element Is Visible    &{ADD_NEW_DATASET}[submit]
+
 dataset was configured
     add dataset    ${API_URL}    ${DATASET_NAME}    @{ITEMS}    
     Go To    ${BASE_URL}&{ON_PAGE}[configuration page]

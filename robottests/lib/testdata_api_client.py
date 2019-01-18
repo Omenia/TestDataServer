@@ -40,8 +40,7 @@ class TestdataApi(object):
         """
         Delete dataset.
 
-        :param base_url: base url for api
-        :param dataset_name: name of dataset to be deleted
+        :param base_url: endpoint url
         """
         response = requests.delete(base_url + '/testdata/' + dataset_name)
         if response.status_code != 200:
@@ -57,66 +56,41 @@ class TestdataApi(object):
 
         :param base_url: base url for api
         """
-        response = self.send_get_request(base_url, '/testdata')
+        response = requests.get(base_url + '/testdata')
         for dataset in response.json()['testdata']:
             self.delete_dataset(base_url, dataset)
 
     @staticmethod
-    def send_get_request(base_url, endpoint):
+    def send_get_request(url):
         """
         Send GET request.
 
-        :param base_url: base url for api
-        :param endpoint: endpoint for request
+        :param base_url: endpoint url
         :rtype: requests.Response
         """
-        return requests.get(base_url + endpoint)
+        return requests.get(url)
 
     @staticmethod
-    def send_get_testdata_dataset_request(base_url, dataset_name):
+    def send_post_request(url, body_json):
         """
-        Send GET /testdata/<dataset> request.
+        Send POST request.
 
-        :param base_url: base url for api
-        :param dataset_name: dataset name
-        :rtype: requests.Response
-        """
-        return requests.get(base_url + '/testdata/' + dataset_name)
-
-    @staticmethod
-    def send_post_testdata_request(base_url, body_json):
-        """
-        Send POST /testdata request.
-
-        :param base_url: base url for api
+        :param base_url: endpoint url
         :param body_json: body parameters in json
         :rtype: requests.Response
         """
         return requests.post(
-            base_url + '/testdata',
+            url,
             json=json.loads(body_json),
             headers={'Content-Type': 'application/json'},
         )
 
     @staticmethod
-    def send_delete_testdata_dataset_request(base_url, dataset_name):
+    def send_delete_request(url):
         """
-        Send DELETE /testdata/<dataset> request.
+        Send DELETE request.
 
-        :param base_url: base url for api
-        :param dataset_name: dataset name
+        :param url: endpoint url
         :rtype: requests.Response
         """
-        return requests.delete(base_url + '/testdata/' + dataset_name)
-
-    @staticmethod
-    def send_get_testdata_dataset_item_request(base_url, dataset_name, item):
-        """
-        Send DELETE /testdata/<dataset>/<item> request.
-
-        :param base_url: base url for api
-        :param dataset_name: dataset name
-        :parma item: dataset item
-        :rtype: requests.Response
-        """
-        return requests.delete(base_url + '/testdata/' + dataset_name + '/' + item)
+        return requests.delete(url)
