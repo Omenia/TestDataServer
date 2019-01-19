@@ -1,3 +1,5 @@
+import json
+
 from robot.libraries.BuiltIn import BuiltIn
 from robot.api import logger
 import requests
@@ -93,7 +95,7 @@ class TestdataApi(object):
         return requests.post(
             base_url + '/testdata',
             json=json.loads(body_json),
-            headers={'Content-Type': 'application/json'}
+            headers={'Content-Type': 'application/json'},
         )
 
     @staticmethod
