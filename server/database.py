@@ -51,10 +51,7 @@ def get_testdata_next(dataset):
 def add_testdata_to_db(dataset, items):
     for item in items:
         testitem = TestItem(
-            dataset=dataset,
-            item=str(item),
-            status='available',
-            timestamp=datetime.now(),
+            dataset=dataset, item=str(item), status='available', timestamp=datetime.now()
         )
         db.session.add(testitem)
     db.session.commit()
@@ -66,5 +63,7 @@ def delete_dataset(dataset):
 
 
 def delete_dataset_item(dataset, item):
-    db.session.query(TestItem.item).filter(TestItem.item == item).filter(TestItem.dataset == dataset).delete()
+    db.session.query(TestItem.item).filter(TestItem.item == item).filter(
+        TestItem.dataset == dataset
+    ).delete()
     db.session.commit()
