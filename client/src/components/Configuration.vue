@@ -7,7 +7,6 @@
       <div>
         <info-area v-bind:class="[infoStyle]" > {{ infoMsg }} </info-area>
         <modify-datasets v-on:submit="update_info"></modify-datasets>
-        <new-dataset v-on:submit="update_info"></new-dataset>
       </div>
     </div>
   </div>
@@ -18,7 +17,6 @@ import Header from "./Header";
 import Navigation from "./Navigation";
 import InfoArea from "./Info";
 import ModifyDatasets from "./ModifyDatasets";
-import NewDataset from "./NewDataset";
 
 export default {
   name: "Configuration",
@@ -27,7 +25,6 @@ export default {
     Navigation,
     InfoArea,
     ModifyDatasets,
-    NewDataset
   },
   data() {
     return {

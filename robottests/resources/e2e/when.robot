@@ -27,7 +27,7 @@ user goes to root domain
 user submits new dataset
     Set Test Variable    ${ACTION}    dataset-added
     Set Test Variable    ${DATASET_ITEMS}    ${ITEMS}[0]\n${ITEMS}[1]
-    Input Text    &{NEW_DATASET_FORM}[name]    ${DATASET_NAME}
-    Input Text    &{NEW_DATASET_FORM}[items]    ${DATASET_ITEMS}
-    Click Button    &{NEW_DATASET_FORM}[submit]
-    Wait Until Element Does Not Contain    &{NEW_DATASET_FORM}[name]    ${DATASET_NAME} 
+    Input Text    &{ADD_NEW_DATASET}[name]    ${DATASET_NAME}
+    Input Text    &{ADD_NEW_DATASET}[items]    ${DATASET_ITEMS}
+    Click Button    &{ADD_NEW_DATASET}[submit]
+    Wait Until Element Does Not Contain    &{ADD_NEW_DATASET}[name]    ${DATASET_NAME} 
