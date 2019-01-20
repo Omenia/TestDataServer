@@ -18,14 +18,32 @@ GET /testdata/<dataset> will response with status code 200 and next dataset item
     When GET /testdata/<dataset> request is send
     Then status code 200 with next dataset item will be received
 
+Unknown dataset - GET /testdata/<dataset> will response with status code 404
+    [Setup]    Set Test Variable    ${DATASET_NAME}    unknown
+    Given testdata was configured
+    When GET /testdata/<dataset> request with unknown dataset is send
+    Then status code "404" will be received with error "dataset does not exist" 
+
 DELETE /testdata/<dataset> will response with status code 200
     [Setup]    Set Test Variable    ${DATASET_NAME}    ${DATASET_NAMES}[0]
     Given testdata was configured
     When DELETE /testdata/<dataset> request is send
     Then status code "200" will be received
-    
+
+Unknown dataset - DELETE /testdata/<dataset> will response with status code 404
+    [Setup]    Set Test Variable    ${DATASET_NAME}    unknown
+    Given testdata was configured
+    When DELETE /testdata/<dataset> request with unknown dataset is send
+    Then status code "404" will be received with error "dataset does not exist" 
+        
 DELETE /testdata/<dataset>/<item> will response with status code 200
     [Setup]    Set dataset variables    ${DATASET_NAMES}[0]    ${ITEMS_0}[0]
     Given testdata was configured
     When DELETE /testdata/<dataset>/<item> request is send
     Then status code "200" will be received
+
+Unknown item - DELETE /testdata/<dataset>/<item> will response with status code 404
+    [Setup]    Set dataset variables    ${DATASET_NAMES}[0]    unknown
+    Given testdata was configured
+    When DELETE /testdata/<dataset>/<item> request with unknown item is send
+    Then status code "404" will be received with error "dataset item does not exist" 

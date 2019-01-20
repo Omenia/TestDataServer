@@ -40,11 +40,7 @@ export default {
   },
   methods: {
     submitNewDataset() {
-      // var itemJson = {};
       var itemList = this.items.split("\n");
-      // for (var i = 0; i < itemList.length; i++) {
-        // itemJson[i] = itemList[i];
-      // }
 
       axios
         .post("/api/v1/testdata", {

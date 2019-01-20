@@ -14,6 +14,7 @@ def setup():
 def create():
     db.create_all()
     db.session.commit()
+    db.session.close()
 
 
 def get_testdata():
@@ -33,6 +34,10 @@ def get_testdata():
 
 
 def get_testdata_next(dataset):
+    count = db.session.query(TestItem, TestItem.dataset).filter(TestItem.dataset == dataset).all()
+    if len(count) == 0:
+        return 'does not exist'
+
     item = (
         db.session.query(TestItem, TestItem.dataset)
         .filter(TestItem.dataset == dataset)
@@ -49,21 +54,36 @@ def get_testdata_next(dataset):
 
 
 def add_testdata_to_db(dataset, items):
+    count = db.session.query(TestItem, TestItem.dataset).filter(TestItem.dataset == dataset).all()
+    if len(count) > 0:
+        return 'exists'
+
     for item in items:
         testitem = TestItem(
             dataset=dataset, item=str(item), status='available', timestamp=datetime.now()
         )
         db.session.add(testitem)
     db.session.commit()
+    return 'added'
+
+
+def _delete_testdata_data(count):
+    if count == 0:
+        return 'does not exist'
+    db.session.commit()
+    return 'deleted'
 
 
 def delete_dataset(dataset):
-    db.session.query(TestItem.dataset).filter(TestItem.dataset == dataset).delete()
-    db.session.commit()
+    count = db.session.query(TestItem.dataset).filter(TestItem.dataset == dataset).delete()
+    return _delete_testdata_data(count)
 
 
 def delete_dataset_item(dataset, item):
-    db.session.query(TestItem.item).filter(TestItem.item == item).filter(
-        TestItem.dataset == dataset
-    ).delete()
-    db.session.commit()
+    count = (
+        db.session.query(TestItem.item)
+        .filter(TestItem.item == item)
+        .filter(TestItem.dataset == dataset)
+        .delete()
+    )
+    return _delete_testdata_data(count)
