@@ -72,6 +72,10 @@ jobs:
           background: true
 
     - run:
+          name: Wait for server
+          command: dockerize -wait tcp://localhost:5000 -timeout 1m
+
+    - run:
           name: run Robot tests
           command: |
             . venv/bin/activate
