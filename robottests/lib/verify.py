@@ -89,7 +89,11 @@ class Verify(object):
             response_datasets[dataset] = [item['item'] for item in items]
 
         if datasets != response_datasets:
-            BuiltIn().fail('Datasets did not match! Expected: {}, actual: {}'.format(datasets))
+            BuiltIn().fail(
+                'Datasets did not match! Expected: {}, actual: {}'.format(
+                    datasets, response_datasets
+                )
+            )
 
         logger.info('GET /testdata response verified.')
 

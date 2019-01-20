@@ -80,5 +80,7 @@ def delete_dataset(dataset):
 
 
 def delete_dataset_item(dataset, item):
-    count = db.session.query(TestItem.dataset).filter(TestItem.item == item).filter(TestItem.dataset == dataset).delete()
-    return _delete_testdata_data(count)
+    db.session.query(TestItem.item).filter(TestItem.item == item).filter(
+        TestItem.dataset == dataset
+    ).delete()
+    db.session.commit()
