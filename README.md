@@ -67,4 +67,4 @@ python3 server/testdataserver.py
 
 ## API documentation ##
 
-Go to `localhost:5000/ui` when server is running.
+Go to `http://localhost:5000` when server is running.
