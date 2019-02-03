@@ -3,6 +3,7 @@ conformation alert for ${end_of_name}
     Alert Should Be Present    ${ALERT_INFO}
 
 dataset item will be removed from database
+    Sleep    0.1    reason=To prevent verification to be done too soon
     verify dataset item does no exist in db    ${API_URL}    ${DATASET_NAME}    ${DELETED_ITEM}
 
 dataset item will be removed from existing dataset list
@@ -12,6 +13,7 @@ dataset will be added to existing dataset list
     Wait Until Element Contains    css=.ta_name_${DATASET_NAME}    ${DATASET_NAME}
 
 dataset will be removed from database
+    Sleep    0.1    reason=To prevent verification to be done too soon
     verify dataset does no exist in db    ${API_URL}    ${DATASET_NAME}    
 
 dataset will be removed from existing dataset list
@@ -30,6 +32,7 @@ notification will stay visible
     Page Should Contain            ${SHOWN_INFO_TEXT}
 
 other dataset items will be left in database
+    Sleep    0.1    reason=To prevent verification to be done too soon
     verify dataset item exists in db    ${API_URL}    ${DATASET_NAME}    ${EXISTING_ITEM}
 
 other dataset items will be left in existing dataset list

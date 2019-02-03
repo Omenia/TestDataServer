@@ -9,7 +9,7 @@ venv/
 testitem.db
 __pycache__
 robottests/output
-
+tests/output
 
 # Editor directories and files
 .idea
