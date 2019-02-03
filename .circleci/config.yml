@@ -21,11 +21,19 @@ jobs:
         - v1-dependencies-
 
     - run:
-          name: Build Test Data Server, unittest and Robot test Docker images
+          name: Build unittest Docker images
+          command: docker build -f Dockerfile-tests -t unittests
+
+    - run:
+          name: Run unittest Docker container
+          command: docker run unittests
+
+    - run:
+          name: Build Test Data Server and Robot test Docker images
           command: docker-compose build
         
     - run:
-          name: Run unit and Robot tests
+          name: Run Robot tests
           command: docker-compose run --rm robottests
 
     - store_artifacts:
