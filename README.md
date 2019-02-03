@@ -26,20 +26,26 @@ git clone https://github.com/Omenia/TestDataServer.git
 cd TestDataServer
 ```
 
-## Create Python virtualenv
+## Development ##
+
+There are three ways to run Test Data Server in development
+
+### Run Test Data Server in Python vitual environment ###
+
+#### Create Python virtualenv 
 
 ```
 python3 -m venv venv
 source venv/bin/activate
 ```
 
-## Install Python dependencies
+#### Install Python dependencies
 
 ```
 pip3 install -r server/requirements.txt
 ```
 
-## Install frontend packages
+#### Install frontend packages
 
 Node.js needs to be installed. [Install Node.js](https://nodejs.org/en/download/package-manager/)
 
@@ -48,23 +54,53 @@ cd client
 npm install
 ```
 
-## Build frontend
+#### Build frontend
 
 ```
 npm run build
 ```
 
-## Configuration ##
-
-Configure path to test data configuration file to `TEST_DATA_CONFIG` variable in `server/config.py`.
-
-## Start server
+#### Start server
 
 ```
 cd ..
 python3 server/testdataserver.py
 ```
 
-## API documentation ##
+### Run Test Data Server in Docker container without Robot tests
 
-Go to `http://localhost:5000` when server is running.
+#### Build Test Data Server Docker image 
+
+```
+docker build -t testdataserver .
+```
+
+#### Run Test Data Server Docker image 
+
+```
+docker run -d -v db:/db -p 80:8000 testdataserver
+```
+
+### Run Test Data Server and Robot test in Docker containers 
+
+#### Build Docker images
+
+```
+docker-compose build
+```
+
+#### Run Test Data Server and Robot test Docker containers
+
+```
+docker-compose run --rm robottests
+```
+
+## Production ##
+
+To be update
+
+## Web user interface ##
+
+Go to `http://localhost` when server is running.
+
+
