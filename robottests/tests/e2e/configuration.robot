@@ -22,7 +22,7 @@ Deleting dataset will show alert for conformation
     Given dataset was configured
     When user clicks dataset delete button
     Then conformation alert for dataset with information will be shown
-    [Teardown]    No Operation
+    [Teardown]    Sleep    0.1    reason=To prevent next case to be started too soon
 
 Delete dataset will remove dataset from database
     Given dataset was configured

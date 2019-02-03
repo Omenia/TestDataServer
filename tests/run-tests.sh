@@ -1,6 +1,8 @@
 #!/bin/sh
 
-flake8 --output-file=tests/output/flake8-output.log ../server
+mkdir output 
+
+flake8 --output-file=output/flake8-output.log ../server
 
 export PYTHONPATH=../server
-pytest > tests/output/pytest-output.log
+pytest > output/pytest-output.log
