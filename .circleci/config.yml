@@ -11,7 +11,6 @@ jobs:
     working_directory: ~/repo
 
     steps:
-    - setup_remote_docker
     - checkout
 
     - restore_cache:
@@ -43,6 +42,8 @@ jobs:
           export PYTHONPATH=server
           pytest
 
+    - setup_remote_docker
+
     - run:
           name: Build Test Data Server and Robot test Docker images
           command: docker-compose build
@@ -52,9 +53,8 @@ jobs:
           command: docker-compose run --rm robottests
 
     - store_artifacts:
-        path: test-reports
-        destination: test-reports
-
-    - store_artifacts:
         path: robottests/output
         destination: robottests/
+
+    - store_test_results:
+        path: robottests/output
