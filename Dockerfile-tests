@@ -1,0 +1,12 @@
+FROM    python:3.7-alpine3.8
+
+COPY    server /server
+COPY    tests /tests
+COPY    db /db
+COPY    .flake8 .
+
+WORKDIR /tests
+
+RUN     pip3 install -r requirements.txt
+
+CMD     ["./run-tests.sh"]
