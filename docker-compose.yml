@@ -6,12 +6,6 @@ services:
       - 80:8000
     volumes:
       - ./db:/db
-  unittests:
-    build:
-      context: .
-      dockerfile: Dockerfile-tests
-    volumes:
-      - ./tests/output:/tests/output
   robottests:
     build: robottests
     depends_on:
