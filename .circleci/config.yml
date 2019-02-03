@@ -22,7 +22,7 @@ jobs:
 
     - run:
           name: Build unittest Docker images
-          command: docker build -f Dockerfile-tests -t unittests
+          command: docker build -f Dockerfile-tests -t unittests .
 
     - run:
           name: Run unittest Docker container
