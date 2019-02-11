@@ -11,5 +11,5 @@ Library      lib.verify.Verify
 
 *** Variables ***
 ${BROWSER}=     headlessfirefox
-${BASE_URL}=    http://localhost:5000
-${API_URL}=     http://localhost:5000/api/v1
+${BASE_URL}=    http://localhost
+${API_URL}=     ${BASE_URL}/api/v1

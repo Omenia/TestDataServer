@@ -54,7 +54,7 @@ class Verify(object):
         :param item: dataset item to be searched
         """
         if item in self._get_dataset_items(base_url, dataset_name):
-            BuiltIn().fail('Unexpected dataset item ({}}) found in database'.format(item))
+            BuiltIn().fail('Unexpected dataset item ({}) found in database'.format(item))
 
         logger.info('Dataset item not existing verified.')
 
