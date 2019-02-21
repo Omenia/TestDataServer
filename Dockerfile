@@ -6,7 +6,9 @@ COPY    client /client
 WORKDIR /client
 
 RUN     apk add sqlite nodejs nodejs-npm
-RUN     npm install ajv & npm install & npm run build
+RUN     npm install ajv 
+RUN     npm install 
+RUN     npm run build
 
 RUN     rm -rf /client
 
