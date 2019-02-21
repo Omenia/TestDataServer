@@ -7,16 +7,18 @@ import requests
 
 class TestdataApi(object):
     @staticmethod
-    def add_dataset(base_url, dataset_name, *dataset_items):
+    def add_dataset(base_url, dataset_name, datatype, dataset_items):
         """
         Add new dataset.
 
         :param base_url: base url for api
         :param dataset_name: name of dataset to be added
+        :param datatype: dataset datatype
         :param dataset_items: items for dataset
         """
         response = requests.post(
-            base_url + '/testdata', json={'dataset': dataset_name, 'items': dataset_items}
+            base_url + '/testdata',
+            json={'dataset': dataset_name, 'items': dataset_items, 'datatype': datatype},
         )
         if response.status_code != 201:
             BuiltIn().fail(
@@ -24,16 +26,6 @@ class TestdataApi(object):
             )
 
         logger.info('New dataset added.')
-
-    def add_multiple_dataset(self, base_url, datasets):
-        """
-        Add multiple dataset.
-
-        :param base_url: base url for api
-        :param datasets: dict of datasets and their items in a list
-        """
-        for dataset, items in datasets.items():
-            self.add_dataset(base_url, dataset, *items)
 
     @staticmethod
     def delete_dataset(base_url, dataset_name):
@@ -57,8 +49,8 @@ class TestdataApi(object):
         :param base_url: base url for api
         """
         response = requests.get(base_url + '/testdata')
-        for dataset in response.json()['testdata']:
-            self.delete_dataset(base_url, dataset)
+        for index in range(len(response.json()['testdata'])):
+            self.delete_dataset(base_url, response.json()['testdata'][index]['dataset'])
 
     @staticmethod
     def send_get_request(url):
@@ -80,9 +72,7 @@ class TestdataApi(object):
         :rtype: requests.Response
         """
         return requests.post(
-            url,
-            json=json.loads(body_json),
-            headers={'Content-Type': 'application/json'},
+            url, json=json.loads(body_json), headers={'Content-Type': 'application/json'}
         )
 
     @staticmethod

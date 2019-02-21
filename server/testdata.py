@@ -21,7 +21,19 @@ def get_testdata():
 
 
 def post_dataset(body):
-    status = database.add_testdata_to_db(body.get('dataset').strip(), body.get('items'))
+    if body.get('datatype') not in ['next', 'random']:
+        return (
+            {
+                'detail': "unsupported 'datatype'",
+                'status': 400,
+                'title': 'Bad Request',
+                'type': 'about:blank',
+            },
+            400,
+        )
+    status = database.add_testdata_to_db(
+        body.get('dataset').strip(), body.get('items'), body.get('datatype')
+    )
     if status == 'added':
         return '', 201
     elif status == 'exists':

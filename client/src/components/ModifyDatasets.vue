@@ -2,14 +2,14 @@
   <div>
     <div class="config-testdata"> 
       <div class="section-header">Existing datasets</div>
-      <div v-for="dataset in Object.keys(testdata)" v-bind:key="dataset">
+      <div v-for="dataset in testdata" v-bind:key="dataset.dataset">
         <div class="dataset-row">
-          <span class="dataset-name" :class="dataset_ta_class(dataset, 'name')" @click="toggle_dataset(dataset)">{{ dataset }}</span> 
-          <span class="item-modify" :class="dataset_ta_class(dataset, 'delete')" @click="confirm_dataset_delete(dataset)" title="Delete dataset"><font-awesome-icon size="1x" icon="trash-alt"/></span>
+          <span class="dataset-name" :class="dataset_ta_class(dataset.dataset, 'name')" @click="toggle_dataset(dataset.dataset)">{{ dataset.dataset }} <span class="datatype"> - {{ dataset.datatype }}</span></span>  
+          <span class="item-modify" :class="dataset_ta_class(dataset.dataset, 'delete')" @click="confirm_dataset_delete(dataset.dataset)" title="Delete dataset"><font-awesome-icon size="1x" icon="trash-alt"/></span>
         </div>
-        <div class="dataset-item-row" v-for="(item, index) in testdata[dataset]" v-bind:key="item.item" v-bind:style="{ display: openedDatasets[dataset] }">
-          <span class="item-name" :class="item_ta_class(dataset, index, 'name')">{{ item.item }}</span>
-          <span class="item-modify" :class="item_ta_class(dataset, index, 'delete')" @click="confirm_item_delete(dataset, item.item)" title="Delete dataset item"><font-awesome-icon size="1x" icon="trash-alt"/></span>
+        <div class="dataset-item-row" v-for="(item, index) in dataset.items" v-bind:key="item.item" v-bind:style="{ display: openedDatasets[dataset.dataset] }">
+          <span class="item-name" :class="item_ta_class(dataset.dataset, index, 'name')">{{ item.item }}</span>
+          <span class="item-modify" :class="item_ta_class(dataset.dataset, index, 'delete')" @click="confirm_item_delete(dataset.dataset, item.item)" title="Delete dataset item"><font-awesome-icon size="1x" icon="trash-alt"/></span>
         </div>
       </div>
     </div>
@@ -21,15 +21,21 @@
           type="text"
           name="new-dataset"
           id="new-dataset"
-          class="form-field ta_new_dataset_name"
+          class="form-field ta-new-dataset-name"
           required
           v-model="newDataset"
         >
+        <label for="new-dataset">Dataset type</label><br/>
+        <select v-model="datatype" name="new-dataset-datatype">
+          <option disabled value="">Please select one</option>
+          <option value="next">Next</option>
+          <option value="random">Random</option>
+        </select><br/> 
         <label for="new-dataset">Dataset items</label>
         <textarea
           name="items"
           id="new-dataset-items"
-          class="form-control ta_new_dataset_items"
+          class="form-control ta-new-dataset-items"
           placeholder='One item in a line. Example: 
             {"username": "user1", "password": "passwd", "email": "user1@example.com"}
             {"username": "user2", "password": "passwd", "email": "user2@example.com"}'
@@ -37,7 +43,7 @@
           required
           v-model="items"
         ></textarea>
-        <button type="submit" class="btn ta_new_dataset_submit" @click="submitNewDataset">Submit</button>
+        <button type="submit" class="btn ta-new-dataset-submit" @click="submitNewDataset">Submit</button>
       </div>
     </div>
   </div>
@@ -62,6 +68,7 @@ export default {
       testdata: {},
       newDataset: "",
       items: "",
+      datatype: "",
       openedDatasets: {},
       showAddNew: "none",
       errors: [],
@@ -103,7 +110,8 @@ export default {
       axios
         .post("/api/v1/testdata", {
           dataset: this.newDataset,
-          items: itemList
+          items: itemList,
+          datatype: this.datatype
         })
         .then(response => {
           this.newDataset = "";

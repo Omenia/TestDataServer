@@ -49,6 +49,7 @@ paths:
               required:
                 - dataset
                 - items
+                - datatype
               properties:
                 dataset:
                   type: string
@@ -56,6 +57,9 @@ paths:
                 items:
                   type: array
                   description: Items for dataset
+                datatype:
+                  type: string
+                  description: Dataset type. Supported values - next, random
       responses:
         201:
           description: "Successfully created dataset."

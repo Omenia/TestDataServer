@@ -21,9 +21,10 @@ PAGE_ELEMENT = {
 
 ADD_NEW_DATASET = {
     'header': 'css=#add-new-dataset-header',
-    'name': 'css=.ta_new_dataset_name',
-    'items': 'css=.ta_new_dataset_items',
-    'submit': 'css=.ta_new_dataset_submit',
+    'name': 'css=.ta-new-dataset-name',
+    'datatype': 'name=new-dataset-datatype',
+    'items': 'css=.ta-new-dataset-items',
+    'submit': 'css=.ta-new-dataset-submit',
 }
 
 ALERT_TEXT = {
