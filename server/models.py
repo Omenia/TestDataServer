@@ -3,18 +3,34 @@ from datetime import datetime
 from config import db, ma
 
 
-class TestItem(db.Model):
+class Item(db.Model):
 
-    __tablename__ = 'testitem'
+    __tablename__ = 'item'
 
-    dataset = db.Column(db.String(32), primary_key=True)
     item = db.Column(db.String(100), primary_key=True)
-    status = db.Column(db.String(15))
+    status = db.Column(db.String(15), nullable=False)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    dataset_name = db.Column(db.String(32), db.ForeignKey('dataset.name'), nullable=False, primary_key=True)
 
 
-class TestItemSchema(ma.ModelSchema):
+class ItemSchema(ma.ModelSchema):
     class Meta:
 
-        model = TestItem
+        model = Item
+        sqla_session = db.session
+
+
+class Dataset(db.Model):
+
+    __tablename__ = 'dataset'
+
+    name = db.Column(db.String(32), primary_key=True)
+    datatype = db.Column(db.String(15), nullable=False)
+    items = db.relationship('Item', backref='dataset', lazy=True)
+
+
+class DatasetSchema(ma.ModelSchema):
+    class Meta:
+
+        model = Dataset
         sqla_session = db.session

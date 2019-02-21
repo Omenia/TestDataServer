@@ -150,3 +150,7 @@ textarea {
   visibility: hidden;
   margin-bottom: 20px
 }
+
+.datatype {
+  color: #bd7f0c;
+}

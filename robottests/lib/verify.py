@@ -11,7 +11,9 @@ class Verify(object):
                 'Getting testdata failed ({}: {})'.format(response.status_code, response.text)
             )
 
-        return [items['item'] for items in response.json()['testdata'][dataset_name]]
+        for dataset in response.json()['testdata']:
+            if dataset['dataset'] == dataset_name:
+                return [items['item'] for items in dataset['items']]
 
     def verify_new_dataset(self, base_url, dataset_name, items):
         """
@@ -25,7 +27,7 @@ class Verify(object):
 
         for item in items.splitlines():
             if item not in db_item_list:
-                BuiltIn().fail('Expected dataset item ({}}) not found in database'.format(item))
+                BuiltIn().fail('Expected dataset item ({}) not found in database'.format(item))
 
         logger.info('New dataset verified.')
 
@@ -84,9 +86,15 @@ class Verify(object):
                 'Unexpected status code! Expected: 200, actual: {}'.format(response.status_code)
             )
 
-        response_datasets = {}
-        for dataset, items in response.json()['testdata'].items():
-            response_datasets[dataset] = [item['item'] for item in items]
+        response_datasets = []
+        for dataset in response.json()['testdata']:
+            response_datasets.append(
+                {
+                    'dataset': dataset['dataset'],
+                    'datatype': dataset['datatype'],
+                    'items': [item['item'] for item in dataset['items']],
+                }
+            )
 
         if datasets != response_datasets:
             BuiltIn().fail(

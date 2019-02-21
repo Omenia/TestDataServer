@@ -24,10 +24,11 @@ user confirms deleting
 user goes to root domain
     Go To     ${BASE_URL}
 
-user submits new dataset
+user submits new "${datatype}" dataset
     Set Test Variable    ${ACTION}    dataset-added
     Set Test Variable    ${DATASET_ITEMS}    ${ITEMS}[0]\n${ITEMS}[1]
     Input Text    &{ADD_NEW_DATASET}[name]    ${DATASET_NAME}
+    Select From List By Value    &{ADD_NEW_DATASET}[datatype]    ${datatype}
     Input Text    &{ADD_NEW_DATASET}[items]    ${DATASET_ITEMS}
     Click Button    &{ADD_NEW_DATASET}[submit]
     Wait Until Element Does Not Contain    &{ADD_NEW_DATASET}[name]    ${DATASET_NAME} 
