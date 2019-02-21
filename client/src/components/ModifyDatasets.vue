@@ -4,12 +4,19 @@
       <div class="section-header">Existing datasets</div>
       <div v-for="dataset in testdata" v-bind:key="dataset.dataset">
         <div class="dataset-row">
-          <span class="dataset-name" :class="dataset_ta_class(dataset.dataset, 'name')" @click="toggle_dataset(dataset.dataset)">{{ dataset.dataset }} <span class="datatype"> - {{ dataset.datatype }}</span></span>  
-          <span class="item-modify" :class="dataset_ta_class(dataset.dataset, 'delete')" @click="confirm_dataset_delete(dataset.dataset)" title="Delete dataset"><font-awesome-icon size="1x" icon="trash-alt"/></span>
+          <span class="dataset-name" :class="dataset_ta_class(dataset.dataset, 'name')" @click="toggle_dataset(dataset.dataset)">
+            {{ dataset.dataset }} 
+            <span class="datatype"> - {{ dataset.datatype }}</span>
+          </span>
+          <span class="item-modify" :class="dataset_ta_class(dataset.dataset, 'delete')" @click="confirm_dataset_delete(dataset.dataset)" title="Delete dataset">
+            <font-awesome-icon size="1x" icon="trash-alt"/>
+          </span>
         </div>
         <div class="dataset-item-row" v-for="(item, index) in dataset.items" v-bind:key="item.item" v-bind:style="{ display: openedDatasets[dataset.dataset] }">
           <span class="item-name" :class="item_ta_class(dataset.dataset, index, 'name')">{{ item.item }}</span>
-          <span class="item-modify" :class="item_ta_class(dataset.dataset, index, 'delete')" @click="confirm_item_delete(dataset.dataset, item.item)" title="Delete dataset item"><font-awesome-icon size="1x" icon="trash-alt"/></span>
+          <span class="item-modify" :class="item_ta_class(dataset.dataset, index, 'delete')" @click="confirm_item_delete(dataset.dataset, item.item)" title="Delete dataset item">
+            <font-awesome-icon size="1x" icon="trash-alt"/>
+          </span>
         </div>
       </div>
     </div>
@@ -30,7 +37,7 @@
           <option disabled value="">Please select one</option>
           <option value="next">Next</option>
           <option value="random">Random</option>
-        </select><br/> 
+        </select><br/>
         <label for="new-dataset">Dataset items</label>
         <textarea
           name="items"

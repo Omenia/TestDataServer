@@ -45,14 +45,14 @@ Missing items parameter - POST /testdata will response with status code 400
     Then status code "400" will be received with error "'items' is a required property" 
 
 Missing datatype parameter - POST /testdata will response with status code 400
-    [Setup]    Set Test Variable    
+    [Setup]    Set Test Variable
     ...    ${PARAMS}    {"dataset": "${DATASET_NAMES}[0]", "items": [${ITEMS_0}[0], ${ITEMS_0}[1]]}
     Given service was running
     When POST /testdata request without datatype parameter is send
-    Then status code "400" will be received with error "'datatype' is a required property" 
+    Then status code "400" will be received with error "'datatype' is a required property"
 
 Unsupported datatype parameter - POST /testdata will response with status code 400
-    [Setup]    Set Test Variable    
+    [Setup]    Set Test Variable
     ...    ${PARAMS}    {"dataset": "${DATASET_NAMES}[0]", "items": [${ITEMS_0}[0], ${ITEMS_0}[1]], "datatype": "unsupported"}
     Given service was running
     When POST /testdata request with unsupported datatype parameter is send

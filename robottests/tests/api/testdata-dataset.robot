@@ -13,14 +13,14 @@ Resource         ../../resources/api/generic-resources.robot
 @{ALL_DATASETS}=      &{NEXT_DATASET}    &{RANDOM_DATASET}
 
 *** Test Cases ***
-Next - GET /testdata/<dataset> will response with status code 200 and next dataset item 
+Next - GET /testdata/<dataset> will response with status code 200 and next dataset item
     [Setup]    Set Test Variable    ${DATASET_NAME}    ${DATASET_NAMES}[0]
     Given testdata was configured
     And dataset item was requested
     When GET /testdata/<dataset> request is send
-    Then status code 200 with next dataset item will be received    
+    Then status code 200 with next dataset item will be received
 
-Random - GET /testdata/<dataset> will response with status code 200 and random dataset item 
+Random - GET /testdata/<dataset> will response with status code 200 and random dataset item
     [Setup]    Set Test Variable    ${DATASET_NAME}    ${DATASET_NAMES}[1]
     Given testdata was configured
     When GET /testdata/<dataset> request is send
