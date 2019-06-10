@@ -5,12 +5,11 @@ COPY    client /client
 
 WORKDIR /client
 
-RUN     apk add sqlite nodejs nodejs-npm
-RUN     npm install ajv
-RUN     npm install
-RUN     npm run build
-
-RUN     rm -rf /client
+RUN     apk --no-cache add sqlite nodejs nodejs-npm && \
+        npm install ajv && \
+        npm install && \
+        npm run build && \
+        rm -rf /client
 
 WORKDIR /server
 
