@@ -1,5 +1,4 @@
 from robot.libraries.BuiltIn import BuiltIn
-from robot.api import logger
 
 
 def set_multiple_test_variables(**variables):
