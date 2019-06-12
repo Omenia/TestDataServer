@@ -74,3 +74,22 @@ def delete_dataset(dataset):
 def delete_dataset_item(dataset, item):
     status = database.delete_dataset_item(dataset.strip(), item)
     return _deletion_response(status, 'dataset item')
+
+
+def post_dataset_item(dataset, item):
+    status = database.add_item_to_db(dataset, item)
+    if status == 'added':
+        return '', 201
+    elif status == 'dataset does not exist':
+        return (
+            {
+                'detail': "dataset does not exist",
+                'status': 404,
+                'title': 'Not Found',
+                'type': 'about:blank',
+            },
+            404,
+        )
+
+    else:
+        return '', 500

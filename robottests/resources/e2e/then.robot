@@ -1,4 +1,7 @@
 *** Keywords ***
+add item container will be hidden
+    Wait Until Element Is Not Visible    &{ADD_NEW_DATASET}[submit]
+
 conformation alert for ${end_of_name}
     Alert Should Be Present    ${ALERT_INFO}
 
@@ -9,18 +12,24 @@ dataset item will be removed from database
 dataset item will be removed from existing dataset list
     Wait Until Page Does Not Contain    ${DELETED_ITEM}
 
+dataset item will be stored to database
+    verify new dataset    ${API_URL}    ${DATASET_NAME}    ${ITEMS}[0]\n${ITEMS}[1]\n${NEW_ITEM}
+
 dataset will be added to existing dataset list
-    Wait Until Element Contains    css=.ta_name_${DATASET_NAME}    ${DATASET_NAME}
+    Wait Until Element Contains    css=.ta-name-${DATASET_NAME}    ${DATASET_NAME}
 
 dataset will be removed from database
     Sleep    0.1    reason=To prevent verification to be done too soon
     verify dataset does no exist in db    ${API_URL}    ${DATASET_NAME}    
 
 dataset will be removed from existing dataset list
-    Wait Until Page Does Not Contain Element    css=.ta_name_${DATASET_NAME}
+    Wait Until Page Does Not Contain Element    css=.ta-name-${DATASET_NAME}
 
 dataset will be stored to database
     verify new dataset    ${API_URL}    ${DATASET_NAME}    ${DATASET_ITEMS}
+
+item will be added to existing dataset item list
+    Wait Until Page Contains    ${NEW_ITEM}
 
 notification will be hidden
     Wait Until Page Does Not Contain    ${SHOWN_INFO_TEXT}         timeout=7

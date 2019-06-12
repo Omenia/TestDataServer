@@ -131,3 +131,25 @@ paths:
       responses:
         200:
           description: "Successful dataset item deletion"
+    post:
+      operationId: "testdata.post_dataset_item"
+      description: Add new dataset item
+      tags:
+      - "Testdata"
+      summary: Add dataset item
+      parameters:
+        - name: dataset
+          description: Dataset name
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: item
+          description: Dataset item
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        201:
+          description: "Successfully added item."

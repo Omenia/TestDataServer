@@ -101,7 +101,20 @@ textarea {
   padding: 7px;
   background-color: var(--toolbar-bg-color);  
   overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
 }
+
+.name-icons-row ul{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.name-icons-row ul li{
+  display: inline-block;
+}
+
 .dataset-item-row {
   border: 2px solid #cccccc;
   border-top-style: none;
@@ -109,13 +122,12 @@ textarea {
   padding-left: 20px;
   background-color: white;
   display: none;
+  justify-content: space-between;
   overflow: hidden;
 }
 .dataset-name {
   display: block;
   float: left;
-  width: 98%;
-  cursor: pointer;
 }
 .item-name {
   display: block;
@@ -123,10 +135,8 @@ textarea {
   width: 98%;
 }
 .item-modify {
-  display: block;
-  width: 2%;
-  float: right;
   cursor: pointer;
+  padding-left: 5px;
 }
 
 .info {
@@ -153,4 +163,18 @@ textarea {
 
 .datatype {
   color: #bd7f0c;
+}
+
+.add-item {
+    display: none;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.new-item-element {
+  display: none;
+}
+
+.new-item-container {
+  list-style: none;
 }

@@ -18,3 +18,7 @@ GET "${endpoint}" request ${end_of_name}
 POST /testdata request ${end_of_name}
     ${response}=    send post request    ${API_URL}/testdata    ${PARAMS}
     Set Test Variable    ${RESPONSE}    ${response}
+
+POST /testdata/<dataset>/<item> request ${end_of_name}
+    ${response}=    send post request    ${API_URL}/testdata/${DATASET_NAME}/${ITEM}    {}
+    Set Test Variable    ${RESPONSE}    ${response}
