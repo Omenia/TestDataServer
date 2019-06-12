@@ -115,3 +115,16 @@ def delete_dataset_item(dataset, item):
         .delete()
     )
     return _delete_testdata_data(count)
+
+
+def add_item_to_db(dataset, item):
+    count = db.session.query(Dataset, Dataset.name).filter(Dataset.name == dataset).all()
+    if len(count) == 0:
+        return 'dataset does not exist'
+
+    testitem = Item(
+            dataset_name=dataset, item=str(item), status='available', timestamp=datetime.now()
+        )
+    db.session.add(testitem)
+    db.session.commit()
+    return 'added'

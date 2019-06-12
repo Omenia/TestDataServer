@@ -55,3 +55,15 @@ Unknown item - DELETE /testdata/<dataset>/<item> will response with status code 
     Given testdata was configured
     When DELETE /testdata/<dataset>/<item> request with unknown item is send
     Then status code "404" will be received with error "dataset item does not exist" 
+
+POST /testdata/<dataset>/<item> will response with status code 201
+    [Setup]    Set dataset variables    ${DATASET_NAMES}[0]    {"new-item-key": "new-item-value"}
+    Given testdata was configured
+    When POST /testdata/<dataset>/<item> request is send
+    Then status code "201" will be received
+
+Unknown dataset - POST /testdata/<dataset>/<item> will response with status code 404
+    [Setup]    Set dataset variables    unknown    {"new-item-key": "new-item-value"}
+    Given testdata was configured
+    When POST /testdata/<dataset>/<item> request is send
+    Then status code "404" will be received with error "dataset does not exist"

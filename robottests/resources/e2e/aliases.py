@@ -42,3 +42,13 @@ INFO_TEXT = {
     'item-deleted-ok': 'Dataset item deleted',
     'item-deleted-error': 'Not Found (dataset item does not exist)',
 }
+
+ADD_NEW_ITEM = {
+    'add-icon': 'css=.add-item-{dataset}',
+    'input': 'css=#new-dataset-item',
+    'submit': 'css=#submit-new-item',
+}
+
+CONFIGURATION_PAGE = {
+    'dataset-item': 'css=.ta-name-{dataset}',
+}

@@ -8,6 +8,7 @@ Resource     teardown.robot
 Library      SeleniumLibrary
 Library      lib.testdata_api_client.TestdataApi
 Library      lib.verify.Verify
+Library      lib.utils
 
 *** Variables ***
 ${BROWSER}=     headlessfirefox
