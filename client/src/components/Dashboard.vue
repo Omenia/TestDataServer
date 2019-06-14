@@ -8,14 +8,12 @@
 </template>
 
 <script>
-import Header from "./Header";
 import Navigation from "./Navigation";
 import Testdataview from "./Testdataview";
 
 export default {
   name: "Dashboard",
   components: {
-    Header,
     Navigation,
     Testdataview
   }
@@ -23,5 +21,5 @@ export default {
 </script>
 
 <style>
-@import "../assets/styles/testdataserver.css";
+  @import "../assets/styles/testdataserver.css";
 </style>
