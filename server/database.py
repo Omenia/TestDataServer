@@ -21,22 +21,38 @@ def create():
 
 def get_testdata():
     testdata = []
-    for row_d in db.session.query(Dataset, Dataset.name).all():
-        items = []
-        for row in (
-            db.session.query(Item, Item.dataset_name)
-            .filter(Item.dataset_name == row_d.Dataset.name)
-            .order_by(Item.timestamp)
-            .all()
-        ):
-            items.append(
-                {'item': row.Item.item, 'status': row.Item.status, 'timestamp': row.Item.timestamp}
-            )
+    for row in db.session.query(Dataset, Dataset.name).all():
         testdata.append(
-            {'dataset': row_d.Dataset.name, 'datatype': row_d.Dataset.datatype, 'items': items}
+            {
+                'dataset': row.Dataset.name,
+                'datatype': row.Dataset.datatype,
+                'items': _get_items(row.Dataset.name),
+            }
         )
-
     return testdata
+
+
+def _get_items(dataset_name):
+    items = []
+    for row in (
+        db.session.query(Item, Item.dataset_name)
+        .filter(Item.dataset_name == dataset_name)
+        .order_by(Item.timestamp)
+        .all()
+    ):
+        items.append(
+            {'item': row.Item.item, 'status': row.Item.status, 'timestamp': row.Item.timestamp}
+        )
+    return items
+
+
+def _get_item(dataset, order):
+    return (
+        db.session.query(Item, Item.dataset_name)
+        .filter(Item.dataset_name == dataset)
+        .order_by(order)
+        .first()
+    )
 
 
 def get_testdata_next(dataset):
@@ -46,15 +62,9 @@ def get_testdata_next(dataset):
         .first()
     )
     if not rows:
-        return 'does not exist'
-
+        return None
     if rows.datatype == 'next':
-        item = (
-            db.session.query(Item, Item.dataset_name)
-            .filter(Item.dataset_name == dataset)
-            .order_by(Item.timestamp)
-            .first()
-        )
+        item = _get_item(dataset, Item.timestamp)
         item.Item.timestamp = datetime.now()
         db.session.commit()
         return {
@@ -63,12 +73,7 @@ def get_testdata_next(dataset):
             'timestamp': item.Item.timestamp,
         }
     elif rows.datatype == 'random':
-        item = (
-            db.session.query(Item, Item.dataset)
-            .filter(Item.dataset_name == dataset)
-            .order_by(func.random())
-            .first()
-        )
+        item = _get_item(dataset, func.random())
         return {
             'item': item.Item.item,
             'status': item.Item.status,
@@ -95,36 +100,36 @@ def add_testdata_to_db(dataset, items, datatype):
 
 def _delete_testdata_data(count):
     if count == 0:
-        return 'does not exist'
+        return None
     db.session.commit()
     return 'deleted'
 
 
 def delete_dataset(dataset):
-    count = db.session.query(Item.dataset_name).filter(Item.dataset_name == dataset).delete()
-    _delete_testdata_data(count)
-    count = db.session.query(Dataset.name).filter(Dataset.name == dataset).delete()
-    return _delete_testdata_data(count)
+    item_result = db.session.query(Item.dataset_name).filter(Item.dataset_name == dataset).delete()
+    _delete_testdata_data(item_result)
+    dataset_result = db.session.query(Dataset.name).filter(Dataset.name == dataset).delete()
+    return _delete_testdata_data(dataset_result)
 
 
 def delete_dataset_item(dataset, item):
-    count = (
+    result = (
         db.session.query(Item.item)
         .filter(Item.item == item)
         .filter(Item.dataset_name == dataset)
         .delete()
     )
-    return _delete_testdata_data(count)
+    return _delete_testdata_data(result)
 
 
 def add_item_to_db(dataset, item):
     count = db.session.query(Dataset, Dataset.name).filter(Dataset.name == dataset).all()
     if len(count) == 0:
-        return 'dataset does not exist'
+        return None
 
     testitem = Item(
-            dataset_name=dataset, item=str(item), status='available', timestamp=datetime.now()
-        )
+        dataset_name=dataset, item=str(item), status='available', timestamp=datetime.now()
+    )
     db.session.add(testitem)
     db.session.commit()
     return 'added'
