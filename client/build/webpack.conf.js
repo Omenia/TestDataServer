@@ -18,6 +18,7 @@ function resolve (dir) {
 }
 
 module.exports = {
+  mode: process.env.NODE_ENV,
   context: path.resolve(__dirname, '../'),
   entry: {
     dashboard: './src/dashboard.js',
