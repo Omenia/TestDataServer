@@ -20,6 +20,12 @@ Next - GET /testdata/<dataset> will response with status code 200 and next datas
     When GET /testdata/<dataset> request is send
     Then status code 200 with next dataset item will be received
 
+Next - GET /testdata/<dataset> will set item as reserved
+    [Setup]    set multiple test variables    DATASET_NAME=${DATASET_NAMES}[0]    ITEM=${ITEMS_0}[0]
+    Given testdata was configured
+    When GET /testdata/<dataset> request is send
+    Then item status in database will be "reserved"
+
 Random - GET /testdata/<dataset> will response with status code 200 and random dataset item
     [Setup]    Set Test Variable    ${DATASET_NAME}    ${DATASET_NAMES}[1]
     Given testdata was configured
