@@ -65,6 +65,8 @@ def post_dataset_item(dataset, item):
 
 
 def put_dataset_item_status(dataset, item, body):
+    if body.get('status') not in ['available', 'out of use']:
+        return _set_response(HTTPStatus.BAD_REQUEST, "unsupported 'status'")
     status = database.update_item_status(dataset, item, body.get('status'))
     if status == 'updated':
         return _set_response(HTTPStatus.CREATED, '')

@@ -85,3 +85,9 @@ Unknown item - PUT /testdata/<dataset>/<item> will response with status code 404
     Given testdata was configured
     When PUT /testdata/<dataset>/<item> with request "out of use" is send
     Then status code "404" will be received with error "item does not exist"
+
+Unsupported status parameter - PUT /testdata/<dataset>/<item> will response with status code 400
+    [Setup]    set multiple test variables    DATASET_NAME=${DATASET_NAMES}[0]    ITEM=${ITEMS_0}[0]
+    Given testdata was configured
+    When PUT /testdata/<dataset>/<item> with request "unsupport" is send
+    Then status code "400" will be received with error "unsupported 'status'"
