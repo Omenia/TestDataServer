@@ -11,7 +11,7 @@ Resource         ../../resources/api/generic-resources.robot
 &{NEXT_DATASET}=      dataset=${DATASET_NAMES}[0]    datatype=next     items=@{ITEMS_0}
 &{RANDOM_DATASET}=    dataset=${DATASET_NAMES}[1]    datatype=random    items=@{ITEMS_1}
 @{ALL_DATASETS}=      &{NEXT_DATASET}    &{RANDOM_DATASET}
-# [{'dataset': 'dataset-1', 'datatype': 'next', 'items': ['...']}]
+
 *** Test Cases ***
 GET /testdata will response with status code 200 and datasets
     Given testdata was configured

@@ -1,6 +1,5 @@
 import json
 
-from robot.libraries.BuiltIn import BuiltIn
 from robot.api import logger
 import requests
 
@@ -21,8 +20,8 @@ class TestdataApi(object):
             json={'dataset': dataset_name, 'items': dataset_items, 'datatype': datatype},
         )
         if response.status_code != 201:
-            BuiltIn().fail(
-                'Adding new dataset failed ({}: {})'.format(response.status_code, response.text)
+            raise AssertionError(
+                f'Adding new dataset failed ({response.status_code}: {response.text})'
             )
 
         logger.info('New dataset added.')
@@ -36,8 +35,8 @@ class TestdataApi(object):
         """
         response = requests.delete(base_url + '/testdata/' + dataset_name)
         if response.status_code != 200:
-            BuiltIn().fail(
-                'Deleting dataset failed ({}: {})'.format(response.status_code, response.text)
+            raise AssertionError(
+                'Deleting dataset failed ({response.status_code}: {response.text})'
             )
 
         logger.info('Dataset deleted.')

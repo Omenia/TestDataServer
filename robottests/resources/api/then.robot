@@ -1,4 +1,7 @@
 *** Keywords ***
+item status in database will be "${status}"
+    verify item status    ${API_URL}    ${DATASET_NAME}    ${ITEM}    ${status}
+
 status code 200 with datasets will be received
     verify get testdata response    ${RESPONSE}    ${ALL_DATASETS}
 

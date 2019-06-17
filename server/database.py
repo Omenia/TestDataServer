@@ -66,6 +66,7 @@ def get_testdata_next(dataset):
     if rows.datatype == 'next':
         item = _get_item(dataset, Item.timestamp)
         item.Item.timestamp = datetime.now()
+        item.Item.status = 'reserved'
         db.session.commit()
         return {
             'item': item.Item.item,
