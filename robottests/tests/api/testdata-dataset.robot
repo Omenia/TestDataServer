@@ -73,3 +73,15 @@ Unknown dataset - POST /testdata/<dataset>/<item> will response with status code
     Given testdata was configured
     When POST /testdata/<dataset>/<item> request is send
     Then status code "404" will be received with error "dataset does not exist"
+
+PUT /testdata/<dataset>/<item> will update item status
+    [Setup]    set multiple test variables    DATASET_NAME=${DATASET_NAMES}[0]    ITEM=${ITEMS_0}[0]
+    Given testdata was configured
+    When PUT /testdata/<dataset>/<item> with request "out of use" is send
+    Then item status in database will be "out of use"
+
+Unknown item - PUT /testdata/<dataset>/<item> will response with status code 404
+    [Setup]    set multiple test variables    DATASET_NAME=${DATASET_NAMES}[0]    ITEM=unknown
+    Given testdata was configured
+    When PUT /testdata/<dataset>/<item> with request "out of use" is send
+    Then status code "404" will be received with error "item does not exist"

@@ -83,3 +83,16 @@ class TestdataApi(object):
         :rtype: requests.Response
         """
         return requests.delete(url)
+
+    @staticmethod
+    def send_put_request(url, body_json):
+        """
+        Send PUT request.
+
+        :param base_url: endpoint url
+        :param body_json: body parameters in json
+        :rtype: requests.Response
+        """
+        return requests.put(
+            url, json=json.loads(body_json), headers={'Content-Type': 'application/json'}
+        )
