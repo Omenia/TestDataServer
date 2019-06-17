@@ -68,7 +68,7 @@ paths:
     get:
       operationId: "testdata.get_testdata_next"
       tags:
-      - "Testdata"
+      - "Dataset"
       summary: "Get test data"
       description: "Get data that can be used in test execution."
       parameters:
@@ -96,7 +96,7 @@ paths:
       operationId: "testdata.delete_dataset"
       description: Delete dataset from comfiguration
       tags:
-      - "Testdata"
+      - "Dataset"
       summary: Delete dataset
       parameters:
         - name: dataset
@@ -113,7 +113,7 @@ paths:
       operationId: "testdata.delete_dataset_item"
       description: Delete dataset item from comfiguration
       tags:
-      - "Testdata"
+      - "Dataset item"
       summary: Delete dataset item
       parameters:
         - name: dataset
@@ -135,7 +135,7 @@ paths:
       operationId: "testdata.post_dataset_item"
       description: Add new dataset item
       tags:
-      - "Testdata"
+      - "Dataset item"
       summary: Add dataset item
       parameters:
         - name: dataset
@@ -153,3 +153,35 @@ paths:
       responses:
         201:
           description: "Successfully added item."
+    put:
+      operationId: "testdata.put_dataset_item_status"
+      description: Update dataset item status
+      tags:
+      - "Dataset item"
+      summary: Add dataset item
+      parameters:
+        - name: dataset
+          description: Dataset name
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: item
+          description: Dataset item
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - status
+              properties:
+                status:
+                  type: string
+                  description: Status for item. Supported values - available, out of use
+      responses:
+        201:
+          description: "Successfully updated item."

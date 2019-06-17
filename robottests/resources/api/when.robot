@@ -22,3 +22,7 @@ POST /testdata request ${end_of_name}
 POST /testdata/<dataset>/<item> request ${end_of_name}
     ${response}=    send post request    ${API_URL}/testdata/${DATASET_NAME}/${ITEM}    {}
     Set Test Variable    ${RESPONSE}    ${response}
+
+PUT /testdata/<dataset>/<item> with request "${status}" ${end_of_name}
+    ${response}=    send put request    ${API_URL}/testdata/${DATASET_NAME}/${ITEM}    {"status": "${status}"}
+    Set Test Variable    ${RESPONSE}    ${response}

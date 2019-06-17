@@ -99,18 +99,18 @@ def add_testdata_to_db(dataset, items, datatype):
     return 'added'
 
 
-def _delete_testdata_data(count):
+def _commit_if_existing(count):
     if count == 0:
         return None
     db.session.commit()
-    return 'deleted'
+    return 'commited'
 
 
 def delete_dataset(dataset):
     item_result = db.session.query(Item.dataset_name).filter(Item.dataset_name == dataset).delete()
-    _delete_testdata_data(item_result)
+    _commit_if_existing(item_result)
     dataset_result = db.session.query(Dataset.name).filter(Dataset.name == dataset).delete()
-    return _delete_testdata_data(dataset_result)
+    return _commit_if_existing(dataset_result)
 
 
 def delete_dataset_item(dataset, item):
@@ -120,7 +120,7 @@ def delete_dataset_item(dataset, item):
         .filter(Item.dataset_name == dataset)
         .delete()
     )
-    return _delete_testdata_data(result)
+    return _commit_if_existing(result)
 
 
 def add_item_to_db(dataset, item):
@@ -134,3 +134,17 @@ def add_item_to_db(dataset, item):
     db.session.add(testitem)
     db.session.commit()
     return 'added'
+
+
+def update_item_status(dataset, item, status):
+    item = (
+        db.session.query(Item, Item.status)
+        .filter(Item.item == item)
+        .filter(Item.dataset_name == dataset)
+        .first()
+    )
+    if not item:
+        return None
+    item.Item.status = status
+    db.session.commit()
+    return 'updated'

@@ -36,7 +36,7 @@ def post_dataset(body):
 
 
 def _deletion_response(status, searched):
-    if status == 'deleted':
+    if status == 'commited':
         return _set_response(HTTPStatus.OK, '')
     elif not status:
         return _set_response(HTTPStatus.NOT_FOUND, f'{searched} does not exist')
@@ -60,5 +60,15 @@ def post_dataset_item(dataset, item):
         return _set_response(HTTPStatus.CREATED, '')
     elif not status:
         return _set_response(HTTPStatus.NOT_FOUND, 'dataset does not exist')
+    else:
+        return _set_response(HTTPStatus.INTERNAL_SERVER_ERROR, 'Unknown error')
+
+
+def put_dataset_item_status(dataset, item, body):
+    status = database.update_item_status(dataset, item, body.get('status'))
+    if status == 'updated':
+        return _set_response(HTTPStatus.CREATED, '')
+    elif not status:
+        return _set_response(HTTPStatus.NOT_FOUND, 'item does not exist')
     else:
         return _set_response(HTTPStatus.INTERNAL_SERVER_ERROR, 'Unknown error')
