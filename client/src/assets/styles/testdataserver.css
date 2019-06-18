@@ -221,7 +221,7 @@ textarea {
 }
 
 .db-item-name {
-  flex: 1 0 400px;
+  width: 100%;
 }
 
 .db-item-status {
