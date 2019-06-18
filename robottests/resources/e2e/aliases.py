@@ -20,8 +20,8 @@ PAGE_ELEMENT = {
 }
 
 ADD_NEW_DATASET = {
-    'header': 'css=#add-new-dataset-header',
-    'name': 'css=.ta-new-dataset-name',
+    'header': 'css=#conf-new-dataset-header',
+    'name': 'css=#conf-new-dataset',
     'datatype': 'name=new-dataset-datatype',
     'items': 'css=.ta-new-dataset-items',
     'submit': 'css=.ta-new-dataset-submit',
@@ -51,14 +51,14 @@ ADD_NEW_ITEM = {
 
 CONFIGURATION_PAGE = {'dataset-item': 'css=.ta-name-{dataset}'}
 
-dataset_path = 'xpath=//div[@class="dashboard-dataset"][contains(text(), "{dataset_name}")]'
+dataset_path = 'xpath=//div[@class="db-dataset"][contains(text(), "{dataset_name}")]'
 
 DASHBOARD_PAGE = {
     'dataset': dataset_path,
     'item-name': f'{dataset_path} \
-        /following-sibling::div[{{index}}]/span[contains(@class, "item-name")]',
+        /following-sibling::div[{{index}}]/span[contains(@class, "db-item-name")]',
     'item-time': f'{dataset_path} \
-        /following-sibling::div[{{index}}]/span[contains(@class, "item-time")]',
+        /following-sibling::div[{{index}}]/span[contains(@class, "db-item-time")]',
     'item-status': f'{dataset_path} \
-        /following-sibling::div[{{index}}]/span[contains(@class, "item-status")]',
+        /following-sibling::div[{{index}}]/span[contains(@class, "db-item-status")]',
 }

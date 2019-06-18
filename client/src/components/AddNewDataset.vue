@@ -1,13 +1,13 @@
 <template>
-  <div class="form-group">
-    <div class="section-header ta-add-new-dataset-header" id="add-new-dataset-header" @click="toggle_new_dataset()">Add new dataset</div>
+  <div class="conf-form">
+    <div class="section-header" id="conf-new-dataset-header" @click="toggle_new_dataset()">Add new dataset</div>
     <div id="add-new-dataset-section" :style="{ display: showAddNew }">
       <label for="new-dataset">Dataset name</label>
       <input
         type="text"
         name="new-dataset"
-        id="new-dataset"
-        class="form-field ta-new-dataset-name"
+        id="conf-new-dataset"
+        class="form-field"
         required
         v-model="newDataset"
       >
