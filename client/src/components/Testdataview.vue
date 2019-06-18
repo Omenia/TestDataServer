@@ -2,12 +2,14 @@
   <div class="content">
     <div>
         <h3>Datasets</h3>
-        <template v-for="dataset in Object.keys(testdata)">
-            <span :key="dataset">Dataset: {{ dataset }}</span>
-            <div v-for="item in testdata[dataset]" :key="item.item">
-                <span>Item: {{ item.item }} - Timestamp: {{ item.timestamp }}</span>
-            </div>
-        </template>
+        <div class="dashboard-dataset-container" v-for="dataset in testdata" :key="dataset.dataset">
+          <div class="dashboard-dataset">{{ dataset.dataset }} - {{ dataset.datatype }}</div>
+          <div class="dashboard-items" v-for="item in dataset.items" :key="item.item">
+              <span class="dashboard-item-row item-name">{{ item.item }}</span>
+              <span class="dashboard-item-row item-time">{{ item.timestamp }}</span>
+              <span class="dashboard-item-row item-status" :class="status_class(item.status)">{{ item.status }}</span>
+          </div>
+        </div>
     </div>
   </div>
 </template>
@@ -28,10 +30,16 @@ export default {
       .get(`/api/v1/testdata`)
       .then(response => (this.testdata = response.data.testdata))
       .catch(error => (this.errors = error));
+  },
+  methods: {
+    status_class: function (status) {
+      var className = "status-" + status.split(' ').join('-');
+      return {[className]: true}
+    }
   }
 };
 </script>
 
 <style>
-@import "../assets/styles/testdataserver.css";
+  @import "../assets/styles/testdataserver.css";
 </style>

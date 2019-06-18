@@ -1,5 +1,13 @@
+import datetime
+
+from robot.libraries.BuiltIn import BuiltIn
 from robot.api import logger
 import requests
+
+import resources.e2e.aliases as alias
+
+
+SELENIUM = 'SeleniumLibrary'
 
 
 class Verify(object):
@@ -159,3 +167,40 @@ class Verify(object):
             raise AssertionError(f'Unexpected item status ({item_status}), expected ({status})')
 
         logger.info('Item status verified.')
+
+    @staticmethod
+    def verify_dataset_in_dashboard(dataset, items, status):
+        """
+        Verify dataset and items in dashboard.
+
+        :param dataset: name of dataset
+        :param items: list of dataset items
+        :param status: expected status for items
+        """
+        selenium = BuiltIn().get_library_instance(SELENIUM)
+        dataset_name = selenium.get_webelement(
+            alias.DASHBOARD_PAGE['dataset'].format(dataset_name=dataset)
+        ).text
+        if dataset not in dataset_name:
+            raise AssertionError(f'Dataset ({dataset}) could not be found.')
+
+        for index in range(1, len(items) + 1):
+            item_name = selenium.get_webelement(
+                alias.DASHBOARD_PAGE['item-name'].format(dataset_name=dataset, index=index)
+            ).text
+            if item_name != items[index - 1]:
+                raise AssertionError(f'Item ({item_name}) could not be found.')
+
+            item_time = selenium.get_webelement(
+                alias.DASHBOARD_PAGE['item-time'].format(dataset_name=dataset, index=index)
+            ).text
+            if datetime.date.today().isoformat() not in item_time:
+                raise AssertionError(f'Item timestamp ({item_time}) could not be found.')
+
+            item_status = selenium.get_webelement(
+                alias.DASHBOARD_PAGE['item-status'].format(dataset_name=dataset, index=index)
+            ).text
+            if status != item_status:
+                raise AssertionError(f'Unexpected item status ({item_status}), expected ({status})')
+
+        logger.info('Dataset in dashboard verified.')

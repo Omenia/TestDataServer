@@ -47,3 +47,6 @@ user submits new item
     Input Text    &{ADD_NEW_ITEM}[input]    ${NEW_ITEM}    
     Click Button    &{ADD_NEW_ITEM}[submit]
     Wait Until Element Is Not Visible    &{ADD_NEW_ITEM}[submit]
+
+user visits dashboard page
+    Go To    ${BASE_URL}&{ON_PAGE}[dashboard page]
