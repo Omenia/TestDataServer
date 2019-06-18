@@ -39,7 +39,7 @@
             v-model="newItem"
           >
         </span>
-        <button type="submit" id="submit-new-item" class="btn new-item-element" @click="submitAddItem(dataset.dataset)" :style="{ display: addItems[dataset.dataset] }">Submit</button>
+        <button type="submit" id="submit-new-item" class="btn conf-new-item-element" @click="submitAddItem(dataset.dataset)" :style="{ display: addItems[dataset.dataset] }">Submit</button>
       </span>
     </div>
   </div>
