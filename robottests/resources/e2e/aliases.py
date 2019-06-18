@@ -49,15 +49,16 @@ ADD_NEW_ITEM = {
     'submit': 'css=#submit-new-item',
 }
 
-CONFIGURATION_PAGE = {
-    'dataset-item': 'css=.ta-name-{dataset}',
-}
+CONFIGURATION_PAGE = {'dataset-item': 'css=.ta-name-{dataset}'}
 
 dataset_path = 'xpath=//div[@class="dashboard-dataset"][contains(text(), "{dataset_name}")]'
 
 DASHBOARD_PAGE = {
     'dataset': dataset_path,
-    'item-name': f'{dataset_path}/following-sibling::div[{{index}}]/span[contains(@class, "item-name")]',
-    'item-time': f'{dataset_path}/following-sibling::div[{{index}}]/span[contains(@class, "item-time")]',
-    'item-status': f'{dataset_path}/following-sibling::div[{{index}}]/span[contains(@class, "item-status")]',
+    'item-name': f'{dataset_path} \
+        /following-sibling::div[{{index}}]/span[contains(@class, "item-name")]',
+    'item-time': f'{dataset_path} \
+        /following-sibling::div[{{index}}]/span[contains(@class, "item-time")]',
+    'item-status': f'{dataset_path} \
+        /following-sibling::div[{{index}}]/span[contains(@class, "item-status")]',
 }
