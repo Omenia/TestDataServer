@@ -25,6 +25,9 @@ dataset will be removed from database
 dataset will be removed from existing dataset list
     Wait Until Page Does Not Contain Element    css=.ta-name-${DATASET_NAME}
 
+dataset will be shown in dashboard
+    verify dataset in dashboard    ${DATASET_NAME}    ${ITEMS}    ${STATUS}
+
 dataset will be stored to database
     verify new dataset    ${API_URL}    ${DATASET_NAME}    ${DATASET_ITEMS}
 

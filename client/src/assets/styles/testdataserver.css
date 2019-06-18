@@ -178,3 +178,59 @@ textarea {
 .new-item-container {
   list-style: none;
 }
+
+.dashboard-dataset {
+  padding-bottom: 5px;
+}
+
+.dashboard-items {
+  display: flex;
+  align-items: stretch;
+  background-color: #ffffff;
+}
+
+.dashboard-item-row {
+  padding: 5px 15px 5px 15px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.item-name {
+  flex: 1 0 400px;
+}
+
+.item-status {
+  flex: 0 0 110px;
+  vertical-align: middle;
+  display: table-cell;
+  text-align: center;
+}
+
+.dashboard-dataset-container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 5px 20px 20px 20px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.status-available {
+  color: #088A4B;
+  background-color: #01DF3A;
+}
+
+.status-quarantine {
+  color: #610B0B;
+  background-color: #FE2E2E;
+}
+
+.status-not-in-use {
+  color: #B45F04;
+  background-color: #FAAC58;
+}
+
+.status-reserved {
+  color: #868A08;
+  background-color: #F7FE2E;
+}
