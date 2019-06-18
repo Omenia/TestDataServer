@@ -2,12 +2,12 @@
   <div class="content">
     <div>
         <h3>Datasets</h3>
-        <div class="dashboard-dataset-container" v-for="dataset in testdata" :key="dataset.dataset">
-          <div class="dashboard-dataset">{{ dataset.dataset }} - {{ dataset.datatype }}</div>
-          <div class="dashboard-items" v-for="item in dataset.items" :key="item.item">
-              <span class="dashboard-item-row item-name">{{ item.item }}</span>
-              <span class="dashboard-item-row item-time">{{ item.timestamp }}</span>
-              <span class="dashboard-item-row item-status" :class="status_class(item.status)">{{ item.status }}</span>
+        <div class="db-dataset-container" v-for="dataset in testdata" :key="dataset.dataset">
+          <div class="db-dataset">{{ dataset.dataset }} - {{ dataset.datatype }}</div>
+          <div class="db-items" v-for="item in dataset.items" :key="item.item">
+              <span class="db-item-row db-item-name">{{ item.item }}</span>
+              <span class="db-item-row db-item-time">{{ item.timestamp }}</span>
+              <span class="db-item-row db-item-status" :class="status_class(item.status)">{{ item.status }}</span>
           </div>
         </div>
     </div>
@@ -33,7 +33,7 @@ export default {
   },
   methods: {
     status_class: function (status) {
-      var className = "status-" + status.split(' ').join('-');
+      var className = "db-status-" + status.split(' ').join('-');
       return {[className]: true}
     }
   }

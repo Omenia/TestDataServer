@@ -1,35 +1,35 @@
 <template>
-  <div class="config-testdata"> 
+  <div class="conf-testdata"> 
     <div class="section-header">Existing datasets</div>
     <div v-for="dataset in testdata" :key="dataset.dataset">
-      <div class="dataset-row name-icons-row" :class="dataset_ta_class(dataset.dataset, 'name')" @click="toggle_dataset(dataset.dataset)">
+      <div class="conf-dataset-row conf-name-icons-row" :class="dataset_ta_class(dataset.dataset, 'name')" @click="toggle_dataset(dataset.dataset)">
         <ul class="left">
-          <li class="dataset-name">
+          <li class="conf-dataset-name">
             {{ dataset.dataset }} 
-            <span class="datatype"> - {{ dataset.datatype }}</span>
+            <span class="conf-datatype"> - {{ dataset.datatype }}</span>
           </li>
         </ul>
         <ul class="right">
-          <li class="item-modify" :class="dataset_ta_class(dataset.dataset, 'delete')" @click="confirm_dataset_delete(dataset.dataset)" title="Delete dataset">
+          <li class="conf-item-modify" :class="dataset_ta_class(dataset.dataset, 'delete')" @click="confirm_dataset_delete(dataset.dataset)" title="Delete dataset">
             <font-awesome-icon size="1x" icon="trash-alt"/>
           </li>
         </ul>
       </div>
-      <div class="dataset-item-row name-icons-row" v-for="(item, index) in dataset.items" :key="item.item" :style="{ display: openedDatasets[dataset.dataset] }">
+      <div class="conf-dataset-item-row conf-name-icons-row" v-for="(item, index) in dataset.items" :key="item.item" :style="{ display: openedDatasets[dataset.dataset] }">
         <ul class="left">
-          <li class="item-name" :class="item_ta_class(dataset.dataset, index, 'name')">{{ item.item }}</li>
+          <li class="conf-item-name" :class="item_ta_class(dataset.dataset, index, 'name')">{{ item.item }}</li>
         </ul>
         <ul class="right">
-          <li class="item-modify" :class="item_ta_class(dataset.dataset, index, 'delete')" @click="confirm_item_delete(dataset.dataset, item.item)" title="Delete dataset item">
+          <li class="conf-item-modify" :class="item_ta_class(dataset.dataset, index, 'delete')" @click="confirm_item_delete(dataset.dataset, item.item)" title="Delete dataset item">
             <font-awesome-icon size="1x" icon="trash-alt"/>
           </li>
         </ul>
       </div>
-      <div :class="['add-item-' + dataset.dataset]" class="add-item" @click="toggle_add_item(dataset.dataset)"  title="Add new item" :style="{ display: openedDatasets[dataset.dataset] }">
+      <div :class="['add-item-' + dataset.dataset]" class="conf-add-item" @click="toggle_add_item(dataset.dataset)"  title="Add new item" :style="{ display: openedDatasets[dataset.dataset] }">
         <font-awesome-icon size="1x" icon="plus-square"/>
       </div>
-      <span class="new-item-container" :style="{ display: addItemContainers[dataset.dataset] }">
-        <span class="new-item-element" :style="{ display: addItems[dataset.dataset] }">
+      <span class="conf-new-item-container" :style="{ display: addItemContainers[dataset.dataset] }">
+        <span class="conf-new-item-element" :style="{ display: addItems[dataset.dataset] }">
           <input
             type="text"
             name="new-item"

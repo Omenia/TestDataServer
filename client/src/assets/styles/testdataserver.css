@@ -8,38 +8,74 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Navigation */
+
 #navigation {
   padding-top: 60px;
 }
+
 #navigation li {
   margin-top: 5px;
 }
+
 .active_page {
   color: #3300cc;
 }
+
 .deactive_page {
   color: #6699ff;
 }
+
 .deactive_page:hover {
   color: #000033;
 }
 
-.container {
-  height: 100vh;
-  display: flex;
-}
 .nav {
   background: var(--toolbar-bg-color);
   flex: 0 0 70px;
   text-align: center;
   height: 100vh;
 }
+
 .nav ul {
   padding: 0px;
 }
+
 .nav li {
   display: inline-block;
   margin: 5px 10px;
+}
+
+/* Content */
+
+.container {
+  height: 100vh;
+  display: flex;
+}
+
+.info {
+  top: 1px;
+  padding: 5px;
+  margin-bottom: 1px;
+  text-align: center;
+  min-width: 800px;
+}
+
+.ok-info {
+  background: #99cc99;
+  border-radius: 5px;
+  visibility: visible;
+}
+
+.error-info {
+  background: #ff9999;
+  border-radius: 5px;
+  visibility: visible;
+}
+
+.hidden-info {
+  visibility: hidden;
+  margin-bottom: 20px
 }
 
 #dashboard #configuration {
@@ -55,14 +91,24 @@ body {
   align-self: baseline;
 }
 
-#add-new-dataset-header {
+.section-header {
+  margin-bottom: 10px;
+  font-size: x-large;
+  text-align: center;
+}
+
+/* Configuration page */
+
+#conf-new-dataset-header {
   cursor: pointer;
 }
-.form-group {
+
+.conf-form {
   border-radius: 5px;
   background-color: #f2f2f2;
   padding: 20px;
 }
+
 input[type=text] {
   width: 100%;
   padding: 12px 20px;
@@ -72,6 +118,7 @@ input[type=text] {
   border-radius: 4px;
   box-sizing: border-box;
 }
+
 textarea {
   width: 100%;
   height: 150px;
@@ -79,24 +126,17 @@ textarea {
   box-sizing: border-box;
   border: 1px solid #cccccc;
   border-radius: 4px;
-  /* background-color: #f8f8f8; */
   resize: none;
 }
 
-.config-testdata {
+.conf-testdata {
   border-radius: 5px;
   background-color: #f2f2f2;
   padding: 20px;
   margin-bottom: 10px;
 }
 
-.section-header {
-  margin-bottom: 10px;
-  font-size: x-large;
-  text-align: center;
-}
-
-.dataset-row {
+.conf-dataset-row {
   border: 2px solid #f2f2f2;
   padding: 7px;
   background-color: var(--toolbar-bg-color);  
@@ -106,16 +146,17 @@ textarea {
   cursor: pointer;
 }
 
-.name-icons-row ul{
+.conf-name-icons-row ul{
   margin: 0;
   padding: 0;
   list-style: none;
 }
-.name-icons-row ul li{
+
+.conf-name-icons-row ul li{
   display: inline-block;
 }
 
-.dataset-item-row {
+.conf-dataset-item-row {
   border: 2px solid #cccccc;
   border-top-style: none;
   padding: 7px;
@@ -125,89 +166,72 @@ textarea {
   justify-content: space-between;
   overflow: hidden;
 }
-.dataset-name {
+
+.conf-dataset-name {
   display: block;
   float: left;
 }
-.item-name {
+
+.conf-item-name {
   display: block;
   float: left;
   width: 98%;
 }
-.item-modify {
+
+.conf-item-modify {
   cursor: pointer;
   padding-left: 5px;
 }
 
-.info {
-  top: 1px;
-  padding: 5px;
-  margin-bottom: 1px;
-  text-align: center;
-  min-width: 800px;
-}
-.ok-info {
-  background: #99cc99;
-  border-radius: 5px;
-  visibility: visible;
-}
-.error-info {
-  background: #ff9999;
-  border-radius: 5px;
-  visibility: visible;
-}
-.hidden-info {
-  visibility: hidden;
-  margin-bottom: 20px
-}
-
-.datatype {
+.conf-datatype {
   color: #bd7f0c;
 }
 
-.add-item {
+.conf-add-item {
     display: none;
     padding: 5px;
     cursor: pointer;
 }
 
-.new-item-element {
+.conf-new-item-element {
   display: none;
 }
 
-.new-item-container {
+.conf-new-item-container {
   list-style: none;
 }
 
-.dashboard-dataset {
+/* Dashboard */
+
+.db-dataset {
   padding-bottom: 5px;
 }
 
-.dashboard-items {
+.db-items {
   display: flex;
   align-items: stretch;
   background-color: #ffffff;
 }
 
-.dashboard-item-row {
+.db-item-row {
   padding: 5px 15px 5px 15px;
   border: 1px solid #cccccc;
   border-radius: 4px;
   box-sizing: border-box;
 }
 
-.item-name {
+.db-item-name {
   flex: 1 0 400px;
 }
 
-.item-status {
+.db-item-status {
   flex: 0 0 110px;
   vertical-align: middle;
   display: table-cell;
   text-align: center;
 }
 
-.dashboard-dataset-container {
+.db-dataset-container {
   border-radius: 5px;
   background-color: #f2f2f2;
   padding: 5px 20px 20px 20px;
@@ -215,22 +239,22 @@ textarea {
   width: 100%;
 }
 
-.status-available {
+.db-status-available {
   color: #088A4B;
   background-color: #01DF3A;
 }
 
-.status-quarantine {
+.db-status-quarantine {
   color: #610B0B;
   background-color: #FE2E2E;
 }
 
-.status-not-in-use {
+.db-status-not-in-use {
   color: #B45F04;
   background-color: #FAAC58;
 }
 
-.status-reserved {
+.db-status-reserved {
   color: #868A08;
   background-color: #F7FE2E;
 }
