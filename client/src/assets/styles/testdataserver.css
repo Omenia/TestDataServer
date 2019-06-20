@@ -201,6 +201,14 @@ textarea {
   list-style: none;
 }
 
+.conf-status-quarantine {
+  color: #FE2E2E;
+}
+
+.conf-status-out-of-use {
+  color: #FAAC58;
+}
+
 /* Dashboard */
 
 .db-dataset {
@@ -249,7 +257,7 @@ textarea {
   background-color: #FE2E2E;
 }
 
-.db-status-not-in-use {
+.db-status-out-of-use {
   color: #B45F04;
   background-color: #FAAC58;
 }

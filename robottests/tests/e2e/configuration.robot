@@ -91,3 +91,17 @@ Toggle dataset will hide add item container
     When user clicks dataset
     Then add item container will be hidden
 
+Stop button will set item as out of use
+    [Setup]    Set Test Variable    ${DATATYPE}    next
+    Given dataset section was open
+    When user clicks item "stop" button
+    Then item will be set as out of use
+    And button will be changed to "play"
+
+Play button will set item as available
+    [Setup]    Set Test Variable    ${DATATYPE}    next
+    Given dataset section was open
+    And item was out of use
+    When user clicks item "play" button
+    Then item will be set as available
+    And button will be changed to "stop"

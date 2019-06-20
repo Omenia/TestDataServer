@@ -6,8 +6,8 @@ Resource         ../../resources/api/generic-resources.robot
 @{DATASET_NAMES}=    dataset-1    dataset-2
 @{ITEMS_0}=          {"key-a1": "value-a1", "key-a2": "value-a2"}
 ...                  {"key-b1": "value-b1", "key-b2": "value-b2"}
-@{ITEMS_1}=          {"key-z1": "value-z1", "key-z2": "value-z2"}
-...                  {"key-x1": "value-x1", "key-x2": "value-x2"}
+@{ITEMS_1}=          {"key-x1": "value-x1", "key-x2": "value-x2"}
+...                  {"key-z1": "value-z1", "key-z2": "value-z2"}
 &{NEXT_DATASET}=      dataset=${DATASET_NAMES}[0]    datatype=next     items=@{ITEMS_0}
 &{RANDOM_DATASET}=    dataset=${DATASET_NAMES}[1]    datatype=random    items=@{ITEMS_1}
 @{ALL_DATASETS}=      &{NEXT_DATASET}    &{RANDOM_DATASET}

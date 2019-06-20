@@ -25,6 +25,10 @@ user clicks dataset item delete button
     Click Element    css=.ta-delete-${DATASET_NAME}-0
     Set Test Variable    ${ALERT_INFO}    &{ALERT_TEXT}[delete-item] ${DATASET_NAME} - ${DELETED_ITEM}
 
+user clicks item "${button}" button
+    Wait Until Element Is Visible    css=.ta-${button}-${DATASET_NAME}-0
+    Click Element    css=.ta-${button}-${DATASET_NAME}-0
+
 user clicks "${link}" navigation item
     Click Link    &{NAV_LINK}[${link}]
 

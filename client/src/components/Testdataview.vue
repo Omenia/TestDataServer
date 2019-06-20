@@ -5,9 +5,12 @@
       <div class="db-dataset-container" v-for="dataset in testdata" :key="dataset.dataset">
         <div class="db-dataset">{{ dataset.dataset }} - {{ dataset.datatype }}</div>
         <div class="db-items" v-for="item in dataset.items" :key="item.item">
-            <span class="db-item-row db-item-name">{{ item.item }}</span>
-            <span class="db-item-row db-item-time">{{ item.timestamp }}</span>
-            <span class="db-item-row db-item-status" :class="status_class(item.status)">{{ item.status }}</span>
+          <span class="db-item-row db-item-name">{{ item.item }}</span>
+          <span class="db-item-row db-item-time">{{ item.timestamp }}</span>
+          <span
+            class="db-item-row db-item-status"
+            :class="status_class(item.status)"
+          >{{ item.status }}</span>
         </div>
       </div>
     </div>
@@ -32,14 +35,14 @@ export default {
       .catch(error => (this.errors = error));
   },
   methods: {
-    status_class: function (status) {
-      var className = "db-status-" + status.split(' ').join('-');
-      return {[className]: true}
+    status_class: function(status) {
+      var className = "db-status-" + status.split(" ").join("-");
+      return { [className]: true };
     }
   }
 };
 </script>
 
 <style>
-  @import "../assets/styles/testdataserver.css";
+@import "../assets/styles/testdataserver.css";
 </style>
