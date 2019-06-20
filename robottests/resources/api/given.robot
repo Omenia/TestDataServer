@@ -1,7 +1,10 @@
 *** Keywords ***
 dataset item was requested
     ${response}=    send get request    ${API_URL}/testdata/${DATASET_NAME}
-    Set Test Variable    ${PREVIOUS_RESPONSE}    ${response}
+
+oldest item was out of use
+    send put request    ${API_URL}/testdata/${DATASET_NAME}/${OLDEST_ITEM}    {"status": "out of use"}
+    verify item status    ${API_URL}    ${DATASET_NAME}    ${OLDEST_ITEM}    out of use
 
 service was running
     Log    Service is already running after setup

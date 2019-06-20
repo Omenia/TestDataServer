@@ -50,6 +50,7 @@ def _get_item(dataset, order):
     return (
         db.session.query(Item, Item.dataset_name)
         .filter(Item.dataset_name == dataset)
+        .filter(Item.status == 'available')
         .order_by(order)
         .first()
     )

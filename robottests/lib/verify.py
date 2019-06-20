@@ -123,29 +123,14 @@ class Verify(object):
         logger.info('GET /testdata response verified.')
 
     @staticmethod
-    def verify_get_testdata_dataset_response(item, previous_response, response):
+    def verify_get_testdata_dataset_response(item, response):
         """
         Verify /testdata/<dataset> response.
 
         :param item: expected item
-        :param previous_response: previous requests.response to /testdata/<dataset> request
         :param response: requests.response to /testdata/<dataset> request
         """
-        if previous_response.status_code != 200 or response.status_code != 200:
-            raise AssertionError(
-                f'Wrong status code(s). Previous: {previous_response.status_code} \
-                ({previous_response.text}), current: {response.status_code} ({response.text})'
-            )
-        previous_json = previous_response.json()['testdata']
-        response_json = response.json()['testdata']
-        if previous_json['item'] == response_json['item']:
-            raise AssertionError(f'Unexpected item {response.json()}')
-        if previous_json['timestamp'] >= response_json['timestamp']:
-            raise AssertionError(
-                f'Wrong item returned (timestamp). Previous: {previous_response.json()}, \
-                    current: {response.json()}'
-            )
-        if response_json['item'] != item:
+        if response.json()['testdata']['item'] != item:
             raise AssertionError(
                 f'Wrong item returned (value). Expected: {item}, actual: {response.json()}'
             )
