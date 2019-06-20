@@ -1,6 +1,10 @@
 <template>
   <div class="conf-form">
-    <div class="section-header" id="conf-new-dataset-header" @click="toggle_new_dataset()">Add new dataset</div>
+    <div
+      class="section-header"
+      id="conf-new-dataset-header"
+      @click="toggle_new_dataset()"
+    >Add new dataset</div>
     <div id="add-new-dataset-section" :style="{ display: showAddNew }">
       <label for="new-dataset">Dataset name</label>
       <input
@@ -11,12 +15,14 @@
         required
         v-model="newDataset"
       >
-      <label for="new-dataset">Dataset type</label><br/>
+      <label for="new-dataset">Dataset type</label>
+      <br>
       <select v-model="datatype" name="new-dataset-datatype">
-        <option disabled value="">Please select one</option>
+        <option disabled value>Please select one</option>
         <option value="next">Next</option>
         <option value="random">Random</option>
-      </select><br/>
+      </select>
+      <br>
       <label for="new-dataset">Dataset items</label>
       <textarea
         name="items"
@@ -42,19 +48,18 @@ const axios = require("axios");
 export default {
   name: "AddNewDataset",
   data() {
-    return { 
+    return {
       newDataset: "",
       showAddNew: "none",
-      errors: [],
+      errors: []
     };
   },
   methods: {
     toggle_new_dataset: function() {
       if (this.showAddNew == "inherit") {
-        this.showAddNew = 'none';
-      }
-      else {
-        this.showAddNew = 'inherit';
+        this.showAddNew = "none";
+      } else {
+        this.showAddNew = "inherit";
       }
     },
     submitNewDataset() {
@@ -72,14 +77,19 @@ export default {
           this.$emit("submit", "ok", "Dataset added");
         })
         .catch(error => {
-          var errorData = error["response"]["data"]
-          this.$emit("submit", "error",  errorData["title"] + " (" + errorData["detail"] + ")", null);
+          var errorData = error["response"]["data"];
+          this.$emit(
+            "submit",
+            "error",
+            errorData["title"] + " (" + errorData["detail"] + ")",
+            null
+          );
         });
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style>
-  @import "../assets/styles/testdataserver.css";
+@import "../assets/styles/testdataserver.css";
 </style>

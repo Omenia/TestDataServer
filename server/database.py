@@ -26,18 +26,18 @@ def get_testdata():
             {
                 'dataset': row.Dataset.name,
                 'datatype': row.Dataset.datatype,
-                'items': _get_items(row.Dataset.name),
+                'items': _get_items(row.Dataset.name, Item.item),
             }
         )
     return testdata
 
 
-def _get_items(dataset_name):
+def _get_items(dataset_name, order):
     items = []
     for row in (
         db.session.query(Item, Item.dataset_name)
         .filter(Item.dataset_name == dataset_name)
-        .order_by(Item.timestamp)
+        .order_by(order)
         .all()
     ):
         items.append(

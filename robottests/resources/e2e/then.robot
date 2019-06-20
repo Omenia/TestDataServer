@@ -2,6 +2,9 @@
 add item container will be hidden
     Wait Until Element Is Not Visible    &{ADD_NEW_DATASET}[submit]
 
+button will be changed to "${button}"
+    Wait Until Element Is Visible   css=.ta-${button}-icon-${DATASET_NAME}-0
+
 conformation alert for ${end_of_name}
     Alert Should Be Present    ${ALERT_INFO}
 
@@ -33,6 +36,12 @@ dataset will be stored to database
 
 item will be added to existing dataset item list
     Wait Until Page Contains    ${NEW_ITEM}
+
+item will be set as available
+    Wait Until Page Does Not Contain    css=.ta-status-${DATASET_NAME}-0
+
+item will be set as out of use
+    Wait Until Element Contains    css=.ta-status-${DATASET_NAME}-0    out of use
 
 notification will be hidden
     Wait Until Page Does Not Contain    ${SHOWN_INFO_TEXT}         timeout=7

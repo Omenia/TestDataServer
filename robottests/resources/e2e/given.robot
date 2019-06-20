@@ -15,6 +15,10 @@ dataset section was open
     ${locator}=    Set Variable    &{CONFIGURATION_PAGE}[dataset-item]
     Wait Until Element Is Visible    ${locator.format(dataset='${DATASET_NAME}', index=0)}
 
+item was out of use
+    Wait Until Element Is Visible    css=.ta-stop-${DATASET_NAME}-0
+    Click Element    css=.ta-stop-${DATASET_NAME}-0
+
 user was not on "${page}"
     Go To    ${BASE_URL}&{NOT_ON_PAGE}[${page}]
 
