@@ -2,13 +2,16 @@
 item status in database will be "${status}"
     verify item status    ${API_URL}    ${DATASET_NAME}    ${ITEM}    ${status}
 
+oldest available item will be received
+    verify get testdata dataset response    ${ITEM}    ${RESPONSE}   
+
 status code 200 with datasets will be received
     verify get testdata response    ${RESPONSE}    ${ALL_DATASETS}
 
 status code 200 with next dataset item will be received
     ${dataset_name}=    Set Variable    ${DATASET_NAME}
     ${items}=           Set Variable    &{NEXT_DATASET}[items]
-    verify get testdata dataset response    ${items}[1]    ${PREVIOUS_RESPONSE}    ${RESPONSE}
+    verify get testdata dataset response    ${items}[1]    ${RESPONSE}
 
 status code 200 with random dataset item will be received
     Should Be Equal As Numbers    ${RESPONSE.status_code}    200

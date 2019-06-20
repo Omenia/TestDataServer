@@ -26,6 +26,14 @@ Next - GET /testdata/<dataset> will set item as reserved
     When GET /testdata/<dataset> request is send
     Then item status in database will be "reserved"
 
+Next - Oldest as out of use - GET /testdata/<dataset> will response with oldest available
+    [Setup]    set multiple test variables    DATASET_NAME=${DATASET_NAMES}[0]    
+    ...    OLDEST_ITEM=${ITEMS_0}[0]    ITEM=${ITEMS_0}[1]
+    Given testdata was configured
+    And oldest item was out of use
+    When GET /testdata/<dataset> request is send
+    Then oldest available item will be received
+
 Random - GET /testdata/<dataset> will response with status code 200 and random dataset item
     [Setup]    Set Test Variable    ${DATASET_NAME}    ${DATASET_NAMES}[1]
     Given testdata was configured
