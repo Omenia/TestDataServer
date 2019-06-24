@@ -18,7 +18,7 @@
       <label for="new-dataset">Dataset type</label>
       <br>
       <select v-model="datatype" name="new-dataset-datatype">
-        <option disabled value="">Please select one</option>
+        <option value="" disabled>Please select one</option>
         <option value="next">Next</option>
         <option value="random">Random</option>
       </select>
@@ -81,8 +81,7 @@ export default {
           this.$emit(
             "submit",
             "error",
-            errorData["title"] + " (" + errorData["detail"] + ")",
-            null
+            errorData["title"] + " (" + errorData["detail"] + ")"
           );
         });
     }

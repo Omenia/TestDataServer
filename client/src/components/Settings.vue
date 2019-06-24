@@ -6,7 +6,7 @@
     <div class="content">
       <div>
         <info-area :class="[infoStyle]">{{ infoMsg }}</info-area>
-        <SettingsView/>
+        <SettingsView v-on:submit="update_info"></SettingsView>
       </div>
     </div>
   </div>  
@@ -29,6 +29,20 @@ export default {
       infoMsg: "",
       infoStyle: "hidden-info"
     };
+  },
+  methods: {
+    update_info: function(status, msg) {
+      this.infoMsg = msg;
+      if (status == "error") {
+        this.infoStyle = "error-info";
+      } else {
+        this.infoStyle = "ok-info";
+        setTimeout(() => {
+          this.infoMsg = "";
+          this.infoStyle = "hidden-info";
+        }, 5000);
+      }
+    },
   }
 };
 </script>
