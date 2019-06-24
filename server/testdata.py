@@ -14,6 +14,8 @@ def get_testdata_next(dataset):
     dataset = database.get_testdata_next(dataset)
     if not dataset:
         return _set_response(HTTPStatus.NOT_FOUND, 'dataset does not exist')
+    elif dataset == 'no items':
+        return _set_response(HTTPStatus.CONFLICT, 'no items available')
     return {"testdata": dataset}
 
 

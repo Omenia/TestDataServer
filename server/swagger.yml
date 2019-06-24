@@ -63,6 +63,11 @@ paths:
       responses:
         201:
           description: "Successfully created dataset."
+        400:
+          description: "Unsupported 'datatype'"
+        409:
+          description: "Dataset exists already"
+
 
   /api/v1/testdata/{dataset}:
     get:
@@ -92,9 +97,13 @@ paths:
                   properties:
                     testdata:
                       type: string
+        404:
+          description: "Dataset does not exist"
+        409:
+          description: "No items available"
     delete:
       operationId: "testdata.delete_dataset"
-      description: Delete dataset from comfiguration
+      description: Delete dataset from configuration
       tags:
       - "Dataset"
       summary: Delete dataset
@@ -108,10 +117,12 @@ paths:
       responses:
         200:
           description: "Successful dataset deletion"
+        404:
+          description: "Dataset does not exist"
   /api/v1/testdata/{dataset}/{item}:
     delete:
       operationId: "testdata.delete_dataset_item"
-      description: Delete dataset item from comfiguration
+      description: Delete dataset item from configuration
       tags:
       - "Dataset item"
       summary: Delete dataset item
@@ -131,6 +142,8 @@ paths:
       responses:
         200:
           description: "Successful dataset item deletion"
+        404:
+          description: "Item does not exist"
     post:
       operationId: "testdata.post_dataset_item"
       description: Add new dataset item
@@ -152,13 +165,15 @@ paths:
             type: string
       responses:
         201:
-          description: "Successfully added item."
+          description: "Successfully added item"
+        404:
+          description: "Dataset does not exist"
     put:
       operationId: "testdata.put_dataset_item_status"
       description: Update dataset item status
       tags:
       - "Dataset item"
-      summary: Add dataset item
+      summary: Update dataset item status
       parameters:
         - name: dataset
           description: Dataset name
@@ -184,7 +199,11 @@ paths:
                   description: Status for item. Supported values - available, out of use
       responses:
         201:
-          description: "Successfully updated item."
+          description: "Successfully updated item"
+        400:
+          description: "Unsupported 'status'"
+        404:
+          description: "Item does not exist"
   /api/v1/settings:
     get:
       operationId: "testdata.get_settings"
@@ -232,4 +251,6 @@ paths:
                   description: Timeout for reserved item to be quarantined (hh:mm:ss)
       responses:
         200:
-          description: "Successfully updated settings."                  
+          description: "Successfully updated settings"            
+        400:
+          description: "Incorrect parameter syntax or datatype"      

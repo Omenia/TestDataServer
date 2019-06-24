@@ -66,9 +66,13 @@ def get_testdata_next(dataset):
     if not rows:
         return None
     if rows.datatype == 'next':
+        settings = db.session.query(Settings, Settings.use_status).first()
         item = _get_item(dataset, Item.timestamp)
+        if not item:
+            return 'no items'
+        if settings.Settings.use_status:
+            item.Item.status = 'reserved'
         item.Item.timestamp = datetime.now()
-        item.Item.status = 'reserved'
         db.session.commit()
         return {
             'item': item.Item.item,
