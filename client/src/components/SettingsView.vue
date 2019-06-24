@@ -9,6 +9,8 @@
             id="status_use"
             name="use_status"
             :checked="status_checked == true ? true : false"
+            @change="useStatusChanged()"
+            v-model="use_status"
           >
         </div>
         <div class="input-description">
@@ -25,6 +27,8 @@
             name="use_quarantine"
             :checked="quarantine_checked == true ? true : false"
             :disabled="quarantine_disabled == true ? true : false"
+            @change="useQuarantineChanged()"
+            v-model="use_quarantine"
           >
         </div>
         <div class="input-description">
@@ -47,7 +51,7 @@
           >
         </div>
         <div class="input-description">
-          Hours, minutes and seconds until reserved item is quarantined.
+          Hours, minutes and seconds (hh:mm:ss) until reserved item is quarantined.
           Only used when quarantine is in use.
         </div>
       </div>
@@ -55,7 +59,7 @@
         type="submit"
         id="save-settings"
         class="btn setting-save"
-        @click="save_settings(dataset.dataset)"
+        @click="saveSettings()"
       >Save</button>
     </div>
   </div>
@@ -90,6 +94,36 @@ export default {
         this.timeout_disabled = this.use_quarantine == true ? false : true;
       })
       .catch(error => (this.errors = error));
+  },
+  methods: {
+    useStatusChanged() {
+      this.quarantine_disabled = this.use_status == true ? false : true;
+      this.use_quarantine = this.use_status == true ? this.use_quarantine : false;
+      this.useQuarantineChanged()
+    },
+    useQuarantineChanged() {
+      this.timeout_disabled = this.use_quarantine == true ? false : true;
+      this.timeout = this.use_quarantine == true ? this.timeout : "00:00:00";
+    },
+    saveSettings() {
+      axios
+        .put("/api/v1/settings", {
+          use_status: this.use_status,
+          use_quarantine: this.use_quarantine,
+          timeout: this.timeout
+        })
+        .then(response => {
+          this.$emit("submit", "ok", "Settings saved");
+        })
+        .catch(error => {
+          var errorData = error["response"]["data"];
+          this.$emit(
+            "submit",
+            "error",
+            errorData["title"] + " (" + errorData["detail"] + ")"
+          );
+        });
+    }
   }
 };
 </script>

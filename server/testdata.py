@@ -78,3 +78,15 @@ def put_dataset_item_status(dataset, item, body):
 
 def get_settings():
     return {"settings": database.get_settings()}
+
+
+def put_settings(body):
+    status = database.update_settings(
+        body.get('use_status'), body.get('use_quarantine'), body.get('timeout')
+    )
+    if status == 'updated':
+        return _set_response(HTTPStatus.OK, '')
+    elif status == 'timeout error':
+        return _set_response(HTTPStatus.BAD_REQUEST, 'Incorrect timeout syntax')
+    else:
+        return _set_response(HTTPStatus.INTERNAL_SERVER_ERROR, 'Unknown error')

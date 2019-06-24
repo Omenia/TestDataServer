@@ -206,3 +206,30 @@ paths:
                   properties:
                     settings:
                       type: string
+    put:
+      operationId: "testdata.put_settings"
+      description: Update settings
+      tags:
+      - "Settings"
+      summary: Update settings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - use_status
+                - use_quarantine
+                - timeout
+              properties:
+                use_status:
+                  type: boolean
+                  description: Is status used?
+                use_quarantine:
+                  type: boolean
+                  description: Is quarantine used?
+                timeout:
+                  type: string
+                  description: Timeout for reserved item to be quarantined (hh:mm:ss)
+      responses:
+        200:
+          description: "Successfully updated settings."                  

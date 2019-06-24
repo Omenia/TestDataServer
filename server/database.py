@@ -1,5 +1,5 @@
 import os.path
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from sqlalchemy import func
 
@@ -159,3 +159,19 @@ def get_settings():
         'use_quarantine': settings.Settings.use_quarantine,
         'timeout': str(settings.Settings.timeout),
     }
+
+
+def update_settings(use_status, use_quarantine, timeout):
+    try:
+        time_list = timeout.split(':')
+        timeout_delta = timedelta(
+            hours=int(time_list[0]), minutes=int(time_list[1]), seconds=int(time_list[2])
+        )
+    except (IndexError, ValueError):
+        return 'timeout error'
+    settings = db.session.query(Settings, Settings.use_status).first()
+    settings.Settings.use_status = use_status
+    settings.Settings.use_quarantine = use_quarantine
+    settings.Settings.timeout = timeout_delta
+    db.session.commit()
+    return 'updated'
