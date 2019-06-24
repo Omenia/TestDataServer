@@ -185,3 +185,24 @@ paths:
       responses:
         201:
           description: "Successfully updated item."
+  /api/v1/settings:
+    get:
+      operationId: "testdata.get_settings"
+      tags:
+      - "Settings"
+      summary: "Get settings"
+      description: "Get server settings."
+      responses:
+        200:
+          description: "Successful request of settings"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - settings
+                  properties:
+                    settings:
+                      type: string

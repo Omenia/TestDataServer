@@ -74,3 +74,7 @@ def put_dataset_item_status(dataset, item, body):
         return _set_response(HTTPStatus.NOT_FOUND, 'item does not exist')
     else:
         return _set_response(HTTPStatus.INTERNAL_SERVER_ERROR, 'Unknown error')
+
+
+def get_settings():
+    return {"settings": database.get_settings()}

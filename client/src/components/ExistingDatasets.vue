@@ -1,5 +1,5 @@
 <template>
-  <div class="conf-testdata">
+  <div class="data-section">
     <div class="section-header">Existing datasets</div>
     <div v-for="dataset in testdata" :key="dataset.dataset">
       <div
