@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from config import db, ma
 
@@ -35,4 +35,20 @@ class DatasetSchema(ma.ModelSchema):
     class Meta:
 
         model = Dataset
+        sqla_session = db.session
+
+
+class Settings(db.Model):
+
+    __tablename__ = 'settings'
+
+    use_status = db.Column(db.Boolean, primary_key=True, default=False)
+    use_quarantine = db.Column(db.Boolean, default=False)
+    timeout = db.Column(db.Interval, default=timedelta(0))
+
+
+class SettingsSchema(ma.ModelSchema):
+    class Meta:
+
+        model = Settings
         sqla_session = db.session

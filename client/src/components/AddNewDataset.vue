@@ -1,5 +1,5 @@
 <template>
-  <div class="conf-form">
+  <div class="data-section">
     <div
       class="section-header"
       id="conf-new-dataset-header"
@@ -18,7 +18,7 @@
       <label for="new-dataset">Dataset type</label>
       <br>
       <select v-model="datatype" name="new-dataset-datatype">
-        <option disabled value>Please select one</option>
+        <option disabled value="">Please select one</option>
         <option value="next">Next</option>
         <option value="random">Random</option>
       </select>

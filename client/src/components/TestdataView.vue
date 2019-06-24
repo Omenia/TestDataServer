@@ -1,8 +1,7 @@
 <template>
-  <div class="content">
+  <div class="db-container">
     <div>
-      <h3>Datasets</h3>
-      <div class="db-dataset-container" v-for="dataset in testdata" :key="dataset.dataset">
+      <div class="data-section" v-for="dataset in testdata" :key="dataset.dataset">
         <div class="db-dataset">{{ dataset.dataset }} - {{ dataset.datatype }}</div>
         <div class="db-items" v-for="item in dataset.items" :key="item.item">
           <span class="db-item-row db-item-name">{{ item.item }}</span>
@@ -21,7 +20,7 @@
 const axios = require("axios");
 
 export default {
-  name: "Testdataview",
+  name: "TestdataView",
   data() {
     return {
       testdata: [],

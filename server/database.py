@@ -4,7 +4,7 @@ from datetime import datetime
 from sqlalchemy import func
 
 from config import db
-from models import Item, Dataset
+from models import Item, Dataset, Settings
 
 
 def setup():
@@ -15,6 +15,7 @@ def setup():
 
 def create():
     db.create_all()
+    db.session.add(Settings())
     db.session.commit()
     db.session.close()
 
@@ -149,3 +150,12 @@ def update_item_status(dataset, item, status):
     item.Item.status = status
     db.session.commit()
     return 'updated'
+
+
+def get_settings():
+    settings = db.session.query(Settings, Settings.use_status).first()
+    return {
+        'use_status': settings.Settings.use_status,
+        'use_quarantine': settings.Settings.use_quarantine,
+        'timeout': str(settings.Settings.timeout),
+    }

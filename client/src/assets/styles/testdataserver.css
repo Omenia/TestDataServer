@@ -97,16 +97,21 @@ body {
   text-align: center;
 }
 
+.data-section {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 5px 20px 20px 20px;
+  margin-bottom: 10px;
+}
+
+.input-description {
+  color: #848484;
+}
+
 /* Configuration page */
 
 #conf-new-dataset-header {
   cursor: pointer;
-}
-
-.conf-form {
-  border-radius: 5px;
-  background-color: #f2f2f2;
-  padding: 20px;
 }
 
 input[type=text] {
@@ -127,13 +132,6 @@ textarea {
   border: 1px solid #cccccc;
   border-radius: 4px;
   resize: none;
-}
-
-.conf-testdata {
-  border-radius: 5px;
-  background-color: #f2f2f2;
-  padding: 20px;
-  margin-bottom: 10px;
 }
 
 .conf-dataset-row {
@@ -211,6 +209,10 @@ textarea {
 
 /* Dashboard */
 
+.db-container {
+  border-radius: 5px;
+}
+
 .db-dataset {
   padding-bottom: 5px;
 }
@@ -230,6 +232,7 @@ textarea {
 
 .db-item-name {
   width: 100%;
+  flex:
 }
 
 .db-item-status {
@@ -237,14 +240,6 @@ textarea {
   vertical-align: middle;
   display: table-cell;
   text-align: center;
-}
-
-.db-dataset-container {
-  border-radius: 5px;
-  background-color: #f2f2f2;
-  padding: 5px 20px 20px 20px;
-  margin-bottom: 10px;
-  width: 100%;
 }
 
 .db-status-available {

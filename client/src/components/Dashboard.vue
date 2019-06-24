@@ -3,23 +3,36 @@
     <div class="nav">
       <Navigation active_page="dashboard"/>
     </div>
-    <Testdataview/>
+    <div class="content">
+      <div>
+        <info-area :class="[infoStyle]">{{ infoMsg }}</info-area>
+        <TestdataView/>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import Navigation from "./Navigation";
-import Testdataview from "./Testdataview";
+import InfoArea from "./Info";
+import TestdataView from "./TestdataView";
 
 export default {
   name: "Dashboard",
   components: {
     Navigation,
-    Testdataview
+    InfoArea,
+    TestdataView
+  },
+  data() {
+    return {
+      infoMsg: "",
+      infoStyle: "hidden-info"
+    };
   }
 };
 </script>
 
 <style>
-  @import "../assets/styles/testdataserver.css";
+@import "../assets/styles/testdataserver.css";
 </style>

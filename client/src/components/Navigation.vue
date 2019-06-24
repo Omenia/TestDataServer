@@ -14,9 +14,10 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faTachometerAlt } from "@fortawesome/free-solid-svg-icons";
 import { faDatabase } from "@fortawesome/free-solid-svg-icons";
 import { faInfo } from "@fortawesome/free-solid-svg-icons";
+import { faCog } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
-library.add(faTachometerAlt, faDatabase, faInfo);
+library.add(faTachometerAlt, faDatabase, faInfo, faCog);
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
@@ -41,6 +42,13 @@ export default {
           element_class: "deactive_page",
           ta_class: "ta_configuration_nav_item"
         },
+        settings: {
+          url: "/settings",
+          icon: "cog",
+          tooltip: "Settings",
+          element_class: "deactive_page",
+          ta_class: "ta_settings_nav_item"
+        },
         swagger: {
           url: "/ui",
           icon: "info",
@@ -58,5 +66,5 @@ export default {
 </script>
 
 <style>
-  @import "../assets/styles/testdataserver.css";
+@import "../assets/styles/testdataserver.css";
 </style>
