@@ -11,6 +11,7 @@ def _set_response(status, message):
 
 
 def get_testdata_next(dataset):
+    database.quarantine_items()
     dataset = database.get_testdata_next(dataset)
     if not dataset:
         return _set_response(HTTPStatus.NOT_FOUND, 'dataset does not exist')
@@ -20,6 +21,7 @@ def get_testdata_next(dataset):
 
 
 def get_testdata():
+    database.quarantine_items()
     return {"testdata": database.get_testdata()}
 
 

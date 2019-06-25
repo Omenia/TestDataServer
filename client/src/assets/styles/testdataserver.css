@@ -135,13 +135,16 @@ textarea {
 }
 
 .conf-dataset-row {
-  border: 2px solid #f2f2f2;
+  border: 2px solid #cccccc;
   padding: 7px;
   background-color: var(--toolbar-bg-color);  
   overflow: hidden;
   display: flex;
   justify-content: space-between;
   cursor: pointer;
+  margin-top: 2px;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
 
 .conf-name-icons-row ul{
@@ -163,6 +166,8 @@ textarea {
   display: none;
   justify-content: space-between;
   overflow: hidden;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
 
 .conf-dataset-name {
@@ -199,7 +204,7 @@ textarea {
   list-style: none;
 }
 
-.conf-status-quarantine {
+.conf-status-quarantined {
   color: #FE2E2E;
 }
 
@@ -236,7 +241,7 @@ textarea {
 }
 
 .db-item-status {
-  flex: 0 0 110px;
+  flex: 0 0 120px;
   vertical-align: middle;
   display: table-cell;
   text-align: center;
@@ -245,19 +250,23 @@ textarea {
 .db-status-available {
   color: #088A4B;
   background-color: #01DF3A;
+  border: 1px solid #088A4B;
 }
 
-.db-status-quarantine {
+.db-status-quarantined {
   color: #610B0B;
   background-color: #FE2E2E;
+  border: 1px solid #610B0B;
 }
 
 .db-status-out-of-use {
   color: #B45F04;
   background-color: #FAAC58;
+  border: 1px solid #B45F04;
 }
 
 .db-status-reserved {
   color: #868A08;
   background-color: #F7FE2E;
+  border: 1px solid #868A08;
 }

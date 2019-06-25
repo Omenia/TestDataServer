@@ -65,27 +65,16 @@ def get_testdata_next(dataset):
     )
     if not rows:
         return None
+    item = _get_item(dataset, {'next': Item.timestamp, 'random': func.random()}[rows.datatype])
+    if not item:
+        return 'no items'
     if rows.datatype == 'next':
         settings = db.session.query(Settings, Settings.use_status).first()
-        item = _get_item(dataset, Item.timestamp)
-        if not item:
-            return 'no items'
         if settings.Settings.use_status:
             item.Item.status = 'reserved'
-        item.Item.timestamp = datetime.now()
-        db.session.commit()
-        return {
-            'item': item.Item.item,
-            'status': item.Item.status,
-            'timestamp': item.Item.timestamp,
-        }
-    elif rows.datatype == 'random':
-        item = _get_item(dataset, func.random())
-        return {
-            'item': item.Item.item,
-            'status': item.Item.status,
-            'timestamp': item.Item.timestamp,
-        }
+    item.Item.timestamp = datetime.now()
+    db.session.commit()
+    return {'item': item.Item.item, 'status': item.Item.status, 'timestamp': item.Item.timestamp}
 
 
 def add_testdata_to_db(dataset, items, datatype):
@@ -179,3 +168,12 @@ def update_settings(use_status, use_quarantine, timeout):
     settings.Settings.timeout = timeout_delta
     db.session.commit()
     return 'updated'
+
+
+def quarantine_items():
+    settings = db.session.query(Settings, Settings.use_status).first()
+    if not settings.Settings.use_quarantine:
+        return
+    for item in db.session.query(Item, Item.dataset_name).filter(Item.status == 'reserved').all():
+        if item.Item.timestamp + settings.Settings.timeout < datetime.now():
+            update_item_status(item.Item.dataset_name, item.Item.item, 'quarantined')
