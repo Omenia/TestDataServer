@@ -38,14 +38,14 @@
         </ul>
         <ul class="right">
           <li
-            v-if="['quarantine', 'out of use'].indexOf(item.status) >= 0"
+            v-if="['quarantined', 'out of use'].indexOf(item.status) >= 0"
             class="conf-item-modify"
             :class="status_class(item.status)"
           >
             <div :class="item_ta_class(dataset.dataset, index, 'status')">{{ item.status }}</div>
           </li>
           <li
-            v-if="['quarantine', 'out of use'].indexOf(item.status) >= 0"
+            v-if="['quarantined', 'out of use'].indexOf(item.status) >= 0"
             class="conf-item-modify"
             :class="item_ta_class(dataset.dataset, index, 'play')"
             @click="update_item_status(dataset.dataset, item.item, 'available')"

@@ -9,7 +9,7 @@ class Item(db.Model):
 
     item = db.Column(db.String(100), primary_key=True)
     status = db.Column(db.String(15), nullable=False)
-    timestamp = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    timestamp = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
     dataset_name = db.Column(
         db.String(32), db.ForeignKey('dataset.name'), nullable=False, primary_key=True
     )
