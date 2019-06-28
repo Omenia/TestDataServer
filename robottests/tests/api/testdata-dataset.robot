@@ -10,7 +10,6 @@ Resource         ../../resources/api/generic-resources.robot
 ...                   {"key-x1": "value-x1", "key-x2": "value-x2"}
 &{NEXT_DATASET}=      dataset=${DATASET_NAMES}[0]    datatype=next      items=@{ITEMS_0}
 &{RANDOM_DATASET}=    dataset=${DATASET_NAMES}[1]    datatype=random    items=@{ITEMS_1}
-@{ALL_DATASETS}=      &{NEXT_DATASET}    &{RANDOM_DATASET}
 
 *** Test Cases ***
 Next - GET /testdata/<dataset> will response with status code 200 and next dataset item
@@ -19,20 +18,6 @@ Next - GET /testdata/<dataset> will response with status code 200 and next datas
     And dataset item was requested
     When GET /testdata/<dataset> request is send
     Then status code 200 with next dataset item will be received
-
-Next - GET /testdata/<dataset> will set item as reserved
-    [Setup]    set multiple test variables    DATASET_NAME=${DATASET_NAMES}[0]    ITEM=${ITEMS_0}[0]
-    Given testdata was configured
-    When GET /testdata/<dataset> request is send
-    Then item status in database will be "reserved"
-
-Next - Oldest as out of use - GET /testdata/<dataset> will response with oldest available
-    [Setup]    set multiple test variables    DATASET_NAME=${DATASET_NAMES}[0]    
-    ...    OLDEST_ITEM=${ITEMS_0}[0]    ITEM=${ITEMS_0}[1]
-    Given testdata was configured
-    And oldest item was out of use
-    When GET /testdata/<dataset> request is send
-    Then oldest available item will be received
 
 Random - GET /testdata/<dataset> will response with status code 200 and random dataset item
     [Setup]    Set Test Variable    ${DATASET_NAME}    ${DATASET_NAMES}[1]
@@ -46,6 +31,13 @@ Unknown dataset - GET /testdata/<dataset> will response with status code 404
     When GET /testdata/<dataset> request with unknown dataset is send
     Then status code "404" will be received with error "dataset does not exist" 
 
+Next - No available items - GET /testdata/<dataset> will response with status code 409
+    [Setup]    set multiple test variables    DATASET_NAME=${DATASET_NAMES}[0]    ITEMS=${ITEMS_0}
+    Given testdata was configured
+    And all items were out of use
+    When GET /testdata/<dataset> request is send
+    Then status code "409" will be received with error "no items available"
+
 DELETE /testdata/<dataset> will response with status code 200
     [Setup]    Set Test Variable    ${DATASET_NAME}    ${DATASET_NAMES}[0]
     Given testdata was configured
@@ -57,45 +49,3 @@ Unknown dataset - DELETE /testdata/<dataset> will response with status code 404
     Given testdata was configured
     When DELETE /testdata/<dataset> request with unknown dataset is send
     Then status code "404" will be received with error "dataset does not exist" 
-        
-DELETE /testdata/<dataset>/<item> will response with status code 200
-    [Setup]    Set dataset variables    ${DATASET_NAMES}[0]    ${ITEMS_0}[0]
-    Given testdata was configured
-    When DELETE /testdata/<dataset>/<item> request is send
-    Then status code "200" will be received
-
-Unknown item - DELETE /testdata/<dataset>/<item> will response with status code 404
-    [Setup]    Set dataset variables    ${DATASET_NAMES}[0]    unknown
-    Given testdata was configured
-    When DELETE /testdata/<dataset>/<item> request with unknown item is send
-    Then status code "404" will be received with error "dataset item does not exist" 
-
-POST /testdata/<dataset>/<item> will response with status code 201
-    [Setup]    Set dataset variables    ${DATASET_NAMES}[0]    {"new-item-key": "new-item-value"}
-    Given testdata was configured
-    When POST /testdata/<dataset>/<item> request is send
-    Then status code "201" will be received
-
-Unknown dataset - POST /testdata/<dataset>/<item> will response with status code 404
-    [Setup]    Set dataset variables    unknown    {"new-item-key": "new-item-value"}
-    Given testdata was configured
-    When POST /testdata/<dataset>/<item> request is send
-    Then status code "404" will be received with error "dataset does not exist"
-
-PUT /testdata/<dataset>/<item> will update item status
-    [Setup]    set multiple test variables    DATASET_NAME=${DATASET_NAMES}[0]    ITEM=${ITEMS_0}[0]
-    Given testdata was configured
-    When PUT /testdata/<dataset>/<item> with request "out of use" is send
-    Then item status in database will be "out of use"
-
-Unknown item - PUT /testdata/<dataset>/<item> will response with status code 404
-    [Setup]    set multiple test variables    DATASET_NAME=${DATASET_NAMES}[0]    ITEM=unknown
-    Given testdata was configured
-    When PUT /testdata/<dataset>/<item> with request "out of use" is send
-    Then status code "404" will be received with error "item does not exist"
-
-Unsupported status parameter - PUT /testdata/<dataset>/<item> will response with status code 400
-    [Setup]    set multiple test variables    DATASET_NAME=${DATASET_NAMES}[0]    ITEM=${ITEMS_0}[0]
-    Given testdata was configured
-    When PUT /testdata/<dataset>/<item> with request "unsupport" is send
-    Then status code "400" will be received with error "unsupported 'status'"

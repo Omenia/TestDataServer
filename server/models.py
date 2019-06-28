@@ -44,7 +44,7 @@ class Settings(db.Model):
 
     use_status = db.Column(db.Boolean, primary_key=True, default=False)
     use_quarantine = db.Column(db.Boolean, default=False)
-    timeout = db.Column(db.Interval, default=timedelta(0))
+    timeout = db.Column(db.Interval, default=timedelta(hours=23, minutes=59, seconds=59))
 
 
 class SettingsSchema(ma.ModelSchema):

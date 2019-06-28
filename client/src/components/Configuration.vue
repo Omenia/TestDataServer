@@ -1,5 +1,5 @@
 <template>
-  <div id="configuration" class="container ta_configuration_header">
+  <div id="configuration" class="container ta-configuration-header">
     <div class="nav">
       <Navigation active_page="configuration"/>
     </div>

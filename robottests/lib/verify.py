@@ -4,7 +4,7 @@ from robot.libraries.BuiltIn import BuiltIn
 from robot.api import logger
 import requests
 
-import resources.e2e.aliases as alias
+import resources.gui.aliases as alias
 
 
 SELENIUM = 'SeleniumLibrary'
