@@ -6,7 +6,7 @@
           Use status:
           <input
             type="checkbox"
-            id="status_use"
+            id="use_status"
             name="use_status"
             :checked="status_checked == true ? true : false"
             @change="useStatusChanged()"
@@ -23,7 +23,7 @@
           Use quarantine:
           <input
             type="checkbox"
-            id="quarantine_use"
+            id="use_quarantine"
             name="use_quarantine"
             :checked="quarantine_checked == true ? true : false"
             :disabled="quarantine_disabled == true ? true : false"
@@ -103,7 +103,7 @@ export default {
     },
     useQuarantineChanged() {
       this.timeout_disabled = this.use_quarantine == true ? false : true;
-      this.timeout = this.use_quarantine == true ? this.timeout : "00:00:00";
+      this.timeout = this.use_quarantine == true ? this.timeout : "23:59:59";
     },
     saveSettings() {
       axios

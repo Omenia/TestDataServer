@@ -1,6 +1,6 @@
 *** Settings ***
 Test Teardown    Delete dataset case teardown
-Resource         ../../resources/e2e/generic-resources.robot
+Resource         ../../resources/gui/generic-resources.robot
 
 *** Variables ***
 ${DATASET_NAME}    dataset-1

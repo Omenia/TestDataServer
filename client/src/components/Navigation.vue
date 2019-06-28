@@ -32,29 +32,29 @@ export default {
           url: "/",
           icon: "tachometer-alt",
           tooltip: "Dashboard",
-          element_class: "deactive_page",
-          ta_class: "ta_dashboard_nav_item"
+          element_class: "deactive-page",
+          ta_class: "ta-dashboard-nav-item"
         },
         configuration: {
           url: "/configuration",
           icon: "database",
           tooltip: "Configuration",
-          element_class: "deactive_page",
-          ta_class: "ta_configuration_nav_item"
+          element_class: "deactive-page",
+          ta_class: "ta-configuration-nav-item"
         },
         settings: {
           url: "/settings",
           icon: "cog",
           tooltip: "Settings",
-          element_class: "deactive_page",
-          ta_class: "ta_settings_nav_item"
+          element_class: "deactive-page",
+          ta_class: "ta-settings-nav-item"
         },
         swagger: {
           url: "/ui",
           icon: "info",
           tooltip: "API documentation",
-          element_class: "deactive_page",
-          ta_class: "ta_swagger_nav_item"
+          element_class: "deactive-page",
+          ta_class: "ta-swagger-nav-item"
         }
       }
     };

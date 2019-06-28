@@ -1,5 +1,5 @@
 <template>
-  <div id="dashboard" class="container ta_dashboard_header">
+  <div id="dashboard" class="container ta-dashboard-header">
     <div class="nav">
       <Navigation active_page="dashboard"/>
     </div>

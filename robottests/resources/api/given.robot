@@ -1,6 +1,16 @@
 *** Keywords ***
+all items were out of use
+    ${response}=    send put request    ${API_URL}/testdata/${DATASET_NAME}/@{ITEMS}[0]    {"status": "out of use"}
+    Should Be Equal As Numbers    ${response.status_code}    201
+    ${response}=    send put request    ${API_URL}/testdata/${DATASET_NAME}/@{ITEMS}[1]    {"status": "out of use"}
+    Should Be Equal As Numbers    ${response.status_code}    201
+
 dataset item was requested
     ${response}=    send get request    ${API_URL}/testdata/${DATASET_NAME}
+
+item was reserved
+    Testdata was configured
+    ${response}=    send get request    ${API_URL}/testdata/${DATASET_NAME}    
 
 oldest item was out of use
     send put request    ${API_URL}/testdata/${DATASET_NAME}/${OLDEST_ITEM}    {"status": "out of use"}

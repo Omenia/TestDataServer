@@ -1,6 +1,6 @@
 *** Settings ***
 Test Teardown    Delete dataset case teardown
-Resource         ../../resources/e2e/generic-resources.robot
+Resource         ../../resources/gui/generic-resources.robot
 
 *** Variables ***
 ${DATASET_NAME}    dataset-1
@@ -26,6 +26,7 @@ Delete dataset - Ok - Notification will be shown
     Then "ok" notification will be shown
 
 Delete item - Ok - Notification will be shown
+    [Setup]    set multiple test variables    DELETED_ITEM=${ITEMS}[0]    EXISTING_ITEM=${ITEMS}[1]
     Given "next" dataset was configured
     When user clicks dataset item delete button
     And user confirms deleting
