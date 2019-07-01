@@ -291,6 +291,6 @@ export default {
 };
 </script>
 
-<style>
+<style module>
 @import "../assets/styles/testdataserver.css";
 </style>
