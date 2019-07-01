@@ -23,7 +23,12 @@ Vue.component("font-awesome-icon", FontAwesomeIcon);
 
 export default {
   name: "Navigation",
-  props: ["active_page"],
+  props: {
+    active_page: {
+      type: String,
+      required: true,
+    }
+  },
   data() {
     return {
       active_link: this.active_page,

@@ -132,7 +132,16 @@ const axios = require("axios");
 
 export default {
   name: "ExistingDatasets",
-  props: ["testdata", "openedDatasets"],
+  props: {
+    testdata: {
+      type: String,
+      required: true,
+    }, 
+    openedDatasets: {
+      type: Array,
+      required: true,
+    },
+  },
   data() {
     return {
       testdata: {},
