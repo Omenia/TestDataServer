@@ -21,9 +21,9 @@ module.exports = {
   mode: process.env.NODE_ENV,
   context: path.resolve(__dirname, '../'),
   entry: {
-    dashboard: './src/dashboard.js',
-    configuration: './src/configuration.js',
-    settings: './src/settings.js',
+    dashboard: './src/dashboard-page.js',
+    configuration: './src/configuration-page.js',
+    settings: './src/settings-page.js',
   },
 
     module: {
