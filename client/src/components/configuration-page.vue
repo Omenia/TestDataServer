@@ -26,7 +26,7 @@ import AddNewDataset from "./AddNewDataset";
 const axios = require("axios");
 
 export default {
-  name: "Configuration",
+  name: "ConfigurationPage",
   components: {
     Navigation,
     InfoArea,

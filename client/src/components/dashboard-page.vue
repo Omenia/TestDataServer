@@ -18,7 +18,7 @@ import InfoArea from "./Info";
 import TestdataView from "./TestdataView";
 
 export default {
-  name: "Dashboard",
+  name: "DashboardPage",
   components: {
     Navigation,
     InfoArea,

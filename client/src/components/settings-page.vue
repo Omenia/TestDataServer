@@ -18,7 +18,7 @@ import InfoArea from "./Info";
 import SettingsView from "./SettingsView";
 
 export default {
-  name: "Settings",
+  name: "SettingsPage",
   components: {
     Navigation,
     InfoArea,
