@@ -12,4 +12,4 @@ WORKDIR /robottests
 
 RUN     pip3 install -r requirements.txt
 
-CMD     ["python3", "-m", "robot", "-P", ".", "-d", "output", "--listener", "listeners/listener.py", "-v", "BASE_URL:$BASE_URL", "$ROBOT_OPTIONS", "."]
+CMD     ["sh", "-c", "python3 -m robot -P . -d output --listener listeners/listener.py -v BASE_URL:$BASE_URL $ROBOT_OPTIONS ."]
