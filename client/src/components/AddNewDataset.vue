@@ -3,7 +3,7 @@
     <div
       class="section-header"
       id="conf-new-dataset-header"
-      @click="toggle_new_dataset()"
+      @click="$_toggleNewDataset()"
     >Add new dataset</div>
     <div id="add-new-dataset-section" :style="{ display: showAddNew }">
       <label for="new-dataset">Dataset name</label>
@@ -35,7 +35,7 @@
         required
         v-model="items"
       ></textarea>
-      <button type="submit" class="btn ta-new-dataset-submit" @click="submitNewDataset">Submit</button>
+      <button type="submit" class="btn ta-new-dataset-submit" @click="$_submitNewDataset">Submit</button>
     </div>
   </div>
 </template>
@@ -55,14 +55,14 @@ export default {
     };
   },
   methods: {
-    toggle_new_dataset: function() {
+    $_toggleNewDataset: function() {
       if (this.showAddNew == "inherit") {
         this.showAddNew = "none";
       } else {
         this.showAddNew = "inherit";
       }
     },
-    submitNewDataset() {
+    $_submitNewDataset() {
       var itemList = this.items.split("\n");
 
       axios
@@ -89,6 +89,6 @@ export default {
 };
 </script>
 
-<style module>
+<style>
 @import "../assets/styles/testdataserver.css";
 </style>

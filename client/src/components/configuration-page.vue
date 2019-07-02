@@ -7,11 +7,11 @@
       <div>
         <info-area :class="[infoStyle]">{{ infoMsg }}</info-area>
         <existing-datasets
-          v-on:submit="update_testdata_and_info"
+          v-on:submit="$_updateTestdataAndInfo"
           :testdata="testdata"
           :openedDatasets="openedDatasets"
         ></existing-datasets>
-        <add-new-dataset v-on:submit="update_testdata_and_info"></add-new-dataset>
+        <add-new-dataset v-on:submit="$_updateTestdataAndInfo"></add-new-dataset>
       </div>
     </div>
   </div>
@@ -59,7 +59,7 @@ export default {
       });
   },
   methods: {
-    update_info: function(status, msg) {
+    $_updateInfo: function(status, msg) {
       this.infoMsg = msg;
       if (status == "error") {
         this.infoStyle = "error-info";
@@ -71,8 +71,8 @@ export default {
         }, 5000);
       }
     },
-    update_testdata_and_info: function(status, msg) {
-      this.update_info(status, msg);
+    $_updateTestdataAndInfo: function(status, msg) {
+      this.$_updateInfo(status, msg);
       if (status == "ok") {
         axios
           .get(`/api/v1/testdata`)
@@ -89,6 +89,6 @@ export default {
 };
 </script>
 
-<style module>
+<style>
 @import "../assets/styles/testdataserver.css";
 </style>

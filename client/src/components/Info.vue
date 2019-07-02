@@ -10,6 +10,6 @@ export default {
 };
 </script>
 
-<style module>
+<style>
 @import "../assets/styles/testdataserver.css";
 </style>
