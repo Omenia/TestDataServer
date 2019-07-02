@@ -4,8 +4,8 @@
     <div v-for="dataset in testdata" :key="dataset.dataset">
       <div
         class="conf-dataset-row conf-name-icons-row"
-        :class="dataset_ta_class(dataset.dataset, 'name')"
-        @click="toggle_dataset(dataset.dataset)"
+        :class="$_datasetTaClass(dataset.dataset, 'name')"
+        @click="$_toggleDataset(dataset.dataset)"
       >
         <ul class="left">
           <li class="conf-dataset-name">
@@ -16,8 +16,8 @@
         <ul class="right">
           <li
             class="conf-item-modify"
-            :class="dataset_ta_class(dataset.dataset, 'delete')"
-            @click="confirm_dataset_delete(dataset.dataset)"
+            :class="$_datasetTaClass(dataset.dataset, 'delete')"
+            @click="$_confirmDatasetDelete(dataset.dataset)"
             title="Delete dataset"
           >
             <font-awesome-icon size="1x" icon="trash-alt"/>
@@ -33,47 +33,47 @@
         <ul class="left">
           <li
             class="conf-item-name"
-            :class="item_ta_class(dataset.dataset, index, 'name')"
+            :class="$_itemTaClass(dataset.dataset, index, 'name')"
           >{{ item.item }}</li>
         </ul>
         <ul class="right">
           <li
             v-if="['quarantined', 'out of use'].indexOf(item.status) >= 0"
             class="conf-item-modify"
-            :class="status_class(item.status)"
+            :class="$_statusClass(item.status)"
           >
-            <div :class="item_ta_class(dataset.dataset, index, 'status')">{{ item.status }}</div>
+            <div :class="$_itemTaClass(dataset.dataset, index, 'status')">{{ item.status }}</div>
           </li>
           <li
             v-if="['quarantined', 'out of use'].indexOf(item.status) >= 0"
             class="conf-item-modify"
-            :class="item_ta_class(dataset.dataset, index, 'play')"
-            @click="update_item_status(dataset.dataset, item.item, 'available')"
+            :class="$_itemTaClass(dataset.dataset, index, 'play')"
+            @click="$_updateItemStatus(dataset.dataset, item.item, 'available')"
             title="Take item into use"
           >
             <font-awesome-icon
               size="1x"
               icon="play-circle"
-              :class="item_ta_class(dataset.dataset, index, 'play-icon')"
+              :class="$_itemTaClass(dataset.dataset, index, 'play-icon')"
             />
           </li>
           <li
             v-else
             class="conf-item-modify"
-            :class="item_ta_class(dataset.dataset, index, 'stop')"
-            @click="update_item_status(dataset.dataset, item.item, 'out of use')"
+            :class="$_itemTaClass(dataset.dataset, index, 'stop')"
+            @click="$_updateItemStatus(dataset.dataset, item.item, 'out of use')"
             title="Take item out of use"
           >
             <font-awesome-icon
               size="1x"
               icon="stop-circle"
-              :class="item_ta_class(dataset.dataset, index, 'stop-icon')"
+              :class="$_itemTaClass(dataset.dataset, index, 'stop-icon')"
             />
           </li>
           <li
             class="conf-item-modify"
-            :class="item_ta_class(dataset.dataset, index, 'delete')"
-            @click="confirm_item_delete(dataset.dataset, item.item)"
+            :class="$_itemTaClass(dataset.dataset, index, 'delete')"
+            @click="$_confirmItemDelete(dataset.dataset, item.item)"
             title="Delete dataset item"
           >
             <font-awesome-icon size="1x" icon="trash-alt"/>
@@ -83,7 +83,7 @@
       <div
         :class="['add-item-' + dataset.dataset]"
         class="conf-add-item"
-        @click="toggle_add_item(dataset.dataset)"
+        @click="$_toggleAddItem(dataset.dataset)"
         title="Add new item"
         :style="{ display: openedDatasets[dataset.dataset] }"
       >
@@ -107,7 +107,7 @@
           type="submit"
           id="submit-new-item"
           class="btn conf-new-item-element"
-          @click="submitAddItem(dataset.dataset)"
+          @click="$_submitAddItem(dataset.dataset)"
           :style="{ display: addItems[dataset.dataset] }"
         >Submit</button>
       </span>
@@ -153,7 +153,7 @@ export default {
     };
   },
   methods: {
-    toggle_dataset: function(dataset) {
+    $_toggleDataset: function(dataset) {
       if (this.openedDatasets[dataset] == "flex") {
         this.$set(this.openedDatasets, dataset, "none");
         this.$set(this.addItemContainers, dataset, "none");
@@ -162,7 +162,7 @@ export default {
         this.$set(this.addItemContainers, dataset, "list-item");
       }
     },
-    confirm_dataset_delete: function(dataset) {
+    $_confirmDatasetDelete: function(dataset) {
       if (confirm("Are you sure you want to delete dataset: " + dataset)) {
         axios
           .delete("/api/v1/testdata/" + dataset)
@@ -189,7 +189,7 @@ export default {
           });
       }
     },
-    confirm_item_delete: function(dataset, item) {
+    $_confirmItemDelete: function(dataset, item) {
       if (
         confirm(
           "Are you sure you want to delete dataset item: " +
@@ -223,22 +223,22 @@ export default {
           });
       }
     },
-    dataset_ta_class: function(dataset, element) {
+    $_datasetTaClass: function(dataset, element) {
       var className = "ta-" + element + "-" + dataset;
       return { [className]: true };
     },
-    item_ta_class: function(dataset, index, element) {
+    $_itemTaClass: function(dataset, index, element) {
       var className = "ta-" + element + "-" + dataset + "-" + index;
       return { [className]: true };
     },
-    toggle_add_item(dataset) {
+    $_toggleAddItem(dataset) {
       if (this.addItems[dataset] == "flex") {
         this.$set(this.addItems, dataset, "none");
       } else {
         this.$set(this.addItems, dataset, "flex");
       }
     },
-    submitAddItem(dataset) {
+    $_submitAddItem(dataset) {
       axios
         .post("/api/v1/testdata/" + dataset + "/" + this.newItem, {})
         .then(response => {
@@ -255,7 +255,7 @@ export default {
           );
         });
     },
-    update_item_status(dataset, item, status) {
+    $_updateItemStatus(dataset, item, status) {
       axios
         .put("/api/v1/testdata/" + dataset + "/" + item, { status: status })
         .then(response => {
@@ -283,7 +283,7 @@ export default {
           );
         });
     },
-    status_class: function(status) {
+    $_statusClass: function(status) {
       var className = "conf-status-" + status.split(" ").join("-");
       return { [className]: true };
     }
@@ -291,6 +291,6 @@ export default {
 };
 </script>
 
-<style module>
+<style>
 @import "../assets/styles/testdataserver.css";
 </style>

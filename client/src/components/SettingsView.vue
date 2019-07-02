@@ -9,7 +9,7 @@
             id="use_status"
             name="use_status"
             :checked="status_checked == true ? true : false"
-            @change="useStatusChanged()"
+            @change="$_useStatusChanged()"
             v-model="use_status"
           >
         </div>
@@ -27,7 +27,7 @@
             name="use_quarantine"
             :checked="quarantine_checked == true ? true : false"
             :disabled="quarantine_disabled == true ? true : false"
-            @change="useQuarantineChanged()"
+            @change="$_useQuarantineChanged()"
             v-model="use_quarantine"
           >
         </div>
@@ -59,7 +59,7 @@
         type="submit"
         id="save-settings"
         class="btn setting-save"
-        @click="saveSettings()"
+        @click="$_saveSettings()"
       >Save</button>
     </div>
   </div>
@@ -96,16 +96,16 @@ export default {
       .catch(error => (this.errors = error));
   },
   methods: {
-    useStatusChanged() {
+    $_useStatusChanged() {
       this.quarantine_disabled = this.use_status == true ? false : true;
       this.use_quarantine = this.use_status == true ? this.use_quarantine : false;
-      this.useQuarantineChanged()
+      this.$_useQuarantineChanged()
     },
-    useQuarantineChanged() {
+    $_useQuarantineChanged() {
       this.timeout_disabled = this.use_quarantine == true ? false : true;
       this.timeout = this.use_quarantine == true ? this.timeout : "23:59:59";
     },
-    saveSettings() {
+    $_saveSettings() {
       axios
         .put("/api/v1/settings", {
           use_status: this.use_status,
@@ -128,6 +128,6 @@ export default {
 };
 </script>
 
-<style module>
+<style>
 @import "../assets/styles/testdataserver.css";
 </style>

@@ -6,7 +6,7 @@
     <div class="content">
       <div>
         <info-area :class="[infoStyle]">{{ infoMsg }}</info-area>
-        <SettingsView v-on:submit="update_info"></SettingsView>
+        <SettingsView v-on:submit="$_updateInfo"></SettingsView>
       </div>
     </div>
   </div>  
@@ -31,7 +31,7 @@ export default {
     };
   },
   methods: {
-    update_info: function(status, msg) {
+    $_updateInfo: function(status, msg) {
       this.infoMsg = msg;
       if (status == "error") {
         this.infoStyle = "error-info";
@@ -47,6 +47,6 @@ export default {
 };
 </script>
 
-<style module>
+<style>
 @import "../assets/styles/testdataserver.css";
 </style>

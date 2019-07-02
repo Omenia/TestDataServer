@@ -8,7 +8,7 @@
           <span class="db-item-row db-item-time">{{ item.timestamp }}</span>
           <span
             class="db-item-row db-item-status"
-            :class="status_class(item.status)"
+            :class="$_statusClass(item.status)"
           >{{ item.status }}</span>
         </div>
       </div>
@@ -34,7 +34,7 @@ export default {
       .catch(error => (this.errors = error));
   },
   methods: {
-    status_class: function(status) {
+    $_statusClass: function(status) {
       var className = "db-status-" + status.split(" ").join("-");
       return { [className]: true };
     }
@@ -42,6 +42,6 @@ export default {
 };
 </script>
 
-<style module>
+<style>
 @import "../assets/styles/testdataserver.css";
 </style>
