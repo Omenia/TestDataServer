@@ -7,11 +7,11 @@
       <div>
         <info-area :class="[infoStyle]">{{ infoMsg }}</info-area>
         <existing-datasets
-          v-on:submit="$_updateTestdataAndInfo"
+          @submit="$_updateTestdataAndInfo"
           :testdata="testdata"
           :opened-datasets="openedDatasets"
         ></existing-datasets>
-        <add-new-dataset v-on:submit="$_updateTestdataAndInfo"></add-new-dataset>
+        <add-new-dataset @submit="$_updateTestdataAndInfo"></add-new-dataset>
       </div>
     </div>
   </div>
