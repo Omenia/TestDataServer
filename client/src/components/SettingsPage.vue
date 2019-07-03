@@ -6,7 +6,7 @@
     <div class="content">
       <div>
         <info-area :class="[infoStyle]">{{ infoMsg }}</info-area>
-        <SettingsView v-on:submit="$_updateInfo"></SettingsView>
+        <SettingsView @submit="$_updateInfo"></SettingsView>
       </div>
     </div>
   </div>  
