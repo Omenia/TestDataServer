@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import SettingsPage from './components/settings-page'
+import SettingsPage from './components/SettingsPage'
 
 Vue.config.productionTip = false;
 
