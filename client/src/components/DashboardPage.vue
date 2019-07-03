@@ -1,7 +1,7 @@
 <template>
   <div id="dashboard" class="container ta-dashboard-header">
     <div class="nav">
-      <Navigation activePage="dashboard"/>
+      <Navigation active-page="dashboard"/>
     </div>
     <div class="content">
       <div>
