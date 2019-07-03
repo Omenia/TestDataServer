@@ -1,7 +1,7 @@
 <template>
   <div id="configuration" class="container ta-configuration-header">
     <div class="nav">
-      <Navigation activePage="configuration"/>
+      <Navigation active-page="configuration"/>
     </div>
     <div class="content">
       <div>
@@ -9,7 +9,7 @@
         <existing-datasets
           v-on:submit="$_updateTestdataAndInfo"
           :testdata="testdata"
-          :openedDatasets="openedDatasets"
+          :opened-datasets="openedDatasets"
         ></existing-datasets>
         <add-new-dataset v-on:submit="$_updateTestdataAndInfo"></add-new-dataset>
       </div>

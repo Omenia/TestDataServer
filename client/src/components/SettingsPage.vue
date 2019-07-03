@@ -1,7 +1,7 @@
 <template>
   <div id="settings" class="container ta-settings-header">
     <div class="nav">
-      <Navigation activePage="settings"/>
+      <Navigation active-page="settings"/>
     </div>
     <div class="content">
       <div>
