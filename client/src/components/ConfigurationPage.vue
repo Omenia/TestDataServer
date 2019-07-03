@@ -1,7 +1,7 @@
 <template>
   <div id="configuration" class="container ta-configuration-header">
     <div class="nav">
-      <Navigation active_page="configuration"/>
+      <Navigation activePage="configuration"/>
     </div>
     <div class="content">
       <div>
@@ -18,10 +18,10 @@
 </template>
 
 <script>
-import Navigation from "./Navigation";
-import InfoArea from "./Info";
-import ExistingDatasets from "./ExistingDatasets";
-import AddNewDataset from "./AddNewDataset";
+import Navigation from "./TheNavigation";
+import InfoArea from "./TheInfo";
+import ExistingDatasets from "./ConfigurationDatasetsExisting";
+import AddNewDataset from "./ConfigurationDatasetAdd";
 
 const axios = require("axios");
 

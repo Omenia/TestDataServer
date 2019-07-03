@@ -24,14 +24,14 @@ Vue.component("font-awesome-icon", FontAwesomeIcon);
 export default {
   name: "Navigation",
   props: {
-    active_page: {
+    activePage: {
       type: String,
       required: true,
     }
   },
   data() {
     return {
-      active_link: this.active_page,
+      activeLink: this.activePage,
       links: {
         dashboard: {
           url: "/",
@@ -65,7 +65,7 @@ export default {
     };
   },
   created() {
-    this.links[this.active_link]["element_class"] = "active_page";
+    this.links[this.activeLink]["element_class"] = "active-page";
   }
 };
 </script>

@@ -18,15 +18,15 @@ body {
   margin-top: 5px;
 }
 
-.active_page {
+.active-page {
   color: #3300cc;
 }
 
-.deactive_page {
+.deactive-page {
   color: #6699ff;
 }
 
-.deactive_page:hover {
+.deactive-page:hover {
   color: #000033;
 }
 

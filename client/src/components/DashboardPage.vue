@@ -1,7 +1,7 @@
 <template>
   <div id="dashboard" class="container ta-dashboard-header">
     <div class="nav">
-      <Navigation active_page="dashboard"/>
+      <Navigation activePage="dashboard"/>
     </div>
     <div class="content">
       <div>
@@ -13,9 +13,9 @@
 </template>
 
 <script>
-import Navigation from "./Navigation";
-import InfoArea from "./Info";
-import TestdataView from "./TestdataView";
+import Navigation from "./TheNavigation";
+import InfoArea from "./TheInfo";
+import TestdataView from "./DashboardTestdataView";
 
 export default {
   name: "DashboardPage",

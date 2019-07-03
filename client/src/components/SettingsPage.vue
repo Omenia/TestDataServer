@@ -1,7 +1,7 @@
 <template>
   <div id="settings" class="container ta-settings-header">
     <div class="nav">
-      <Navigation active_page="settings"/>
+      <Navigation activePage="settings"/>
     </div>
     <div class="content">
       <div>
@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import Navigation from './Navigation';
-import InfoArea from "./Info";
+import Navigation from './TheNavigation';
+import InfoArea from "./TheInfo";
 import SettingsView from "./SettingsView";
 
 export default {
