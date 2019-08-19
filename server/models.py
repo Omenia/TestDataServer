@@ -7,7 +7,7 @@ class Item(db.Model):
 
     __tablename__ = 'item'
 
-    item = db.Column(db.String(100), primary_key=True)
+    item = db.Column(db.JSON, primary_key=True)
     status = db.Column(db.String(15), nullable=False)
     timestamp = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
     dataset_name = db.Column(

@@ -5,20 +5,15 @@ import requests
 
 
 class TestdataApi(object):
-    @staticmethod
-    def add_dataset(base_url, dataset_name, datatype, dataset_items):
+    def add_dataset(self, base_url, params):
         """
         Add new dataset.
 
         :param base_url: base url for api
-        :param dataset_name: name of dataset to be added
-        :param datatype: dataset datatype
-        :param dataset_items: items for dataset
+        :param params: parameters for POST body
         """
-        response = requests.post(
-            base_url + '/testdata',
-            json={'dataset': dataset_name, 'items': dataset_items, 'datatype': datatype},
-        )
+        response = self.send_post_request(f'{base_url}/testdata', params)
+
         if response.status_code != 201:
             raise AssertionError(
                 f'Adding new dataset failed ({response.status_code}: {response.text})'
@@ -71,7 +66,8 @@ class TestdataApi(object):
         :rtype: requests.Response
         """
         return requests.post(
-            url, json=json.loads(body_json), headers={'Content-Type': 'application/json'}
+            url,
+            json=json.loads(body_json),
         )
 
     @staticmethod

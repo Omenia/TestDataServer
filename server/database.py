@@ -1,4 +1,5 @@
 import os.path
+import json
 from datetime import datetime, timedelta
 
 from sqlalchemy import func
@@ -85,7 +86,10 @@ def add_testdata_to_db(dataset, items, datatype):
     new_dataset = Dataset(name=dataset, datatype=datatype)
     for item in items:
         testitem = Item(
-            dataset_name=dataset, item=str(item), status='available', timestamp=datetime.now()
+            dataset_name=dataset,
+            item=json.dumps(item),
+            status='available',
+            timestamp=datetime.now(),
         )
         new_dataset.items.append(testitem)
         db.session.add(testitem)
@@ -109,12 +113,17 @@ def delete_dataset(dataset):
 
 
 def delete_dataset_item(dataset, item):
-    result = (
-        db.session.query(Item.item)
-        .filter(Item.item == item)
-        .filter(Item.dataset_name == dataset)
-        .delete()
-    )
+    result = 0
+    items = db.session.query(Item, Item.dataset_name).filter(Item.dataset_name == dataset).all()
+    for db_item in items:
+        if json.loads(item) == json.loads(db_item.Item.item):
+            result = (
+                db.session.query(Item.item)
+                .filter(Item.item == json.dumps(db_item.Item.item))
+                .filter(Item.dataset_name == dataset)
+                .delete()
+            )
+            break
     return _commit_if_existing(result)
 
 
@@ -132,15 +141,21 @@ def add_item_to_db(dataset, item):
 
 
 def update_item_status(dataset, item, status):
-    item = (
-        db.session.query(Item, Item.status)
-        .filter(Item.item == item)
-        .filter(Item.dataset_name == dataset)
-        .first()
-    )
-    if not item:
+    found_item = False
+    items = db.session.query(Item, Item.dataset_name).filter(Item.dataset_name == dataset).all()
+    for db_item in items:
+        if json.loads(item) == json.loads(db_item.Item.item):
+            found_item = (
+                db.session.query(Item, Item.status)
+                .filter(Item.item == json.dumps(db_item.Item.item))
+                .filter(Item.dataset_name == dataset)
+                .first()
+            )
+            break
+
+    if not found_item:
         return None
-    item.Item.status = status
+    found_item.Item.status = status
     db.session.commit()
     return 'updated'
 
