@@ -19,7 +19,7 @@ status code 200 with next dataset item will be received
 
 status code 200 with random dataset item will be received
     Should Be Equal As Numbers    ${RESPONSE.status_code}    200
-    Should Be True                ${RESPONSE.json()}[testdata]
+    Should Be True                ${RESPONSE.json()}
 
 status code 200 with settings will be received
     Should Be Equal As Numbers    ${RESPONSE.status_code}    200

@@ -198,7 +198,7 @@ paths:
                   type: string
                   description: Status for item. Supported values - available, out of use
       responses:
-        201:
+        200:
           description: "Successfully updated item"
         400:
           description: "Unsupported 'status'"

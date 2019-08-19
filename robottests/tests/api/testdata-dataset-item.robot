@@ -19,10 +19,16 @@ DELETE /testdata/<dataset>/<item> will response with status code 200
     Then status code "200" will be received
 
 Unknown item - DELETE /testdata/<dataset>/<item> will response with status code 404
-    [Setup]    Set dataset variables    ${DATASET_NAMES}[0]    unknown
+    [Setup]    Set dataset variables    ${DATASET_NAMES}[0]    {"unknown": "item"}
     Given testdata was configured
     When DELETE /testdata/<dataset>/<item> request with unknown item is send
     Then status code "404" will be received with error "dataset item does not exist" 
+
+Item not in json - DELETE /testdata/<dataset>/<item> will response with status code 400
+    [Setup]    Set dataset variables    ${DATASET_NAMES}[0]    not-json
+    Given testdata was configured
+    When DELETE /testdata/<dataset>/<item> request with not json item is send
+    Then status code "400" will be received with error "item is not json"
 
 POST /testdata/<dataset>/<item> will response with status code 201
     [Setup]    Set dataset variables    ${DATASET_NAMES}[0]    {"new-item-key": "new-item-value"}
@@ -36,20 +42,32 @@ Unknown dataset - POST /testdata/<dataset>/<item> will response with status code
     When POST /testdata/<dataset>/<item> request is send
     Then status code "404" will be received with error "dataset does not exist"
 
+Item not in json - POST /testdata/<dataset>/<item> will response with status code 400
+    [Setup]    Set dataset variables    ${DATASET_NAMES}[0]    not-json
+    Given testdata was configured
+    When POST /testdata/<dataset>/<item> request with not json item is send
+    Then status code "400" will be received with error "item is not json"
+
 PUT /testdata/<dataset>/<item> will update item status
-    [Setup]    set multiple test variables    DATASET_NAME=${DATASET_NAMES}[0]    ITEM=${ITEMS_0}[0]
+    [Setup]    Set dataset variables    ${DATASET_NAMES}[0]    ${ITEMS_0}[0]
     Given testdata was configured
     When PUT /testdata/<dataset>/<item> with request "out of use" is send
     Then item status in database will be "out of use"
 
 Unknown item - PUT /testdata/<dataset>/<item> will response with status code 404
-    [Setup]    set multiple test variables    DATASET_NAME=${DATASET_NAMES}[0]    ITEM=unknown
+    [Setup]    Set dataset variables    ${DATASET_NAMES}[0]    {"unknown": "item"}
     Given testdata was configured
     When PUT /testdata/<dataset>/<item> with request "out of use" is send
     Then status code "404" will be received with error "item does not exist"
 
+Item not in json - PUT /testdata/<dataset>/<item> will response with status code 400
+    [Setup]    Set dataset variables    ${DATASET_NAMES}[0]    not-json
+    Given testdata was configured
+    When PUT /testdata/<dataset>/<item> with request "out of use" for not json item is send
+    Then status code "400" will be received with error "item is not json"
+
 Unsupported status parameter - PUT /testdata/<dataset>/<item> will response with status code 400
-    [Setup]    set multiple test variables    DATASET_NAME=${DATASET_NAMES}[0]    ITEM=${ITEMS_0}[0]
+    [Setup]    Set dataset variables    ${DATASET_NAMES}[0]    ${ITEMS_0}[0]
     Given testdata was configured
     When PUT /testdata/<dataset>/<item> with request "unsupport" is send
     Then status code "400" will be received with error "unsupported 'status'"

@@ -130,7 +130,7 @@ class Verify(object):
         :param item: expected item
         :param response: requests.response to /testdata/<dataset> request
         """
-        if response.json()['testdata']['item'] != item:
+        if response.json()['item'] != item:
             raise AssertionError(
                 f'Wrong item returned (value). Expected: {item}, actual: {response.json()}'
             )

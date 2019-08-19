@@ -14,15 +14,15 @@
         class="form-field"
         required
         v-model="newDataset"
-      >
+      />
       <label for="new-dataset">Dataset type</label>
-      <br>
+      <br />
       <select v-model="datatype" name="new-dataset-datatype">
-        <option value="" disabled>Please select one</option>
+        <option value disabled>Please select one</option>
         <option value="next">Next</option>
         <option value="random">Random</option>
       </select>
-      <br>
+      <br />
       <label for="new-dataset">Dataset items</label>
       <textarea
         name="items"
@@ -63,7 +63,17 @@ export default {
       }
     },
     $_submitNewDataset() {
-      var itemList = this.items.split("\n");
+      var itemList = [];
+
+      for (var item of this.items.split("\n")) {
+        try {
+          var jsonObject = JSON.parse(item);
+          itemList.push(jsonObject);
+        } catch (e) {
+          this.$emit("submit", "error", "Item is not in json (" + item + ")");
+          return;
+        }
+      }
 
       axios
         .post("/api/v1/testdata", {

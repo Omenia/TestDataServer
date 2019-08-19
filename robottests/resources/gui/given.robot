@@ -40,7 +40,8 @@ user was on "${page}"
     Go To    ${BASE_URL}&{ON_PAGE}[${page}]
 
 "${datatype}" dataset was configured
-    add dataset    ${API_URL}    ${DATASET_NAME}    ${datatype}    ${ITEMS}
+    add dataset    ${API_URL}
+    ...    {"dataset": "${DATASET_NAME}", "items": [${ITEMS}[0], ${ITEMS}[1]], "datatype": "${datatype}"}
     Go To    ${BASE_URL}&{ON_PAGE}[configuration page]
     Wait Until Page Contains    ${DATASET_NAME}
 

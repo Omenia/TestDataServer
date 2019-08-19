@@ -1,4 +1,6 @@
 from http import HTTPStatus
+import urllib.parse
+import json
 
 import database
 
@@ -10,6 +12,14 @@ def _set_response(status, message):
     )
 
 
+def _check_json(item):
+    try:
+        json.loads(item)
+    except (json.decoder.JSONDecodeError, TypeError):
+        return False
+    return True
+
+
 def get_testdata_next(dataset):
     database.quarantine_items()
     dataset = database.get_testdata_next(dataset)
@@ -17,7 +27,7 @@ def get_testdata_next(dataset):
         return _set_response(HTTPStatus.NOT_FOUND, 'dataset does not exist')
     elif dataset == 'no items':
         return _set_response(HTTPStatus.CONFLICT, 'no items available')
-    return {"testdata": dataset}
+    return dataset
 
 
 def get_testdata():
@@ -28,6 +38,9 @@ def get_testdata():
 def post_dataset(body):
     if body.get('datatype') not in ['next', 'random']:
         return _set_response(HTTPStatus.BAD_REQUEST, "unsupported 'datatype'")
+    for item in body.get('items'):
+        if not _check_json(json.dumps(item)):
+            return _set_response(HTTPStatus.BAD_REQUEST, "item is not json")
     status = database.add_testdata_to_db(
         body.get('dataset').strip(), body.get('items'), body.get('datatype')
     )
@@ -54,12 +67,16 @@ def delete_dataset(dataset):
 
 
 def delete_dataset_item(dataset, item):
-    status = database.delete_dataset_item(dataset.strip(), item)
+    if not _check_json(item):
+        return _set_response(HTTPStatus.BAD_REQUEST, "item is not json")
+    status = database.delete_dataset_item(dataset.strip(), urllib.parse.unquote(item))
     return _deletion_response(status, 'dataset item')
 
 
 def post_dataset_item(dataset, item):
-    status = database.add_item_to_db(dataset, item)
+    if not _check_json(item):
+        return _set_response(HTTPStatus.BAD_REQUEST, "item is not json")
+    status = database.add_item_to_db(dataset, urllib.parse.unquote(item))
     if status == 'added':
         return _set_response(HTTPStatus.CREATED, '')
     elif not status:
@@ -71,9 +88,11 @@ def post_dataset_item(dataset, item):
 def put_dataset_item_status(dataset, item, body):
     if body.get('status') not in ['available', 'out of use']:
         return _set_response(HTTPStatus.BAD_REQUEST, "unsupported 'status'")
-    status = database.update_item_status(dataset, item, body.get('status'))
+    if not _check_json(item):
+        return _set_response(HTTPStatus.BAD_REQUEST, "item is not json")
+    status = database.update_item_status(dataset, urllib.parse.unquote(item), body.get('status'))
     if status == 'updated':
-        return _set_response(HTTPStatus.CREATED, '')
+        return _set_response(HTTPStatus.OK, '')
     elif not status:
         return _set_response(HTTPStatus.NOT_FOUND, 'item does not exist')
     else:
