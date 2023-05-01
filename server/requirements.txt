@@ -1,6 +1,6 @@
 connexion==2.2.0
 swagger-ui-bundle==0.0.2
-Flask==1.0.3
+Flask==2.3.2
 Flask-SQLAlchemy==2.4.0
 flask-marshmallow==0.10.1
 marshmallow-sqlalchemy==0.16.3
